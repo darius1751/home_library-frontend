@@ -1,0 +1,37 @@
+.footer {
+    margin-top: 1em;
+    width: 100%;
+    min-height: 9em;
+    background-color: light-dark(black, gray);
+    color: white;
+    padding: 1em 0;
+}
+
+.title {
+    text-align: center;
+    margin: 1em;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.items>li {
+    list-style: none;
+}
+
+.email {
+    text-align: center;
+}
+
+.item {
+    color: inherit;
+}
+
+.copyright {
+    display: block;
+    text-align: center;
+}
