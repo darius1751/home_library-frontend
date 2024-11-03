@@ -1,0 +1,20 @@
+.section {
+    border: 2px solid #10ACA3;
+    text-align: center;
+    width: 15em;
+    height: 15em;
+    margin-top: 1em;
+    margin-left: 1em;
+}
+
+.image {
+    margin-top: 2em;
+}
+
+.description {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 1em;
+    color: #00A79D;
+    font-weight: bold;
+}
