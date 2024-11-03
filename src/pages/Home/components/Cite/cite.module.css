@@ -20,3 +20,9 @@
     font-weight: bold;
     margin-left: 70%;
 }
+
+@media (max-width: 400px) {
+    .cite {
+        font-size: 1em;
+    }
+}
