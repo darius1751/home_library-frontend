@@ -1,25 +1,11 @@
 import { Outlet } from "react-router-dom"
-import { Navbar } from "../components/Navbar/Navbar"
-import { NavItem } from "../interfaces/nav-item.interface"
-import { Footer } from "../components/Footer/Footer"
+import { ToogleTheme } from "../components/ToogleTheme/ToogleTheme"
 
-const navItems: NavItem[] = [
-    {
-        text: 'Sign In',
-        to: '/sign-in'
-    },
-    {
-        text: 'Login',
-        to: '/login'
-    }
-]
 export const RootLayout = () => {
-
     return (
-        <div>
-            <Navbar navItems={navItems} />
+        <>
             <Outlet />
-            <Footer navItems={navItems} />
-        </div>
+            <ToogleTheme />
+        </>
     )
 }
