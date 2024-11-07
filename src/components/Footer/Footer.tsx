@@ -8,7 +8,7 @@ export const Footer = ({ navItems }: Props) => {
     const year = new Date().getFullYear()
     return (
         <footer className={styles.footer}>
-            <h1 className={styles.title}>Home Libray</h1>
+            <NavLink to="/" className={styles.title}>Home Library</NavLink>
             <div className={styles.items}>
                 {
                     navItems.map(({ text, to }, index) => (
