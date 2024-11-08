@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { NavItem } from '../../interfaces/nav-item.interface';
+import { NavItem } from '../../interfaces/nav-item';
 import styles from './footer.module.css';
 type Props = {
     navItems: NavItem[];

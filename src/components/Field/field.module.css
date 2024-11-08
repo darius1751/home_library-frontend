@@ -1,0 +1,31 @@
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    top: 1.5em;
+    left: 0.5em;
+    width: 6.5em;
+    color: #10ACA3;
+}
+
+.input {
+    height: 2em;
+    padding-left: 5.5em;
+    max-width: 100%;
+    width: 20em;
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid gray;
+    box-sizing: border-box;
+    background-color: transparent;
+}
+
+.input::placeholder {
+    font-style: italic;
+    font-weight: bold;
+}
