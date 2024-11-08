@@ -7,7 +7,7 @@ import styles from './home.module.css';
 import { Cite } from "./components/Cite/Cite";
 export const HomePage = () => {
     return (
-        <div className={`page`}>
+        <div className={`public_page`}>
             <Hero />
             <div className={styles.container}>
                 <div className={styles.sections}>

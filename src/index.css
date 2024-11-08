@@ -2,6 +2,9 @@
   font-size: 16px;
   font-family: sans-serif;
   color-scheme: light dark;
+  /* margin-bottom: 9.5em; */ /*En veremos*/
+  padding-bottom: 9.5em;/*En veremos, preguntar despues*/
+  background-color: light-dark(white, #111826);
   --primary-color: #BBEFE6;
   --secondary-color: #F2877A;
 }

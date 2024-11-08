@@ -2,12 +2,15 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import { PublicLayout } from "./Layouts/PublicLayout";
 import { HomePage } from "./pages/Home/HomePage";
 import { RootLayout } from "./Layouts/RootLayout";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 import './App.css';
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout />}>
         <Route path="" element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} index />
-            <Route path="/login" element={<>Login</>}/>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
         </Route>
     </Route>
 ));

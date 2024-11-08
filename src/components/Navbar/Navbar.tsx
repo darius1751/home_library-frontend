@@ -1,6 +1,6 @@
 import { Logo } from '../Logo/Logo';
 import { NavLink } from 'react-router-dom'
-import { NavItem } from '../../interfaces/nav-item.interface';
+import { NavItem } from '../../interfaces/nav-item';
 import styles from './navbar.module.css';
 
 type Props = {

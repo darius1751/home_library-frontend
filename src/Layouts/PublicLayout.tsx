@@ -1,17 +1,17 @@
 import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar/Navbar"
-import { NavItem } from "../interfaces/nav-item.interface"
+import { NavItem } from "../interfaces/nav-item"
 import { Footer } from "../components/Footer/Footer"
 
 const navItems: NavItem[] = [
     {
-        text: 'Sign In',
-        to: '/sign-in'
-    },
-    {
         text: 'Login',
         to: '/login'
-    }
+    },
+    {
+        text: 'Register',
+        to: '/register'
+    },
 ]
 export const PublicLayout = () => {
 
