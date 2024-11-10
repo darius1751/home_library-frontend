@@ -5,6 +5,10 @@
     min-height: 100%;
 }
 
+.dashboard_page {
+        margin-top: 5em;
+}
+
 .btn {
     display: inline-block;
     cursor: pointer;
