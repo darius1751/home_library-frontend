@@ -1,22 +1,31 @@
-import { FormEvent } from "react"
+import { FormEvent, useContext } from "react"
 import { Field } from "../../components/Field/Field"
 import { useForm } from '../../hooks/useForm';
-import { NavLink } from 'react-router-dom';
-import { CreateUser } from '../../interfaces/create-user';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { CreateUserForm } from '../../interfaces';
 import styles from './register.module.css';
-const initialRegister: CreateUser = {
-    fullname: '',
+import { register } from "../../services/register";
+import { UserContext } from "../../context/contexts";
+const initialRegister: CreateUserForm = {
+    name: '',
     email: '',
-    username: '',
+    user: '',
     birthday: '',
     password: '',
     confirmPassword: '',
 }
 export const Register = () => {
     const { form, handleChange, } = useForm(initialRegister);
-    const { fullname, email, username, birthday, password, confirmPassword } = form;
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const { name, email, user, birthday, password, confirmPassword } = form;
+    const navigate = useNavigate();
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { confirmPassword, password, user, ...userData } = form;
+        const { status } = await register({ ...userData, credential: { user, password } })
+        if (status === 200) {
+            alert(`El usuario se a creado correctamente`);
+            navigate('/login');
+        }
     }
     return (
         <div className={`public_page`}>
@@ -24,20 +33,20 @@ export const Register = () => {
                 <div className={styles.fields}>
                     <div className={styles.column}>
                         <Field
-                            name='fullname'
+                            name='name'
                             type='text'
                             label='Fullname'
                             placeholder='write your fullname'
                             handleChange={handleChange}
-                            value={fullname}
+                            value={name}
                             className={styles.field}
                         />
                         <Field
-                            name='username'
+                            name='user'
                             type='text'
                             label='Username'
                             handleChange={handleChange}
-                            value={username}
+                            value={user}
                             placeholder='write your username'
                             className={styles.field}
                         />

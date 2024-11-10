@@ -1,9 +1,11 @@
-import { FormEvent } from 'react';
+import { FormEvent, useContext } from 'react';
 import { Field } from '../../components/Field/Field';
 import { useForm } from '../../hooks/useForm';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Credential } from '../../interfaces/credential';
 import styles from './login.module.css';
+import { login } from '../../services/login';
+import { UserContext } from '../../context/contexts';
 const initialCredential: Credential = {
     user: '',
     password: ''
@@ -11,8 +13,15 @@ const initialCredential: Credential = {
 export const Login = () => {
     const { form, handleChange } = useForm(initialCredential);
     const { user, password } = form;
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const { status, data } = await login(form);
+        if (status === 200) {
+            setUser(data);
+            navigate('/dashboard');
+        }
     }
     return (
         <div className={`public_page`}>
@@ -20,8 +29,8 @@ export const Login = () => {
                 <Field
                     name='user'
                     type='text'
-                    label='Email'
-                    placeholder='john@john.com'
+                    label='User'
+                    placeholder='user or email@domain.com'
                     handleChange={handleChange}
                     value={user}
                 />

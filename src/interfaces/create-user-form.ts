@@ -1,7 +1,7 @@
-export interface CreateUser { 
-    fullname: string;
+export interface CreateUserForm { 
+    name: string;
     email: string;
-    username: string;
+    user: string;
     birthday: string; 
     password: string;
     confirmPassword: string;
