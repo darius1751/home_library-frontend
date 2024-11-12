@@ -12,6 +12,8 @@ import { Logout } from "./pages/Logout";
 import CreateBook from "./pages/CreateBook/CreateBook";
 import { PrivateLayout } from "./Layouts/PrivateLayout";
 import ShowBooks from "./pages/ShowBooks/ShowBooks";
+import BookDetail from "./pages/BookDetail/BookDetail";
+import UpdateBook from "./pages/UpdateBook/UpdateBook";
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout />}>
         <Route element={<PublicLayout />}>
@@ -22,6 +24,8 @@ const router = createBrowserRouter(createRoutesFromElements(
         <Route element={<PrivateLayout />}>
             <Route path="/addBook" element={<CreateBook />} />
             <Route path="/books/:id" element={<ShowBooks />} />
+            <Route path="/books/detail/:id" element={<BookDetail/>} />
+            <Route path="/update/:id" element={<UpdateBook/>} />
         </Route>
         <Route element={<DashboardLayout />}>
                 <Route path='/dashboard' element={<Dashboard />} />

@@ -2,6 +2,8 @@
 import React from 'react';
 import { FormEvent, ChangeEvent } from 'react';
 import CreateBookDto from '../../interfaces/book-dto';
+import {Field} from '../Field/Field';
+import styles from './bookForm.module.css';
 
 interface BookFormProps {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
@@ -12,50 +14,86 @@ interface BookFormProps {
 
 const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit }) => {
     return (
-        <div>
-        <h1>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
+        <div className={styles.container}>
+        <h1 className={styles.title}>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
 
-        <form onSubmit={onSubmit} encType='multipart/form-data'>
+        <form onSubmit={onSubmit} className={styles.form}>
+            <div className={styles.row}>
+            <div className={styles.column}>
+        <Field
+                    name='title'
+                    type='text'
+                    label='Title'
+                    placeholder='Title'
+                    handleChange={onChange}
+                    value={book.title}
+                />
+                <Field
+                    name='author'
+                    type='text'
+                    label='Author'
+                    placeholder='Author'
+                    handleChange={onChange}
+                    value={book.author}
+                />
+           
+           <div>
+            <label className={styles.label} htmlFor="summary">Summary</label>
+           <textarea
+                    name='summary'
+                    rows={6}
+                    placeholder='Summary'
+                    onChange={onChange}
+                    value={book.summary}
+                    className={ styles.textarea}
+                />
+           </div>
+        </div>
+
+        <div className={styles.column}>
+              
+           
+            <Field
+                    name='image'
+                    type='text'
+                    label='Image'
+                    placeholder='Image'
+                    handleChange={onChange}
+                    value={book.image}
+                />
+           <Field
+                    name='genre'
+                    type='text'
+                    label='Genre'
+                    placeholder='Genre'
+                    handleChange={onChange}
+                    value={book.genre}
+                />
+                 
             <div>
-                <label htmlFor="title">Title</label>
-                <input type="text" id="title" name="title" value={book.title} onChange={onChange} required />
-            </div>
-            <div>
-                <label htmlFor="author">Author</label>
-                <input type="text" id="author" name="author" value={book.author} onChange={onChange} required />
-            </div>
-            <div>
-                <label htmlFor="summary">Summary</label>
-                <textarea id="summary" name="summary" value={book.summary} onChange={onChange} required />
-            </div>
-            <div>
-                <label htmlFor="image">Image</label>
-                <input type="file" id="image" name="image" value={book.image} onChange={onChange} required />
-            </div>
-            <div>
-                <label htmlFor="genre">Genre</label>
-                <input type="text" id="genre" name="genre" value={book.genre} onChange={onChange} required />
-            </div>
-            <div>
-                <label htmlFor="location">Location</label>
-                <select id="location" name="location" value={book.location} onChange={onChange} required>
-                    <option value="">Select a location</option>
-                    <option value="library">Library</option>
-                    <option value="lent">Lent</option>
-                    <option value="wishlist">Wishlist</option>
+                <label htmlFor="location" className={styles.label}>Location</label>
+                <select id="location" name="location" value={book.location} onChange={onChange} required className={styles.input}>
+                    <option value="" className={styles.option}>Select a location</option>
+                    <option value="library" className={styles.option}>Library</option>
+                    <option value="lent" className={styles.option}>Lent</option>
+                    <option value="wishlist" className={styles.option}>Wishlist</option>
                 </select>
             </div>
             <div>
-                <label htmlFor="state">State</label>
-                <select id="state" name="state" value={book.state} onChange={onChange} required>
-                    <option value="">Select a state</option>
-                    <option value="read">Read</option>
-                    <option value="currently reading">Currently Reading</option>
-                    <option value="not finished">Not Finished</option>
-                    <option value="unread">Unread</option>
+                <label htmlFor="state" className={styles.label}>State</label>
+                <select id="state" name="state" value={book.state} onChange={onChange} required className={styles.input}>
+                    <option value="" className={styles.option}>Select a state</option>
+                    <option value="read" className={styles.option}>Read</option>
+                    <option value="currently reading" className={styles.option}>Currently Reading</option>
+                    <option value="not finished" className={styles.option}>Not Finished</option>
+                    <option value="unread" className={styles.option}>Unread</option>
                 </select>
             </div>
-            <button type="submit">{isEdit ? 'Update' : 'Create'}</button>
+
+        </div>
+            </div>
+       
+            <button className={`btn btn-primary ${styles.btn}`} type="submit">{isEdit ? 'Update' : 'Create'}</button>
         </form>
         </div>
     )
