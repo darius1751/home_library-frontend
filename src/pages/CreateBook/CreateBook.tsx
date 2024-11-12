@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateBook = () => {
     const { user } = useContext(UserContext);
-    console.log("CREAR", {user})
     const navigate = useNavigate();
     const initialBook = {
         title:'',
@@ -28,18 +27,7 @@ const CreateBook = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const formData = new FormData();
-            formData.set('title', form.title);
-            formData.set('author', form.author);
-            formData.set('summary', form.summary);
-            formData.set('genre', JSON.stringify(form.genre));
-            formData.set('location', form.location);
-            formData.set('state', form.state);
-            formData.set('user', user!._id || '');
-            const imageBlob = new Blob([form.image]);
-            formData.set('image', imageBlob);
-            console.log(URL.createObjectURL(imageBlob))
-            const book = await createBook(formData)
+            const book = await createBook({...form, user: user._id || ''})
             console.log({book, form})
             navigate(`/books/${user._id}`)
             

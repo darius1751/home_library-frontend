@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
+import styles from './showbooks.module.css'
 const ShowBooks = () => {
     const {id} = useParams();
     const [books, setBooks] = useState([]);
@@ -19,22 +20,26 @@ useEffect (() => {
 }, [])
 
     return (
-        <div>
-            <h1>My Books</h1>
+        <div className={styles.container}>
+            <h1 className={styles.title}>My Books</h1>
+            <div className={styles.row}>    
             {
             books.map((book: BookDto) => (
-                <div key={book._id}>
-                    <h2>{book.title}</h2>
-                    <p>{book.author}</p>
-                    <p>{book.genre}</p>
-                    <p>{book.summary}</p>
+                <div key={book._id} className={styles.card}>
                     <img src={book.image} alt={book.title} />
-                    <p>{book.location}</p>
-                    <p>{book.state}</p>
-                    <Link to={`books/${book._id}`}>Detail</Link>
+                    <div className={styles.classDetail}>
+                    <p><span className={styles.orange}>Title: </span>{book.title}</p>
+                    <p><span className={styles.orange}>Author: </span>{book.author}</p>
+                    <p><span className={styles.orange}>Genres: </span>{book.genre}</p>
+                    <p><span className={styles.orange}>Location: </span>{book.location}</p>
+                    <p><span className={styles.orange}>State: </span>{book.state}</p>
+                    </div>
+                    
+                    <Link to={`/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
                 </div>
             ))
         }
+        </div>
         </div>
     )
 }
