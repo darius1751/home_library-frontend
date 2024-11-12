@@ -1,12 +1,15 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar/Navbar"
-import { NavItem } from "../interfaces"
+import { NavItem } from "../interfaces/nav-item"
+import { Footer } from "../components/Footer/Footer"
 import { useContext } from "react"
 import { UserContext } from "../context/contexts"
 
-export const DashboardLayout = () => {
-    const { user } = useContext(UserContext);
-    const { _id } = user;
+
+
+export const PrivateLayout = () => {
+    const {user} = useContext(UserContext);
+
     const navItems: NavItem[] = [
         {
             text: 'Home',
@@ -25,16 +28,15 @@ export const DashboardLayout = () => {
             to: '/addBook'
         }
     ]
+  
+
+   
+
     return (
         <>
-            {
-                _id ? (
-                    <>
-                        <Navbar navItems={navItems} />
-                        <Outlet />
-                    </>) : <Navigate to='/' />
-
-            }
+        <Navbar navItems={navItems} />
+            <Outlet />
+            <Footer navItems={navItems} />
         </>
     )
 }

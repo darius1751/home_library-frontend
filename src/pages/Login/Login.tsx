@@ -13,13 +13,14 @@ const initialCredential: Credential = {
 export const Login = () => {
     const { form, handleChange } = useForm(initialCredential);
     const { user, password } = form;
-    const { setUser } = useContext(UserContext);
+    const { user: userContext, setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { status, data } = await login(form);
         if (status === 200) {
             setUser(data);
+            console.log(userContext)
             navigate('/dashboard');
         }
     }
