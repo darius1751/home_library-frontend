@@ -11,6 +11,7 @@ useEffect (() => {
     const getBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
+            console.log("RESPONSE", response)
             setBooks(response.data)
         } catch (error) {
             console.log(error)
@@ -44,7 +45,7 @@ const eraseBook = async (id: string) => {
                     </div>
                     <div className={styles.column}>
                     <button  onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
-                    <Link to={`/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
+                    <Link to={`/dashboard/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
                     </div>
                 </div>
             ))

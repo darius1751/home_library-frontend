@@ -54,8 +54,8 @@ const BookDetail = () => {
                     <p><span className={styles.orange}>State: </span>{book.state}</p>
                 </div>
                 <div className={styles.row}>
-                    <Link className={styles.link} to={`/books/${user._id}`}>Back</Link>
-                    <Link className={styles.link} to={`/update/${id}`}>Update</Link>
+                    <Link className={styles.link} to={`/dashboard/books/${user._id}`}>Back</Link>
+                    <Link className={styles.link} to={`/dashboard/update/${id}`}>Update</Link>
                     {error && <p>{error}</p>}
                 </div>
             </div>

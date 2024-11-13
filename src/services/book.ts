@@ -27,7 +27,7 @@ export const getAllBooksByGenre = async (genre: string) => {
     return response.data
 }
 
-export const updateBook = async (id: string, book: BookDto) => {
+export const updateBook = async (id: string, book: FormData) => {
     const response = await api.patch(`/books/${id}`, book)
     return response.data
 }
