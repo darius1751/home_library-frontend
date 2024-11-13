@@ -1,11 +1,12 @@
 /* The switch - the box around the slider */
 .themeToggleButton {
-    font-size: 17px;
+    font-size: 13px;
     bottom: 1em;
     position: fixed;
     display: inline-block;
     width: 7em;
     cursor: pointer;
+    right: 0.5em;
   }
   
   /* Hide default HTML checkbox */

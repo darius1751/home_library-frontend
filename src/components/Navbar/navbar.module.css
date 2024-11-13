@@ -21,7 +21,7 @@
     width: 30%;
 }
 
-.navbarItems > li {
+.navbarItems>li {
     list-style: none;
 }
 
@@ -29,4 +29,61 @@
     text-decoration: none;
     font-weight: bold;
     color: var(--secondary-color);
+}
+
+.menuInput,
+.menu {
+    display: none;
+}
+
+
+
+@media (max-width: 400px) {
+    .menu {
+        top: 1.5em;
+        right: 0.1em;
+        position: absolute;
+        display: inherit;
+        height: 2em;
+        width: 2em;
+        background-image: url(/src/assets/icons/menuIcon.svg);
+        background-repeat: no-repeat;
+        cursor: pointer;
+        margin-right: 2em;
+    }
+
+    .menuInput {
+        position: relative;
+        display: inherit;
+        top: 1.5em;
+        right: 2.1em;
+        height: 2em;
+        width: 2em;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .menuInput:checked+.menu {
+        background-image: url('../../assets/icons/cancel.svg');
+    }
+
+    .navbar:has(.menuInput:checked) .navbarItems {
+        position: absolute;
+        background-color: azure;
+        top: 4em;
+        right: 0.3em;
+        display: flex;
+        margin: 0;
+        flex-direction: column;
+        border-radius: 7px;
+    }
+
+    .navbar:has(.menuInput:checked) li {
+        margin: 0.2em 0;
+    }
+
+    .navbarItems {
+        display: none;
+    }
+
 }

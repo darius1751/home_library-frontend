@@ -1,6 +1,7 @@
 .field {
     display: flex;
     flex-direction: column;
+    width: min-content;
 }
 
 .label {
@@ -9,7 +10,7 @@
     margin: 0;
     top: 1.5em;
     left: 0.5em;
-    width: 6.5em;
+    width: 5.5em;
     color: #10ACA3;
 }
 
