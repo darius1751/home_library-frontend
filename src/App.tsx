@@ -7,29 +7,28 @@ import { Register } from "./pages/Register/Register";
 import { Context } from "./context/Context";
 import { DashboardLayout } from "./Layouts/DashboardLayout";
 import { Dashboard } from "./pages/Dashboard/Dashboard";
-import './App.css';
 import { Logout } from "./pages/Logout";
 import CreateBook from "./pages/CreateBook/CreateBook";
-import { PrivateLayout } from "./Layouts/PrivateLayout";
 import ShowBooks from "./pages/ShowBooks/ShowBooks";
 import BookDetail from "./pages/BookDetail/BookDetail";
 import UpdateBook from "./pages/UpdateBook/UpdateBook";
+import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
+import './App.css';
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout />}>
         <Route element={<PublicLayout />}>
             <Route path="/" element={<HomePage />} index />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/reset-password" element={<ResetPassword/>}/>
         </Route>
-        <Route element={<PrivateLayout />}>
-            <Route path="/addBook" element={<CreateBook />} />
-            <Route path="/books/:id" element={<ShowBooks />} />
-            <Route path="/books/detail/:id" element={<BookDetail/>} />
-            <Route path="/update/:id" element={<UpdateBook/>} />
-        </Route>
-        <Route element={<DashboardLayout />}>
-                <Route path='/dashboard' element={<Dashboard />} />
-                <Route path="dashboard/logout" element={<Logout/>}/>
+        <Route element={<DashboardLayout />} path="/dashboard">
+            <Route path='' element={<Dashboard />} />
+            <Route path="add-book" element={<CreateBook />} />
+            <Route path="books/:id" element={<ShowBooks />} />
+            <Route path="books/detail/:id" element={<BookDetail />} />
+            <Route path="update/:id" element={<UpdateBook />} />
+            <Route path="logout" element={<Logout />} />
         </Route>
     </Route>
 ));

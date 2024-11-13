@@ -9,28 +9,24 @@ export const DashboardLayout = () => {
     const { _id } = user;
     const navItems: NavItem[] = [
         {
-            text: 'Home',
-            to: '/'
-        },
-        {
-            text: 'Logout',
-            to: '/logout'
-        },
-        {
             text: 'My Books',
-            to: `/books/${user._id}`
+            to: `/dashboard/books/${user._id}`
         },
         {
             text: 'Add Book',
-            to: '/addBook'
-        }
+            to: '/dashboard/add-book'
+        },
+        {
+            text: 'Logout',
+            to: '/dashboard/logout'
+        },
     ]
     return (
         <>
             {
                 _id ? (
                     <>
-                        <Navbar navItems={navItems} />
+                        <Navbar navItems={navItems} home="/dashboard" />
                         <Outlet />
                     </>) : <Navigate to='/' />
 

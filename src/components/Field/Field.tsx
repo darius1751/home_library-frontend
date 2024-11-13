@@ -14,7 +14,7 @@ type Props = {
     accept?: string;
 
 }
-export const Field = ({ className, label, handleChange, ...inputProps }: Props) => {
+export const Field = ({ label, handleChange, className = "", ...inputProps }: Props) => {
     const id = useId();
     return (
         <div className={`${styles.field} ${className}`}>
