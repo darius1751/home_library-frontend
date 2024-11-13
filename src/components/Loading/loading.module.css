@@ -1,0 +1,28 @@
+.loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-image: url('../../assets/icons/book.svg');
+    background-repeat: no-repeat;
+    background-size: 5em;
+    height: 5em;
+    width: 5em;
+    padding-top: 1em;
+    box-sizing: border-box;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 8px white double;
+    border-left-style: solid;
+    border-radius: 50%;
+    animation: spinner-aib1d7 0.75s infinite linear;
+    margin: 0 auto;
+}
+
+@keyframes spinner-aib1d7 {
+    to {
+        transform: rotate(360deg);
+    }
+}

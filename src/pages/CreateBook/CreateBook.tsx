@@ -40,7 +40,7 @@ const CreateBook = () => {
                 formData.append(`genre[${index}]`, genre);
               });
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
+            const $inputImage = e.currentTarget.querySelector<any>('input[name="image"]')!;
             const image = $inputImage.files[0];
             const imageBlob = new Blob([image], { type: image.type });
             formData.append("title", title);
@@ -52,7 +52,7 @@ const CreateBook = () => {
             formData.append("image", imageBlob);
             const book = await createBook(formData)
             console.log({ book });
-            navigate(`/books/${user._id}`)
+            navigate(`/dashboard/books/${user._id}`)
 
         }
         catch (error) {

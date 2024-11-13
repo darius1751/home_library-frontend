@@ -1,9 +1,8 @@
 import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar/Navbar"
 import { NavItem } from "../interfaces/nav-item"
-import { Footer } from "../components/Footer/Footer"
 
-const navItems: NavItem[] = [
+export const navItems: NavItem[] = [
     {
         text: 'Login',
         to: '/login'
@@ -19,7 +18,6 @@ export const PublicLayout = () => {
         <>
             <Navbar navItems={navItems} />
             <Outlet />
-            <Footer navItems={navItems} />
         </>
     )
 }

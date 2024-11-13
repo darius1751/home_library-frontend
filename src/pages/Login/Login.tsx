@@ -6,6 +6,8 @@ import { Credential } from '../../interfaces/credential';
 import styles from './login.module.css';
 import { login } from '../../services/login';
 import { UserContext } from '../../context/contexts';
+import { Footer } from '../../components/Footer/Footer';
+import { navItems } from '../../Layouts/PublicLayout';
 const initialCredential: Credential = {
     user: '',
     password: ''
@@ -13,14 +15,13 @@ const initialCredential: Credential = {
 export const Login = () => {
     const { form, handleChange } = useForm(initialCredential);
     const { user, password } = form;
-    const { user: userContext, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { status, data } = await login(form);
         if (status === 200) {
             setUser(data);
-            console.log(userContext)
             navigate('/dashboard');
         }
     }
@@ -45,10 +46,11 @@ export const Login = () => {
                 />
                 <div className={`btnOptions`}>
                     <input value={'Sign In'} type='submit' className={`btn btn-primary`} />
-                    <NavLink to={'/register'} className={`btn btn-primary`}>Register</NavLink>
+                    <NavLink to={'/register'} className={`btn btn-primary btn-link`}>Register</NavLink>
                 </div>
-                <NavLink to={'/resend-password'} >Forgot Password</NavLink>
+                <NavLink to={'/reset-password'} >Forgot Password</NavLink>
             </form>
+            <Footer navItems={navItems} className={styles.footer} />
         </div>
     )
 }
