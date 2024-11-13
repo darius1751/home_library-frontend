@@ -39,8 +39,9 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                             value={book.author}
                         />
 
-                        <div>
+                        <div className={styles.row}>
                             <label className={styles.label} htmlFor="summary">Summary</label>
+                            <div className={styles.buttonRow}>
                             <textarea
                                 name='summary'
                                 rows={6}
@@ -49,7 +50,10 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                                 value={book.summary}
                                 className={styles.textarea}
                             />
-                            <button onClick={() => { searchSummary(book.title, book.author)}}>Search</button>
+                            <button className={styles.button} onClick={() => { searchSummary(book.title, book.author)}}>Search</button>
+
+                            </div>
+                           
                         </div>
                     </div>
 

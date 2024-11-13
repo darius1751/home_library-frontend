@@ -20,13 +20,13 @@ const CreateBook = () => {
         state: '',
         user: ''
     }
-    const { form, handleChange } = useForm(initialBook);
+    const { form, handleChange, setForm } = useForm(initialBook);
     const [error, setError] = useState('')
     const isEdit = false
 
     const searchSummary = async () => {
         const summary = await responseGenerate(form.title, form.author)
-        form.summary = summary || '';
+        setForm({ ...form, summary: summary || '' });
     }
 
 
