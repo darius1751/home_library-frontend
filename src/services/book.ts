@@ -1,9 +1,10 @@
 import CreateBookDto from "../interfaces/book-dto";
 import { api } from "../config/api";
+import BookDto from "../interfaces/book-dto";
 
-export const createBook = async (book: CreateBookDto) => {
-    const response = await api.post('/books', book)
-    return response.data
+export const createBook = async (formData: FormData) => {
+    const response = await api.post<BookDto>('/books', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    return response.data;
 }
 
 export const getAllBooks = async () => {

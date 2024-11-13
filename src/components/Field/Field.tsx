@@ -11,7 +11,7 @@ type Props = {
     required?: boolean;
     disabled?: boolean;
     readOnly?: boolean;
-
+    accept?: string;
 
 }
 export const Field = ({ className, label, handleChange, ...inputProps }: Props) => {
