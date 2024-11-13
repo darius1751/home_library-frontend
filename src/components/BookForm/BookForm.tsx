@@ -67,6 +67,7 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                             placeholder='Image'
                             handleChange={onChange}
                             accept='image/*'
+                           
                         />
                         <Field
                             name='genre'
