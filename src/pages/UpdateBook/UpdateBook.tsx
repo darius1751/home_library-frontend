@@ -42,7 +42,7 @@ const UpdateBook = () => {
 
     const searchSummary = async () => {
         const summary = await responseGenerate(book.title, book.author)
-        book.summary = summary || '';
+         setBook({ ...book, summary: summary || '' });
     }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
