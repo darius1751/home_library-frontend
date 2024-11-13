@@ -3,7 +3,7 @@ import styles from './field.module.css';
 type Props = {
     label: string;
     name: string;
-    value: string | number | readonly string[] | undefined;
+    value?: string | number | readonly string[] | undefined;
     handleChange: ChangeEventHandler<HTMLInputElement>;
     type?: React.HTMLInputTypeAttribute;
     placeholder?: string;

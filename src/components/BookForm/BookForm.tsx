@@ -5,14 +5,16 @@ import CreateBookDto from '../../interfaces/book-dto';
 import { Field } from '../Field/Field';
 import styles from './bookForm.module.css';
 
+
 interface BookFormProps {
     onSubmit: (e: FormEvent<HTMLFormElement>) => void;
     onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
     book: CreateBookDto;
     isEdit: boolean;
+    searchSummary: (title: string, author: string) => void
 }
 
-const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit }) => {
+const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, searchSummary }) => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
@@ -47,6 +49,7 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit })
                                 value={book.summary}
                                 className={styles.textarea}
                             />
+                            <button onClick={() => { searchSummary(book.title, book.author)}}>Search</button>
                         </div>
                     </div>
 
@@ -59,7 +62,6 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit })
                             label='Image'
                             placeholder='Image'
                             handleChange={onChange}
-                            value={book.image}
                             accept='image/*'
                         />
                         <Field
