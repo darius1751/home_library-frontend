@@ -5,6 +5,7 @@ import { UserContext } from '../../context/contexts';
 import { createBook } from '../../services/book';
 import BookForm from '../../components/BookForm/BookForm';
 import { useNavigate } from 'react-router-dom';
+import responseGenerate from '../../config/openAI';
 
 const CreateBook = () => {
     const { user } = useContext(UserContext);
@@ -23,12 +24,18 @@ const CreateBook = () => {
     const [error, setError] = useState('')
     const isEdit = false
 
+    const searchSummary = async () => {
+        const summary = await responseGenerate(form.title, form.author)
+        form.summary = summary || '';
+    }
+
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             const formData = new FormData();
             const { title, author, genre, location, state, summary } = form;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
             const image = $inputImage.files[0];
             const imageBlob = new Blob([image], { type: image.type });
@@ -52,7 +59,7 @@ const CreateBook = () => {
     }
     return (
         <div>
-            <BookForm onSubmit={handleSubmit} onChange={handleChange} book={form} isEdit={isEdit}></BookForm>
+            <BookForm onSubmit={handleSubmit} onChange={handleChange} book={form} isEdit={isEdit} searchSummary={searchSummary}></BookForm>
             {error && <p>{error}</p>}
         </div>
     )

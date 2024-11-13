@@ -58,6 +58,21 @@
     font-size: smaller;
 }
 
+.noBtn {
+    font-size: smaller;
+    background-color: var(--primary-color);
+    border: none;
+    text-decoration: underline;
+
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    align-items: right;
+}
+
 @media (max-width: 800px) {
     .row {
         flex-direction: column;

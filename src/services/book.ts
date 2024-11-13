@@ -1,4 +1,3 @@
-import CreateBookDto from "../interfaces/book-dto";
 import { api } from "../config/api";
 import BookDto from "../interfaces/book-dto";
 
@@ -27,7 +26,7 @@ export const getAllBooksByGenre = async (genre: string) => {
     return response.data
 }
 
-export const updateBook = async (id: string, book: CreateBookDto) => {
+export const updateBook = async (id: string, book: FormData) => {
     const response = await api.patch(`/books/${id}`, book)
     return response.data
 }

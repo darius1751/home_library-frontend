@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react";
-import { getAllBooksByUserId } from "../../services/book";
+import { deleteBook, getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './showbooks.module.css'
 const ShowBooks = () => {
@@ -19,6 +19,14 @@ useEffect (() => {
     getBooks();
 }, [])
 
+const eraseBook = async (id: string) => {
+    try {
+      await deleteBook(id || '');
+      setBooks(books.filter((book: BookDto) => book._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>My Books</h1>
@@ -34,8 +42,10 @@ useEffect (() => {
                     <p><span className={styles.orange}>Location: </span>{book.location}</p>
                     <p><span className={styles.orange}>State: </span>{book.state}</p>
                     </div>
-                    
+                    <div className={styles.column}>
+                    <button  onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
                     <Link to={`/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
+                    </div>
                 </div>
             ))
         }
