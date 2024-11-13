@@ -10,29 +10,42 @@ const CreateBook = () => {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
     const initialBook = {
-        title:'',
-        author:'',
+        title: '',
+        author: '',
         genre: [''],
-        summary:'',
-        image:'',
-        location:'',
-        state:'',
+        summary: '',
+        image: '',
+        location: '',
+        state: '',
         user: ''
     }
     const { form, handleChange } = useForm(initialBook);
     const [error, setError] = useState('')
     const isEdit = false
-   
+
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const book = await createBook({...form, user: user._id || ''})
-            console.log({book, form})
+            const formData = new FormData();
+            const { title, author, genre, location, state, summary } = form;
+            const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
+            const image = $inputImage.files[0];
+            const imageBlob = new Blob([image], { type: image.type });
+            formData.append("title", title);
+            formData.append("author", author);
+            formData.append("genre", JSON.stringify(genre));
+            formData.append("location", location);
+            formData.append("state", state)
+            formData.append("summary", summary);
+            formData.append("user", user._id!);
+            formData.append("image", imageBlob);
+            const book = await createBook(formData)
+            console.log({ book });
             navigate(`/books/${user._id}`)
-            
-        }    
-        catch (error) { 
+
+        }
+        catch (error) {
             console.log(error)
             setError(JSON.stringify(error))
         }
