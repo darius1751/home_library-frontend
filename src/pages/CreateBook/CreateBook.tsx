@@ -35,13 +35,16 @@ const CreateBook = () => {
         try {
             const formData = new FormData();
             const { title, author, genre, location, state, summary } = form;
+            const genres = genre ? JSON.stringify(genre).split(',') : [];
+            genres.forEach((genre, index) => {
+                formData.append(`genre[${index}]`, genre);
+              });
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
             const image = $inputImage.files[0];
             const imageBlob = new Blob([image], { type: image.type });
             formData.append("title", title);
             formData.append("author", author);
-            formData.append("genre", JSON.stringify(genre));
             formData.append("location", location);
             formData.append("state", state)
             formData.append("summary", summary);

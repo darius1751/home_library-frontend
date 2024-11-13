@@ -6,8 +6,8 @@ import BookForm from "../../components/BookForm/BookForm";
 import { ChangeEvent } from 'react';
 import responseGenerate from "../../config/openAI";
 
-const UpdateBook = () => {
 
+const UpdateBook = () => {
     const {id} = useParams();
     const [book, setBook] = useState({
         title: '',
@@ -19,6 +19,7 @@ const UpdateBook = () => {
         state: '',
         user: ''
     })
+
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const isEdit = true
@@ -27,7 +28,6 @@ const UpdateBook = () => {
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         setBook({ ...book, [e.target.name]: e.target.value });
     }
-
     useEffect (() => {
         const getBook = async () => {
             try {
@@ -48,21 +48,28 @@ const UpdateBook = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
-            const formData = new FormData();
-            const { title, author, genre, location, state, summary } = book;
+            
+            const stringify = book.genre.toString();
+            const genres = stringify.split(',');
+            console.log("GENRES", genres)
+
+            const genresArray: string[] = []
+            genres.forEach((genre) => {
+                genresArray.push(genre)
+            })
+        
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
             const image = $inputImage.files[0];
             const imageBlob = new Blob([image], { type: image.type });
-            formData.append("title", title);
-            formData.append("author", author);
-            formData.append("genre", JSON.stringify(genre));
-            formData.append("location", location);
-            formData.append("state", state)
-            formData.append("summary", summary);
-            formData.append("user", user._id!);
-            formData.append("image", imageBlob);
-              await updateBook(id || '', formData)
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+           
+            setBook({...book, genre:[...genresArray], image: imageBlob})
+
+           
+              const response =await updateBook(id || '', book)
+              console.log(response)
+
            
             navigate(`/books/${user._id}`)
             
