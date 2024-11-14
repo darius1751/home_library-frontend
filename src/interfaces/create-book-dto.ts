@@ -1,9 +1,11 @@
-export interface CreateBookDto {
-    title:    string;
-    author:   string;
-    summary:  string;
-    image:    string;
-    state:    string;
+export default interface CreateBookDto {
+    _id?: string;
+    title: string;
+    author: string;
+    summary: string;
+    image: string;
+    genre:string[];
+    user: string,
     location: string;
-    user:     string;
+    state: string;
 }
