@@ -9,7 +9,7 @@ const responseGenerate = async (title: string, author: string) => {
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
-        {"role": "system", "content": "You are a assistant that provides book previews given book titles and authors that are no more than a paragraph long."},
+        {"role": "system", "content": `You are a assistant that provides book previews given book titles and authors that are no more than a paragraph long. You recognize the language of the ${title} and you return the summary in that language. You first look for the summary in goodreads and then in bookstores that sell the book`},
         {"role": "user", "content": `What is ${title} by ${author} about?`}
       ]
     });
