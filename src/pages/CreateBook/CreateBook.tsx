@@ -6,6 +6,7 @@ import { createBook } from '../../services/book';
 import BookForm from '../../components/BookForm/BookForm';
 import { useNavigate } from 'react-router-dom';
 import responseGenerate from '../../config/openAI';
+import { FieldImage } from '../../components/FieldImage/FieldImage';
 
 const CreateBook = () => {
     const { user } = useContext(UserContext);
@@ -22,6 +23,7 @@ const CreateBook = () => {
     }
     const { form, handleChange, setForm } = useForm(initialBook);
     const [error, setError] = useState('')
+    const [image, setImage] = useState<File | undefined>(undefined);
     const isEdit = false
 
     const searchSummary = async () => {
@@ -69,6 +71,7 @@ const CreateBook = () => {
     return (
         <div>
             <BookForm onSubmit={handleSubmit} onChange={handleChange} book={form} isEdit={isEdit} searchSummary={searchSummary}></BookForm>
+            <FieldImage image={image} setImage={setImage}></FieldImage>
             {error && <p>{error}</p>}
         </div>
     )

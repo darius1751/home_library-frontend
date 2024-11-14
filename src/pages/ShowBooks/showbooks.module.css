@@ -73,8 +73,36 @@
     align-items: right;
 }
 
+.filter {
+    width: 100%;
+    margin-top: 1em;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.input {
+    margin: 0.5em;
+}
+
+.btnContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn {
+    margin: 1em;
+}
+
 @media (max-width: 800px) {
     .row {
+        flex-direction: column;
+    }
+
+    .btnContainer {
         flex-direction: column;
     }
 }
