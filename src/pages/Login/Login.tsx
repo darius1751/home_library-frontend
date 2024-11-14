@@ -3,11 +3,11 @@ import { Field } from '../../components/Field/Field';
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Credential } from '../../interfaces/credential';
-import styles from './login.module.css';
 import { login } from '../../services/login';
 import { UserContext } from '../../context/contexts';
 import { Footer } from '../../components/Footer/Footer';
 import { navItems } from '../../Layouts/PublicLayout';
+import styles from './login.module.css';
 const initialCredential: Credential = {
     user: '',
     password: ''
@@ -20,8 +20,10 @@ export const Login = () => {
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { status, data } = await login(form);
+        console.log({ data });
         if (status === 200) {
-            setUser(data);
+            setUser(data.user);
+            localStorage.setItem('token', data.token);
             navigate('/dashboard');
         }
     }
