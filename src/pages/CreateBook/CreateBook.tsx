@@ -58,8 +58,9 @@ const CreateBook = () => {
             genresArray.forEach((genre, index) => {
                 formData.append(`genre[${index}]`, genre);
               });
+            console.log("FORMDATA", JSON.stringify(formData))
             const book = await createBook(formData)
-            console.log({ book });
+            console.log("book",{ book });
             navigate(`/dashboard/books/${user._id}`)
 
         }

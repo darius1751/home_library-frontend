@@ -8,6 +8,11 @@ const ShowBooks = () => {
     const {id} = useParams();
     const [books, setBooks] = useState([]);
     const [filteredBooks, setFilteredBooks] = useState<BookDto[]>([])
+    const [loc, setLoc] = useState('');
+    const [state, setState] = useState('');
+    const [genre, setGenre] = useState('');
+    const [title, setTitle] = useState('');
+    const [author, setAuthor] = useState('');
 
 useEffect (() => {
     const getBooks = async () => {
@@ -23,6 +28,32 @@ useEffect (() => {
     getBooks();
 }, [])
 
+useEffect (() => {
+    filter()
+    
+},[loc, state, genre, title, author])
+
+const filter = async () => {
+    let filtered: BookDto[] = books
+    if (loc !== '') {
+        filtered = filtered.filter((book: BookDto) => book.location === loc); 
+    }
+    if (state !== '') {
+        filtered = filtered.filter((book: BookDto) => book.state === state); 
+    }
+    if (genre !== '') {
+         const filteredGenres = filtered.map((book: BookDto) => ({ ...book, genre: book.genre.filter((g: string) => g.toLowerCase().includes(genre.toLowerCase())) }));
+         filtered = filteredGenres.filter((book: BookDto) => book.genre.length > 0);
+    }
+    if (title !== '') {
+        filtered = filtered.filter((book: BookDto) => book.title.toLowerCase().includes(title.toLowerCase())); 
+    }
+    if (author !== '') {
+        filtered = filtered.filter((book: BookDto) => book.author.toLowerCase().includes(author.toLowerCase())); 
+    }
+    setFilteredBooks(filtered);
+}
+
 const eraseBook = async (id: string) => {
     try {
       await deleteBook(id || '');
@@ -32,43 +63,6 @@ const eraseBook = async (id: string) => {
     }
   };
 
-  const filterLocation = async (e: any) => {
-    setFilteredBooks(books)
-    const location = e.target.value;
-    const filtered = books.filter((book: BookDto) => book.location === location);
-    setFilteredBooks(filtered);
-}
-
-const filterState = async (e: any) => {
-    setFilteredBooks(books)
-    const state = e.target.value;
-    const filtered = books.filter((book: BookDto) => book.state === state);
-    setFilteredBooks(filtered);
-}
-
-const filterTitle = async (e: any) => {
-    setFilteredBooks(books)
-    const title = e.target.value;
-    const filtered = books.filter((book: BookDto) => book.title.toLowerCase().includes(title.toLowerCase()));
-    setFilteredBooks(filtered);
-}
-
-const filterAuthor = async (e: any) => {
-    setFilteredBooks(books)
-    const author = e.target.value;
-    const filtered = books.filter((book: BookDto) => book.author.toLowerCase().includes(author.toLowerCase()));
-    setFilteredBooks(filtered);
-}
-
-const filterGenre = async (e: any) => {
-    setFilteredBooks(books)
-    const genre = e.target.value;
-    const filtered = books.map((book: BookDto) => ({
-        ...book, genre: book.genre.filter((g: string) => g.toLowerCase().includes(genre.toLowerCase()))
-    }));
-    const filteredBooks = filtered.filter((book: BookDto) => book.genre.length > 0);
-    setFilteredBooks(filteredBooks);
-}
 
 const sortTitle = async () => {
     const sorted = [...filteredBooks].sort((a: BookDto, b: BookDto) => a.title.localeCompare(b.title));
@@ -103,7 +97,7 @@ const sortState = async () => {
            <div className={styles.filter + " " + styles.row}>
            <div>
             <label htmlFor="location" className={styles.label}>Location</label>
-            <select id="location" name="location"  onChange={filterLocation} required className={styles.input}>
+            <select id="location" name="location"  onChange={(e) => setLoc(e.target.value)} value={loc} required className={styles.input}>
             <option value="" className={styles.option}>Search by location</option>
             <option value="library" className={styles.option}>Library</option>
             <option value="lent" className={styles.option}>Lent</option>
@@ -112,7 +106,7 @@ const sortState = async () => {
             </div>
             <div>
                             <label htmlFor="state" className={styles.label}>State</label>
-                            <select id="state" name="state"  onChange={filterState} required className={styles.input}>
+                            <select id="state" name="state"  onChange={(e) => setState(e.target.value)}  value={state} required className={styles.input}>
                                 <option value="" className={styles.option}>Search by state</option>
                                 <option value="read" className={styles.option}>Read</option>
                                 <option value="currently reading" className={styles.option}>Currently Reading</option>
@@ -122,7 +116,7 @@ const sortState = async () => {
                         </div>
                         <div>
                         <label htmlFor="title" className={styles.label}>Title</label>
-                        <input type="text" className={styles.input} placeholder="Search by title" onChange={filterTitle} list="titles"></input>
+                        <input type="text" className={styles.input} placeholder="Search by title" onChange={(e) => setTitle(e.target.value)} value={title} list="titles"></input>
                         <datalist id="titles">
                         {filteredBooks.map((book: BookDto) => (
                         <option key={book._id} value={book.title}></option>
@@ -131,7 +125,7 @@ const sortState = async () => {
                         </div>
                         <div>
                         <label htmlFor="author" className={styles.label}>Author</label>
-                        <input type="text" className={styles.input} placeholder="Search by author" onChange={filterAuthor} list="authors"></input>
+                        <input type="text" className={styles.input} placeholder="Search by author" onChange={(e) => setAuthor(e.target.value)} value={author} list="authors"></input>
                         <datalist id="authors">
                         {filteredBooks.map((book: BookDto) => (
                         <option key={book._id} value={book.author}></option>
@@ -140,7 +134,7 @@ const sortState = async () => {
                         </div>
                         <div>
                         <label htmlFor="genre" className={styles.label}>Genre</label>
-                        <input type="text" className={styles.input} placeholder="Search by genre" onChange={filterGenre} list="genres"></input>
+                        <input type="text" className={styles.input} placeholder="Search by genre" onChange={(e) => setGenre(e.target.value)} value={genre} list="genres"></input>
                         <datalist id="genres">
                         {filteredBooks.map((book: BookDto) => (
                         <option key={book._id} value={book.genre}></option>
