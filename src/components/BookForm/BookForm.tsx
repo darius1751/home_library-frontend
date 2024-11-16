@@ -1,9 +1,10 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { FormEvent, ChangeEvent } from 'react';
 import CreateBookDto from '../../interfaces/book-dto';
 import { Field } from '../Field/Field';
 import styles from './bookForm.module.css';
+import { FieldImage } from '../FieldImage/FieldImage';
 
 
 interface BookFormProps {
@@ -15,6 +16,7 @@ interface BookFormProps {
 }
 
 const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, searchSummary }) => {
+    const [image, setImage] = useState<File | undefined>();
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
@@ -42,34 +44,23 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                         <div className={styles.row}>
                             <label className={styles.label} htmlFor="summary">Summary</label>
                             <div className={styles.buttonRow}>
-                            <textarea
-                                name='summary'
-                                rows={6}
-                                placeholder='Summary'
-                                onChange={onChange}
-                                value={book.summary}
-                                className={styles.textarea}
-                            />
-                            <button className={styles.button} onClick={() => { searchSummary(book.title, book.author)}}>Search</button>
+                                <textarea
+                                    name='summary'
+                                    rows={6}
+                                    placeholder='Summary'
+                                    onChange={onChange}
+                                    value={book.summary}
+                                    className={styles.textarea}
+                                />
+                                <button className={styles.button} onClick={() => { searchSummary(book.title, book.author) }}>Search</button>
 
                             </div>
-                           
+
                         </div>
                     </div>
 
                     <div className={styles.column}>
-
-
-                        <Field
-                            name='image'
-                            type='file'
-                            label='Image'
-                            placeholder='Image'
-                            handleChange={onChange}
-                            accept='image/*'
-                            
-                           
-                        />
+                        <FieldImage image={image} setImage={setImage} label='Cover' accept='image/*' />
                         <Field
                             name='genre'
                             type='text'

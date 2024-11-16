@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useState } from 'react';
+import { FormEvent, useContext } from 'react';
 import { Field } from '../../components/Field/Field';
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { UserContext } from '../../context/contexts';
 import { Footer } from '../../components/Footer/Footer';
 import { navItems } from '../../Layouts/PublicLayout';
 import styles from './login.module.css';
-import { FieldImage } from '../../components/FieldImage/FieldImage';
 const initialCredential: Credential = {
     user: '',
     password: ''
@@ -16,7 +15,6 @@ const initialCredential: Credential = {
 export const Login = () => {
     const { form, handleChange } = useForm(initialCredential);
     const { user, password } = form;
-    const [image, setImage] = useState<File | undefined>(undefined);
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -54,7 +52,6 @@ export const Login = () => {
                 </div>
                 <NavLink to={'/reset-password'} >Forgot Password</NavLink>
             </form>
-            <FieldImage image={image} setImage={setImage} />
             <Footer navItems={navItems} className={styles.footer} />
         </div>
     )
