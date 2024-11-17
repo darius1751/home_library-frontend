@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { deleteBook, getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
-import styles from './showbooks.module.css'
+import styles from './showBooks.module.css'
 const ShowBooks = () => {
     const { id } = useParams();
     const [books, setBooks] = useState([]);
@@ -13,6 +13,7 @@ const ShowBooks = () => {
     const [genre, setGenre] = useState('');
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
+    const [sort, setSort] = useState('')
     const updateBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
@@ -32,6 +33,12 @@ const ShowBooks = () => {
 
     }, [loc, state, genre, title, author])
 
+    useEffect(() => {
+        if (sort !== '') {
+            sortBooks()
+        }   
+    }, [sort])
+
     const filter = async () => {
         let filtered: BookDto[] = books
         if (loc !== '') {
@@ -41,7 +48,7 @@ const ShowBooks = () => {
             filtered = filtered.filter((book: BookDto) => book.state === state);
         }
         if (genre !== '') {
-            const filteredGenres = filtered.map((book: BookDto) => ({ ...book, genre: book.genres.filter((g: string) => g.toLowerCase().includes(genre.toLowerCase())) }));
+            const filteredGenres = filtered.map((book: BookDto) => ({ ...book, genres: book.genres.filter((g: string) => g.toLowerCase().includes(genre.toLowerCase())) }));
             filtered = filteredGenres.filter((book: BookDto) => book.genres.length > 0);
         }
         if (title !== '') {
@@ -74,8 +81,11 @@ const ShowBooks = () => {
     }
 
     const sortGenre = async () => {
-        const alfabetized = filteredBooks.map((book: BookDto) => ({ ...book, genre: book.genres.sort() }));
-        const sorted = [...alfabetized].sort((a: BookDto, b: BookDto) => a.genres[0].localeCompare(b.genres[0]));
+        const sorted = [...filteredBooks].sort((a: BookDto, b: BookDto) => {
+            const genreA = a.genres.join(',').toLowerCase();
+            const genreB = b.genres.join(',').toLowerCase();
+            return genreA.localeCompare(genreB);
+        });
         setFilteredBooks(sorted);
     }
 
@@ -89,6 +99,21 @@ const ShowBooks = () => {
         setFilteredBooks(sorted);
     }
 
+  
+
+    const sortBooks = async () => {
+        if (sort === 'title') {
+            await sortTitle();
+        } else if (sort === 'author') {
+            await sortAuthor();
+        } else if (sort === 'genre') {
+            await sortGenre();
+        } else if (sort === 'location') {
+            await sortLocation();
+        } else if (sort === 'state') {
+            await sortState();
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -144,13 +169,19 @@ const ShowBooks = () => {
 
 
             </div>
-            <div className={styles.btnContainer}>
-                <button onClick={sortTitle} className={styles.orange + ' ' + styles.btn}>Sort by title</button>
-                <button onClick={sortAuthor} className={styles.orange + ' ' + styles.btn}>Sort by author</button>
-                <button onClick={sortGenre} className={styles.orange + ' ' + styles.btn}>Sort by genre</button>
-                <button onClick={sortLocation} className={styles.orange + ' ' + styles.btn}>Sort by location</button>
-                <button onClick={sortState} className={styles.orange + ' ' + styles.btn}>Sort by state</button>
+            <div className={styles.sort + " " + styles.row}>
+                <label htmlFor="sort" className={styles.label}>Sort</label>
+                <select id="sort" name="sort" onChange={(e)=> setSort(e.target.value)} value={sort} required className={styles.input}>
+                    <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
+                    <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
+                    <option value="author" className={styles.option + ' ' + styles.orange}>Author</option> 
+                    <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
+                    <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
+                    <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
+                </select>       
+                    
             </div>
+            
 
             {filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                 <div className={styles.row}>
@@ -161,11 +192,11 @@ const ShowBooks = () => {
                                 <div className={styles.classDetail}>
                                     <p><span className={styles.orange}>Title: </span>{book.title}</p>
                                     <p><span className={styles.orange}>Author: </span>{book.author}</p>
-                                    <p><span className={styles.orange}>Genres: </span>{book.genres}</p>
+                                    <p><span className={styles.orange}>Genres: </span>{book.genres.join(', ')}</p>
                                     <p><span className={styles.orange}>Location: </span>{book.location}</p>
                                     <p><span className={styles.orange}>State: </span>{book.state}</p>
                                 </div>
-                                <div className={styles.column}>
+                                <div className={styles.actions}>
                                     <button onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
                                     <Link to={`/dashboard/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
                                 </div>
