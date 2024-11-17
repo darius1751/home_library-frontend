@@ -9,11 +9,11 @@ import responseGenerate from "../../config/openAI";
 
 
 const UpdateBook = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const [book, setBook] = useState({
         title: '',
         author: '',
-        genre: [''],
+        genres: [''],
         summary: '',
         image: '',
         location: '',
@@ -22,17 +22,18 @@ const UpdateBook = () => {
     })
 
     const [error, setError] = useState('');
+    const [genres, setGenres] = useState<string[]>([]);
+    const [image, setImage] = useState<File | undefined>();
     const navigate = useNavigate();
     const isEdit = true
     const { user } = useContext(UserContext);
-   
 
-   
-    useEffect (() => {
+    useEffect(() => {
         const getBook = async () => {
             try {
                 const response = await getOneBook(id || '');
-                setBook(response)
+                setGenres(response.genres);
+                setBook(response);
             } catch (error) {
                 console.log(error)
             }
@@ -46,46 +47,40 @@ const UpdateBook = () => {
 
     const searchSummary = async () => {
         const summary = await responseGenerate(book.title, book.author)
-         setBook({ ...book, summary: summary || '' });
+        setBook({ ...book, summary: summary || '' });
     }
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
+
         try {
-         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const $inputImage: any = e.currentTarget.querySelector('input[name="image"]');
-            const image = $inputImage.files[0];
-            const imageBlob = new Blob([image], { type: image.type });
+            // validations();
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const formData = new FormData();
-             const { title, author, location, state, summary } = book;
-            const stringify = book.genre.toString();
-            const genres = stringify.split(',');
-
-            const genresArray: string[] = []
-            genres.forEach((genre: string) => {
-                genresArray.push(genre)
-            })
+            const { title, author, location, state, summary } = book;
+            if (image) {
+                const imageBlob = new Blob([image!], { type: image!.type });
+                console.log("Ingresa");
+                formData.append("cover", imageBlob);
+            }
             formData.append("title", title);
             formData.append("author", author);
             formData.append("location", location);
             formData.append("state", state);
             formData.append("summary", summary);
             formData.append("user", user._id!);
-            formData.append("image", imageBlob);
-            
-            genresArray.forEach((genre, index) => {
-              formData.append(`genre[${index}]`, genre);
+            genres.forEach((genre, index) => {
+                formData.append(`genres[${index}]`, genre);
             });
             console.log("BOOK", book) //con info
-            console.log("FORMDATA", formData) // vacío
             const response = await updateBook(id || '', formData)
             console.log({ response });
-           
-            navigate(`/dashboard/books/${user._id}`)
-            
-        }    
-        catch (error) { 
+
+            navigate(`/dashboard/books/${user._id}`);
+
+        }
+        catch (error) {
             console.log(error)
             setError(JSON.stringify(error))
         }
@@ -93,12 +88,22 @@ const UpdateBook = () => {
 
     return (
         <div>
-        <div>UpdateBook</div>
-        <BookForm onSubmit={handleSubmit} onChange={handleChange} book={book} isEdit={isEdit} searchSummary={searchSummary} />
-        {error && <p>{error}</p>}
+            <div>UpdateBook</div>
+            <BookForm
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                book={book}
+                isEdit={isEdit}
+                searchSummary={searchSummary}
+                genres={genres}
+                setGenres={setGenres}
+                image={image}
+                setImage={setImage}
+            />
+            {error && <p>{error}</p>}
         </div>
 
     )
 }
 
-export default UpdateBook
+export default UpdateBook;

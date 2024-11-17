@@ -1,5 +1,3 @@
-
-import React, { useState } from 'react';
 import { FormEvent, ChangeEvent } from 'react';
 import CreateBookDto from '../../interfaces/book-dto';
 import { Field } from '../Field/Field';
@@ -13,12 +11,25 @@ interface BookFormProps {
     onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
     book: CreateBookDto;
     isEdit: boolean;
-    searchSummary: (title: string, author: string) => void
+    searchSummary: (title: string, author: string) => void;
+    image: File | undefined;
+    setImage: React.Dispatch<File | undefined>
+    genres: string[];
+    setGenres: React.Dispatch<string[]>;
 }
 
-const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, searchSummary }) => {
-    const [image, setImage] = useState<File | undefined>();
-    const [genres, setGenres] = useState<string[]>([]);
+const BookForm: React.FC<BookFormProps> = ({
+    onSubmit,
+    onChange,
+    book,
+    isEdit,
+    searchSummary,
+    genres,
+    setGenres,
+    image,
+    setImage,
+}) => {
+    console.log({ book })
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
@@ -59,14 +70,19 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                                     className={styles.textarea}
                                 />
                                 <button className={styles.button} onClick={() => { searchSummary(book.title, book.author) }}>Search</button>
-
                             </div>
 
                         </div>
                     </div>
 
                     <div className={styles.column}>
-                        <FieldImage image={image} setImage={setImage} label='Cover' accept='image/*' />
+                        <FieldImage
+                            image={image}
+                            setImage={setImage}
+                            label='Cover'
+                            accept='image/*'
+                            initialImage={book.image}
+                        />
                         <FieldMultiOption
                             label='Genre'
                             name='genre'

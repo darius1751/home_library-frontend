@@ -13,7 +13,7 @@ const CreateBook = () => {
     const initialBook = {
         title: '',
         author: '',
-        genre: [''],
+        genres: [''],
         summary: '',
         image: '',
         location: '',
@@ -21,6 +21,8 @@ const CreateBook = () => {
         user: ''
     }
     const { form, handleChange, setForm } = useForm(initialBook);
+    const [image, setImage] = useState<File | undefined>();
+    const [genres, setGenres] = useState<string[]>([]);
     const [error, setError] = useState('')
     const isEdit = false
 
@@ -33,43 +35,46 @@ const CreateBook = () => {
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         e.stopPropagation();
+        // validations()
         try {
             const formData = new FormData();
-            const { title, author, genre, location, state, summary } = form;
-            const stringify = genre.toString();
-            const genres = stringify.split(',');
+            const { title, author, location, state, summary } = form;
 
-            // const genresArray: string[] = []
-            // genres.forEach((genre: string) => {
-            //     genresArray.push(genre)
-            // })
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const $inputImage = e.currentTarget.querySelector<any>('input[name="image"]')!;
-            const image = $inputImage.files[0];
-            const imageBlob = new Blob([image], { type: image.type });
+            const imageBlob = new Blob([image!], { type: image!.type });
             formData.append("title", title);
             formData.append("author", author);
             formData.append("location", location);
             formData.append("state", state)
             formData.append("summary", summary);
             formData.append("user", user._id!);
-            formData.append("image", imageBlob);
+            formData.append("cover", imageBlob);
             genres.forEach((genre, index) => {
-                formData.append(`genre[${index}]`, genre);
+                formData.append(`genres[${index}]`, genre);
             });
+            // formData.append("genres", JSON.stringify(genres))
             const book = await createBook(formData);
             console.log("book", { book });
             navigate(`/dashboard/books/${user._id}`);
 
         }
         catch (error) {
-            console.log(error)
+            console.log({ error })
             setError(JSON.stringify(error))
         }
     }
     return (
         <div>
-            <BookForm onSubmit={handleSubmit} onChange={handleChange} book={form} isEdit={isEdit} searchSummary={searchSummary}></BookForm>
+            <BookForm
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                book={form}
+                isEdit={isEdit}
+                searchSummary={searchSummary}
+                genres={genres}
+                setGenres={setGenres}
+                image={image}
+                setImage={setImage}
+            />
             {error && <p>{error}</p>}
         </div>
     )
