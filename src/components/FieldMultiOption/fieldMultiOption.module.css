@@ -1,0 +1,22 @@
+.fieldMultiOption {
+    max-width: 100%;
+    width: 20em;
+}
+
+.selections {
+    display: flex;
+    flex-wrap: wrap;
+    width: 20em;
+}
+
+.selection {
+    border-radius: 1em;
+    border: 1px solid light-dark(black, white);
+    padding: 0.5em;
+    cursor: pointer;
+    margin: 0.5em 0.2em;
+}
+
+.selection:hover {
+    background-color: var(--danger);
+}

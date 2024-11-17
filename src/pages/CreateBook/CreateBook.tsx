@@ -30,18 +30,19 @@ const CreateBook = () => {
     }
 
 
-    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
         try {
             const formData = new FormData();
             const { title, author, genre, location, state, summary } = form;
             const stringify = genre.toString();
             const genres = stringify.split(',');
 
-            const genresArray: string[] = []
-            genres.forEach((genre: string) => {
-                genresArray.push(genre)
-            })
+            // const genresArray: string[] = []
+            // genres.forEach((genre: string) => {
+            //     genresArray.push(genre)
+            // })
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const $inputImage = e.currentTarget.querySelector<any>('input[name="image"]')!;
             const image = $inputImage.files[0];
@@ -53,13 +54,12 @@ const CreateBook = () => {
             formData.append("summary", summary);
             formData.append("user", user._id!);
             formData.append("image", imageBlob);
-            genresArray.forEach((genre, index) => {
+            genres.forEach((genre, index) => {
                 formData.append(`genre[${index}]`, genre);
             });
-            console.log("FORMDATA", JSON.stringify(formData))
-            const book = await createBook(formData)
+            const book = await createBook(formData);
             console.log("book", { book });
-            navigate(`/dashboard/books/${user._id}`)
+            navigate(`/dashboard/books/${user._id}`);
 
         }
         catch (error) {

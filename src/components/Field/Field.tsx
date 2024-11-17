@@ -1,6 +1,6 @@
 import { ChangeEventHandler, useId } from 'react';
 import styles from './field.module.css';
-type Props = {
+export type FieldProps = {
     label: string;
     name: string;
     value?: string | number | readonly string[] | undefined;
@@ -14,7 +14,7 @@ type Props = {
     accept?: string;
 
 }
-export const Field = ({ label, handleChange, className = "", ...inputProps }: Props) => {
+export const Field = ({ label, handleChange, className = "", ...inputProps }: FieldProps) => {
     const id = useId();
     return (
         <div className={`${styles.field} ${className}`}>
