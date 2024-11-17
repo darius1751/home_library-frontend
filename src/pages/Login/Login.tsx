@@ -8,6 +8,7 @@ import { UserContext } from '../../context/contexts';
 import { Footer } from '../../components/Footer/Footer';
 import { navItems } from '../../Layouts/PublicLayout';
 import styles from './login.module.css';
+// import { FieldMultiOption } from '../../components/FieldMultiOption/FieldMultiOption';
 const initialCredential: Credential = {
     user: '',
     password: ''
@@ -15,6 +16,7 @@ const initialCredential: Credential = {
 export const Login = () => {
     const { form, handleChange } = useForm(initialCredential);
     const { user, password } = form;
+    // const [selections, setSelections] = useState<string[]>([]);
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {

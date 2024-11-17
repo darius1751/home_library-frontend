@@ -5,10 +5,11 @@ import CreateBookDto from '../../interfaces/book-dto';
 import { Field } from '../Field/Field';
 import styles from './bookForm.module.css';
 import { FieldImage } from '../FieldImage/FieldImage';
+import { FieldMultiOption } from '../FieldMultiOption/FieldMultiOption';
 
 
 interface BookFormProps {
-    onSubmit: (e: FormEvent<HTMLFormElement>) => void;
+    onSubmit: (e: FormEvent<HTMLButtonElement>) => void;
     onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
     book: CreateBookDto;
     isEdit: boolean;
@@ -17,11 +18,16 @@ interface BookFormProps {
 
 const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, searchSummary }) => {
     const [image, setImage] = useState<File | undefined>();
+    const [genres, setGenres] = useState<string[]>([]);
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>{isEdit ? 'Edit Book' : 'Create Book'}</h1>
 
-            <form onSubmit={onSubmit} className={styles.form}>
+            <form className={styles.form} onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                }
+            }}>
                 <div className={styles.row}>
                     <div className={styles.column}>
                         <Field
@@ -61,15 +67,15 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
 
                     <div className={styles.column}>
                         <FieldImage image={image} setImage={setImage} label='Cover' accept='image/*' />
-                        <Field
-                            name='genre'
-                            type='text'
+                        <FieldMultiOption
                             label='Genre'
-                            placeholder='Genre'
-                            handleChange={onChange}
-                            value={book.genre}
+                            name='genre'
+                            placeholder=''
+                            selections={genres}
+                            setSelections={setGenres}
+                            maxSelection={8}
+                            minSelection={1}
                         />
-
                         <div>
                             <label htmlFor="location" className={styles.label}>Location</label>
                             <select id="location" name="location" value={book.location} onChange={onChange} required className={styles.input}>
@@ -93,7 +99,7 @@ const BookForm: React.FC<BookFormProps> = ({ onSubmit, onChange, book, isEdit, s
                     </div>
                 </div>
 
-                <button className={`btn btn-primary ${styles.btn}`} type="submit">{isEdit ? 'Update' : 'Create'}</button>
+                <button className={`btn btn-primary ${styles.btn}`} type="submit" onClick={onSubmit}>{isEdit ? 'Update' : 'Create'}</button>
             </form>
         </div>
     )
