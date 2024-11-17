@@ -4,7 +4,7 @@ export default interface BookDto {
     author: string;
     summary: string;
     image: string;
-    genre:string[];
+    genres:string[];
     user: string,
     location: string;
     state: string;

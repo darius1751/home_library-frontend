@@ -12,9 +12,9 @@ type Props = {
     accept?: string;
 }
 export const FieldImage = ({ image, setImage, accept, label, initialImage = '' }: Props) => {
+    const [imageURL, setImageURL] = useState(initialImage);
     const id = useId();
     const $input = useRef<HTMLInputElement>(null);
-    const [imageURL, setImageURL] = useState(initialImage);
     const handleUploadFile = ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
         const { files } = currentTarget;
         if (files) {
@@ -41,7 +41,7 @@ export const FieldImage = ({ image, setImage, accept, label, initialImage = '' }
     return (
         <div className={`${styles.fieldImage}`}>
             <label className={styles.label} htmlFor={id}>{label}</label>
-            {!!imageURL && < img className={styles.image} src={imageURL} />}
+            {!!(imageURL || initialImage) && < img className={styles.image} src={imageURL || initialImage} />}
             <div className={`${styles.options} ${!image ? styles.visibleOptions : styles.invisibleOptions}`}>
                 {!!image && <img src={view} alt="view" className={styles.icon} onClick={handleView} />}
                 <img src={upload} alt="upload" className={styles.icon} onClick={handleUpload} />

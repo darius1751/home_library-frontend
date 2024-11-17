@@ -12,18 +12,18 @@ const BookDetail = () => {
         author: '',
         summary: '',
         image: '',
-        genre: [],
+        genres: [],
         user: '',
         location: '',
         state: '',
     })
     const [error, setError] = useState('');
-
+    
     const { user } = useContext(UserContext);
     useEffect(() => {
         const getBook = async () => {
             try {
-                const response = await getOneBook(id || '');
+                const response = await getOneBook(id!);
                 console.log(response)
                 setBook(response)
             } catch (error) {
@@ -49,7 +49,7 @@ const BookDetail = () => {
                     <p>{book.summary}</p>
                 </div>
                 <div className={styles.detail}>
-                    <p><span className={styles.orange}>Genres: </span>{book.genre}</p>
+                    <p><span className={styles.orange}>Genres: </span>{book.genres.join(", ")}</p>
                     <p><span className={styles.orange}>Location: </span> {book.location}</p>
                     <p><span className={styles.orange}>State: </span>{book.state}</p>
                 </div>
