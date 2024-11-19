@@ -1,3 +1,11 @@
+.label {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    width: 5.5em;
+    color: var(--label-text-color);
+}
+
 .field {
     display: flex;
     flex-direction: column;
@@ -6,33 +14,28 @@
     margin: 1em 0;
 }
 
-.label {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    top: 1.5em;
-    left: 0.5em;
-    width: 5.5em;
-    color: var(--label-text-color);
-}
-
-.input {
+.select {
     height: 2em;
-    padding-left: 5.5em;
     max-width: 100%;
     width: 100%;
+    padding: 0;
+    margin: 0;
     border: 0;
     outline: 0;
     border-bottom: 1px solid gray;
     box-sizing: border-box;
     background-color: transparent;
+    cursor: pointer;
 }
 
-.input::placeholder {
-    font-style: italic;
-    font-weight: bold;
-}
-
-.input:disabled {
+.select:disabled {
     opacity: 30%;
+}
+
+.option {
+    color: black;
+    
+}
+.option:disabled{
+    background-color: #c2bcbc;
 }

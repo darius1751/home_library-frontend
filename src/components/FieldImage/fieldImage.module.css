@@ -1,11 +1,9 @@
 .fieldImage {
-    font-size: small;
-    width: 15em;
-    margin: 1em;
+    width: 12.25em;
+    margin: 2em 0;
     position: relative;
     max-width: 100%;
-    /* width: 20em; */
-    height: 20em;
+    height: 16.25em;
     border-radius: 7px;
     background-color: #D3D3D3;
     background-size: contain;

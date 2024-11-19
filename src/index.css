@@ -5,5 +5,6 @@
   background-color: light-dark(white, #111826);
   --primary-color: #BBEFE6;
   --secondary-color: #F2877A;
-  --danger:#e64646;
+  --danger: #e64646;
+  --label-text-color: #10ACA3;
 }

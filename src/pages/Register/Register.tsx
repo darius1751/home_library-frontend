@@ -31,74 +31,68 @@ export const Register = () => {
     return (
         <>
 
-            <div className={`public_page`}>
-                <form onSubmit={handleSubmit} className={styles.register}>
-                    <div className={styles.fields}>
-                        <div className={styles.column}>
-                            <Field
-                                name='name'
-                                type='text'
-                                label='Fullname'
-                                placeholder='write your fullname'
-                                handleChange={handleChange}
-                                value={name}
-                                className={styles.field}
-                            />
-                            <Field
-                                name='user'
-                                type='text'
-                                label='Username'
-                                handleChange={handleChange}
-                                value={user}
-                                placeholder='write your username'
-                                className={styles.field}
-                            />
-                            <Field
-                                name='password'
-                                type='password'
-                                label='Password'
-                                handleChange={handleChange}
-                                value={password}
-                                placeholder='*********'
-                                className={styles.field}
-                            />
-                        </div>
-                        <div className={styles.column}>
-                            <Field
-                                name='email'
-                                type='text'
-                                label='Email'
-                                placeholder='write your email'
-                                handleChange={handleChange}
-                                value={email}
-                                className={styles.field}
-                            />
-                            <Field
-                                name='birthday'
-                                type='date'
-                                label='Birthday'
-                                handleChange={handleChange}
-                                value={birthday}
-                                className={styles.field}
-                            />
-                            <Field
-                                name='confirmPassword'
-                                type='password'
-                                label='Confirm Password'
-                                handleChange={handleChange}
-                                value={confirmPassword}
-                                placeholder='*********'
-                                className={styles.field}
-                            />
-                        </div>
-                    </div>
+            <div className={`page`}>
+                <form onSubmit={handleSubmit} className={`form`}>
+                    <Field
+                        name='name'
+                        type='text'
+                        label='Fullname'
+                        placeholder='write your fullname'
+                        handleChange={handleChange}
+                        value={name}
+                        className={styles.field}
+                    />
+                    <Field
+                        name='user'
+                        type='text'
+                        label='Username'
+                        handleChange={handleChange}
+                        value={user}
+                        placeholder='write your username'
+                        className={styles.field}
+                    />
+                    <Field
+                        name='password'
+                        type='password'
+                        label='Password'
+                        handleChange={handleChange}
+                        value={password}
+                        placeholder='*********'
+                        className={styles.field}
+                    />
+                    <Field
+                        name='email'
+                        type='text'
+                        label='Email'
+                        placeholder='write your email'
+                        handleChange={handleChange}
+                        value={email}
+                        className={styles.field}
+                    />
+                    <Field
+                        name='birthday'
+                        type='date'
+                        label='Birthday'
+                        handleChange={handleChange}
+                        value={birthday}
+                        className={styles.field}
+                    />
+                    <Field
+                        name='confirmPassword'
+                        type='password'
+                        label='Confirm Password'
+                        handleChange={handleChange}
+                        value={confirmPassword}
+                        placeholder='*********'
+                        className={styles.field}
+                    />
                     <div className={`${styles.row} ${styles.btnOptions}`}>
                         <input value={'Register'} type='submit' className={`btn btn-primary ${styles.btnRegister}`} />
                         <NavLink to={'/login'}>I already have an account</NavLink>
                     </div>
 
-                </form>
-            </div>
+                </form >
+            </div >
             <Footer navItems={navItems} className={styles.footer} />
         </>
     )

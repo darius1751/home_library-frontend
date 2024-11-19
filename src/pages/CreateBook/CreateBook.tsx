@@ -1,4 +1,3 @@
-
 import { useForm } from '../../hooks/useForm';
 import { FormEvent, useContext, useState } from 'react';
 import { UserContext } from '../../context/contexts';
@@ -23,7 +22,7 @@ const CreateBook = () => {
     const { form, handleChange, setForm } = useForm(initialBook);
     const [image, setImage] = useState<File | undefined>();
     const [genres, setGenres] = useState<string[]>([]);
-    const [error, setError] = useState('')
+    // const [error, setError] = useState('')
     const isEdit = false
 
     const searchSummary = async () => {
@@ -51,7 +50,6 @@ const CreateBook = () => {
             genres.forEach((genre, index) => {
                 formData.append(`genres[${index}]`, genre);
             });
-            // formData.append("genres", JSON.stringify(genres))
             const book = await createBook(formData);
             console.log("book", { book });
             navigate(`/dashboard/books/${user._id}`);
@@ -59,11 +57,11 @@ const CreateBook = () => {
         }
         catch (error) {
             console.log({ error })
-            setError(JSON.stringify(error))
+            // setError(JSON.stringify(error))
         }
     }
     return (
-        <div>
+        <div className={`page`}>
             <BookForm
                 onSubmit={handleSubmit}
                 onChange={handleChange}
@@ -75,9 +73,8 @@ const CreateBook = () => {
                 image={image}
                 setImage={setImage}
             />
-            {error && <p>{error}</p>}
         </div>
     )
 };
 
-export default CreateBook
+export default CreateBook;
