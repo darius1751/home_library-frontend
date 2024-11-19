@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from "react-router-dom"
+import {  Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar/Navbar"
 import { NavItem } from "../interfaces"
 import { useContext } from "react"
@@ -6,7 +6,6 @@ import { UserContext } from "../context/contexts"
 
 export const DashboardLayout = () => {
     const { user } = useContext(UserContext);
-    const { _id } = user;
     const navItems: NavItem[] = [
         {
             text: 'My Books',
@@ -24,12 +23,12 @@ export const DashboardLayout = () => {
     return (
         <>
             {
-                _id ? (
+                 (
                     <>
                         <Navbar navItems={navItems} home="/dashboard" />
                         <Outlet />
-                    </>) : <Navigate to='/' />
-
+                    </>
+                 )
             }
         </>
     )

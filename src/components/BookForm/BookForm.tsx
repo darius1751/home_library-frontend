@@ -73,9 +73,9 @@ const BookForm: React.FC<BookFormProps> = ({
                             </div>
 
                         </div>
-                    </div>
+                    
 
-                    <div className={styles.column}>
+                    
                         <FieldImage
                             image={image}
                             setImage={setImage}

@@ -1,8 +1,19 @@
+.container{
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    margin: 2em;
+}
 .form {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: 1em;
+    align-self: center;
+    justify-content: center;  
+    align-items: center;
 }
 
 .label {
@@ -18,7 +29,7 @@
     height: 2.5em;
     padding-left: 5.5em;
     max-width: 100%;
-    width: 20em;
+    width: 100%;
     border: 0;
     outline: 0;
     border-bottom: 1px solid gray;
@@ -39,8 +50,7 @@
 .textarea::placeholder {
     font-style: italic;
     font-weight: bold;
-    text-align: left;
-    justify-items: left;
+
 }
 
 .option {
@@ -61,7 +71,7 @@
 }
 
 .textarea {
-    margin-left: 2rem;
+
     max-width: 100%;
     margin-top: 1em;
     margin-bottom: 1em;
@@ -80,13 +90,7 @@
   
 }
 
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 2em;
-    padding: 2em;
-}
+
 
 .title {
     margin: 2em;
@@ -98,13 +102,7 @@
     font-size: 2em;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1em;
-    align-items: center;
-}
+
 
 .column {
     display: flex;
