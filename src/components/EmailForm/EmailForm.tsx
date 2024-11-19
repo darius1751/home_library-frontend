@@ -12,12 +12,13 @@ interface EmailFormProps {
     const [receiver, setReceiver] = useState('');
     const [name, setName] = useState('');
     const [friend, setFriend] = useState('');
+    const [lastname, setLastname] = useState('');
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSubmit = (e: any) => {
       e.preventDefault();
       try {
-        sendBookEmail(sender, receiver, name, friend, id)
+        sendBookEmail(sender, receiver, name, friend, lastname, id)
         toggle()
       } catch (error) {
         console.log(error)
@@ -32,17 +33,24 @@ interface EmailFormProps {
           value={sender}
           onChange={(e) => setSender(e.target.value)}
         />
-        <input
-          type="email"
-          placeholder="To: email"
-          value={receiver}
-          onChange={(e) => setReceiver(e.target.value)}
-        />
+       
         <input
           type="text"
           placeholder="Your Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+        />
+           <input
+          type="text"
+          placeholder="Your Last Name"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+        />
+         <input
+          type="email"
+          placeholder="To: email"
+          value={receiver}
+          onChange={(e) => setReceiver(e.target.value)}
         />
         <input
           type="text"
