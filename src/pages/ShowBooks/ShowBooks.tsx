@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { deleteBook, getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './showBooks.module.css'
+import EmailForm from "../../assets/EmailForm/EmailForm";
 const ShowBooks = () => {
     const { id } = useParams();
     const [books, setBooks] = useState([]);
@@ -14,6 +15,7 @@ const ShowBooks = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [sort, setSort] = useState('')
+    const [seen, setSeen] = useState(false)
     const updateBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
@@ -38,6 +40,10 @@ const ShowBooks = () => {
             sortBooks()
         }   
     }, [sort])
+
+    const togglePop =() => {
+        setSeen(!seen);
+    }
 
     const filter = async () => {
         let filtered: BookDto[] = books
@@ -178,7 +184,9 @@ const ShowBooks = () => {
                     <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
                     <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
                     <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
-                </select>       
+                </select>     
+                <button onClick={togglePop}>Send List to Friend</button>
+            {seen ? <EmailForm toggle={togglePop}  id={id || ''}/> : null}  
                     
             </div>
             
