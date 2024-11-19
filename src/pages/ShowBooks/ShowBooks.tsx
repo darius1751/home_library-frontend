@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { deleteBook, getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './showBooks.module.css'
-import EmailForm from "../../assets/EmailForm/EmailForm";
+import EmailForm from "../../components/EmailForm/EmailForm";
 const ShowBooks = () => {
     const { id } = useParams();
     const [books, setBooks] = useState([]);
