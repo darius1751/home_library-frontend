@@ -7,6 +7,7 @@ export const register = async (createUserDto: CreateUserDto) => {
 }
 
 export const updateById = async (id: string, createUserDto: CreateUserDto) => {
+    console.log(createUserDto)
     const { data, status } = await api.put<User>(`/user/${id}`, createUserDto);
     return { data, status }
 }

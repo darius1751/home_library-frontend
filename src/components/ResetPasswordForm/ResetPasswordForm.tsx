@@ -1,6 +1,5 @@
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { Field } from "../../components/Field/Field";
-import styles from './resetPassword.module.css';
 import { findById, updateById } from "../../services/register";
 import { useEffect, useState } from "react";
 import { CreateUserDto } from "../../interfaces";
@@ -17,6 +16,7 @@ const ResetPasswordForm = () => {
             try {
                 const response = await findById(id || '');
                 setUser(response.data);
+        
             } catch (error) {
                 console.log(error);
             }
@@ -36,6 +36,7 @@ const ResetPasswordForm = () => {
                 return;
             }
             updateById(id || '', user);
+
         } catch (error) {
             console.log(error);
         }
@@ -61,7 +62,7 @@ const ResetPasswordForm = () => {
                     value={confirmPassword}
                     required
                 />
-                <input className={`btn btn-primary ${styles.btnReset}`} value={`Reset password`}  type='submit'/>
+                <input className={`btn btn-primary`} value={`Reset password`}  type='submit'/>
             </form>
 
         </div>

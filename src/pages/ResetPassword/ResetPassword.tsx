@@ -3,17 +3,20 @@ import styles from './resetPassword.module.css';
 import { useForm } from '../../hooks/useForm';
 import { sendPasswordEmail } from '../../services/email';
 import { FormEvent } from 'react';
+import { useNavigate} from 'react-router-dom';
 const initialForm = {
     email: ''
 }
 export const ResetPassword = () => {
     const {form, handleChange} = useForm(initialForm);
     const { email } = form;
+    const navigate = useNavigate();
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
             sendPasswordEmail(email);
+            navigate('/email-sent');
         } catch (error) {
             console.log(error);
         }
