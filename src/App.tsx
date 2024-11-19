@@ -1,4 +1,4 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from "react-router-dom"
 import { PublicLayout } from "./Layouts/PublicLayout";
 import { HomePage } from "./pages/Home/HomePage";
 import { RootLayout } from "./Layouts/RootLayout";
@@ -6,7 +6,6 @@ import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
 import { Context } from "./context/Context";
 import { DashboardLayout } from "./Layouts/DashboardLayout";
-import { Dashboard } from "./pages/Dashboard/Dashboard";
 import { Logout } from "./pages/Logout";
 import CreateBook from "./pages/CreateBook/CreateBook";
 import ShowBooks from "./pages/ShowBooks/ShowBooks";
@@ -23,8 +22,8 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path="/reset-password" element={<ResetPassword/>}/>
         </Route>
         <Route element={<DashboardLayout />} path="/dashboard">
-            <Route path='' element={<Dashboard />} />
-            <Route path="books/:id" element={<ShowBooks />} />
+            <Route path='' element={<Navigate to={'books'} />} />
+            <Route path="books" element={<ShowBooks />} />
             <Route path="add-book" element={<CreateBook />} />
             <Route path="books/detail/:id" element={<BookDetail />} />
             <Route path="update/:id" element={<UpdateBook />} />

@@ -8,8 +8,8 @@ export const ResetPassword = () => {
     const { form, handleChange } = useForm(initialForm)
     const { user } = form;
     return (
-        <div className="public_page">
-            <form className={styles.resetPassword}>
+        <div className="page">
+            <form className={`form`}>
                 <h2>Reset Password</h2>
                 <p>Please write your username or email and wait for a reset password</p>
                 <Field

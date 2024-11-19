@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useParams, Link } from "react-router-dom"
-import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
+import { useState, useEffect, useContext } from "react";
 import { deleteBook, getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './showBooks.module.css'
 import EmailForm from "../../components/EmailForm/EmailForm";
+import { UserContext } from "../../context/contexts";
 const ShowBooks = () => {
-    const { id } = useParams();
+    const { user } = useContext(UserContext);
+    const id = user._id!;
     const [books, setBooks] = useState([]);
     const [filteredBooks, setFilteredBooks] = useState<BookDto[]>([])
     const [loc, setLoc] = useState('');
@@ -15,7 +17,7 @@ const ShowBooks = () => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [sort, setSort] = useState('')
-    const [seen, setSeen] = useState(false)
+    const [seen, setSeen] = useState(false);
     const updateBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
@@ -38,10 +40,10 @@ const ShowBooks = () => {
     useEffect(() => {
         if (sort !== '') {
             sortBooks()
-        }   
+        }
     }, [sort])
 
-    const togglePop =() => {
+    const togglePop = () => {
         setSeen(!seen);
     }
 
@@ -105,7 +107,7 @@ const ShowBooks = () => {
         setFilteredBooks(sorted);
     }
 
-  
+
 
     const sortBooks = async () => {
         if (sort === 'title') {
@@ -122,7 +124,7 @@ const ShowBooks = () => {
     }
 
     return (
-        <div className={styles.container}>
+        <div className={`page`}>
             <h1 className={styles.title}>My Books</h1>
             <div className={styles.filter + " " + styles.row}>
                 <div>
@@ -177,19 +179,19 @@ const ShowBooks = () => {
             </div>
             <div className={styles.sort + " " + styles.row}>
                 <label htmlFor="sort" className={styles.label}>Sort</label>
-                <select id="sort" name="sort" onChange={(e)=> setSort(e.target.value)} value={sort} required className={styles.input}>
+                <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
                     <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
                     <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
-                    <option value="author" className={styles.option + ' ' + styles.orange}>Author</option> 
+                    <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
                     <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
                     <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
                     <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
-                </select>     
+                </select>
                 <button onClick={togglePop}>Send List to Friend</button>
-            {seen ? <EmailForm toggle={togglePop}  id={id || ''}/> : null}  
-                    
+                {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
+
             </div>
-            
+
 
             {filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                 <div className={styles.row}>

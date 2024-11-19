@@ -30,8 +30,8 @@ export const Login = () => {
         }
     }
     return (
-        <div className={`public_page`}>
-            <form onSubmit={handleSubmit} className={styles.login}>
+        <div className={`page`}>
+            <form onSubmit={handleSubmit} className={`form ${styles.login}`}>
                 <Field
                     name='user'
                     type='text'
