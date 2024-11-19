@@ -1,9 +1,25 @@
-.public_page {
-    margin-top: 5em;
+.page {
+    margin-top: 6em;
 }
 
-.dashboard_page {
-    margin-top: 5em;
+.container {
+    width: 80%;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 50em;
+    max-width: 100%;
+    margin: 2em auto;
+    align-items: center;
+    background-color: light-dark(white, #13151A );
+    box-shadow: 0em 0em 1em 0.1em gray;
+    border-radius: 1em;
+    padding: 0.5em 0;
+    /* #263a63 */
 }
 
 .btn {

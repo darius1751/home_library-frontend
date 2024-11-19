@@ -1,12 +1,17 @@
 .fieldMultiOption {
     max-width: 100%;
-    width: 20em;
+    width: 70%;
+}
+
+.field {
+    width: 100%;
+    margin: 0;
 }
 
 .selections {
     display: flex;
     flex-wrap: wrap;
-    width: 20em;
+    width: 80%;
 }
 
 .selection {
@@ -20,3 +25,9 @@
 .selection:hover {
     background-color: var(--danger);
 }
+
+.selectionEmpty {
+    margin: 1em 0;
+}
+
+/* .textMinimum {} */

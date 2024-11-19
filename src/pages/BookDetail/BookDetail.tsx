@@ -35,7 +35,7 @@ const BookDetail = () => {
     }, [])
     return (
 
-        <div className={styles.row}>
+        <div className={`page`}>
             <div className={styles.top}>
                 <img src={book.image} alt={book.title} className={styles.image} />
             </div>

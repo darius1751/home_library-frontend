@@ -7,11 +7,11 @@ import { Cite } from "./components/Cite/Cite";
 import { Footer } from "../../components/Footer/Footer";
 import { navItems } from "../../Layouts/PublicLayout";
 import styles from './home.module.css';
-import { Loading } from "../../components/Loading/Loading";
+
 export const HomePage = () => {
     return (
         <>
-            <div className={`public_page`}>
+            <div className={`page`}>
                 <Hero />
                 <div className={styles.container}>
                     <div className={styles.sections}>

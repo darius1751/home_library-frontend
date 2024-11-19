@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useId } from 'react';
+import { ChangeEventHandler, KeyboardEventHandler, useId } from 'react';
 import styles from './field.module.css';
 export type FieldProps = {
     label: string;
@@ -12,7 +12,7 @@ export type FieldProps = {
     disabled?: boolean;
     readOnly?: boolean;
     accept?: string;
-
+    onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 export const Field = ({ label, handleChange, className = "", ...inputProps }: FieldProps) => {
     const id = useId();

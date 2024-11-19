@@ -19,8 +19,8 @@ export const ResetPassword = () => {
         }
     }
     return (
-        <div className="public_page" >
-            <form className={styles.resetPassword} onSubmit={handleSubmit}>
+        <div className="page">
+            <form className={`form`} onSubmit={handleSubmit}>
                 <h2>Reset Password</h2>
                 <p>Please write your email and wait for a reset password message in your inbox</p>
                 <Field
