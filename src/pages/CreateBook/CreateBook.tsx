@@ -61,7 +61,7 @@ const CreateBook = () => {
         }
     }
     return (
-        <div className={`page`}>
+        <div className={`dashboard`}>
             <BookForm
                 onSubmit={handleSubmit}
                 onChange={handleChange}

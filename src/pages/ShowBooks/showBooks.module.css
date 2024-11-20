@@ -14,6 +14,11 @@
     flex-wrap: wrap;
 }
 
+.showBooks {
+    width: 50em;
+    margin: 0 auto;
+}
+
 .title {
     margin: 2em;
     display: block;

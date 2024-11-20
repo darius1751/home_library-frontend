@@ -3,11 +3,11 @@ import { Field } from "../../components/Field/Field"
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { CreateUserForm } from '../../interfaces';
-import styles from './register.module.css';
 import { register } from "../../services/register";
 import { Footer } from "../../components/Footer/Footer";
 import { navItems } from "../../Layouts/PublicLayout";
-import { FieldImageProfile } from "../../components/FieldImageProfile/FieldImageProfile";
+import { FieldImageAvatar } from "../../components/FieldImageProfile/FieldImageAvatar";
+import styles from './register.module.css';
 const initialRegister: CreateUserForm = {
     name: '',
     email: '',
@@ -35,7 +35,7 @@ export const Register = () => {
 
             <div className={`page`}>
                 <form onSubmit={handleSubmit} className={`form`}>
-                    <FieldImageProfile
+                    <FieldImageAvatar
                         image={profile}
                         setImage={setProfile}
                         accept="image/*"

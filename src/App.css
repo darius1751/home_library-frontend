@@ -2,6 +2,8 @@
     margin-top: 6em;
 }
 
+/* .dashboard {} */
+
 .container {
     width: 80%;
     max-width: 100%;
@@ -34,12 +36,7 @@
     border-radius: 2em;
     text-decoration: none;
     box-sizing: border-box;
-
-    btn-link {
-        padding: 0.4375em 0;
-    }
-
-    color: white;
+    color: light-dark(black, white);
 }
 
 .btnOptions {

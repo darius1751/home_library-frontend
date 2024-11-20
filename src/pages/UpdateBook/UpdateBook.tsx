@@ -87,7 +87,7 @@ const UpdateBook = () => {
     }
 
     return (
-        <div className={`page`}>
+        <div className={`dashboard`}>
             <div>UpdateBook</div>
             <BookForm
                 onSubmit={handleSubmit}
