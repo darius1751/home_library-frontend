@@ -22,12 +22,15 @@ const CreateBook = () => {
     const { form, handleChange, setForm } = useForm(initialBook);
     const [image, setImage] = useState<File | undefined>();
     const [genres, setGenres] = useState<string[]>([]);
+    const [loading, setLoading] = useState(false);
     // const [error, setError] = useState('')
     const isEdit = false
 
     const searchSummary = async () => {
+         setLoading(true)
         const summary = await responseGenerate(form.title, form.author)
         setForm({ ...form, summary: summary || '' });
+        setLoading(false)
     }
 
 
@@ -72,6 +75,7 @@ const CreateBook = () => {
                 setGenres={setGenres}
                 image={image}
                 setImage={setImage}
+                loading={loading}
             />
         </div>
     )
