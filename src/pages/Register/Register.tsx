@@ -1,4 +1,4 @@
-import { FormEvent } from "react"
+import { FormEvent, useState } from "react"
 import { Field } from "../../components/Field/Field"
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import styles from './register.module.css';
 import { register } from "../../services/register";
 import { Footer } from "../../components/Footer/Footer";
 import { navItems } from "../../Layouts/PublicLayout";
+import { FieldImageProfile } from "../../components/FieldImageProfile/FieldImageProfile";
 const initialRegister: CreateUserForm = {
     name: '',
     email: '',
@@ -18,6 +19,7 @@ const initialRegister: CreateUserForm = {
 export const Register = () => {
     const { form, handleChange, } = useForm(initialRegister);
     const { name, email, user, birthday, password, confirmPassword } = form;
+    const [profile, setProfile] = useState<File | undefined>(undefined);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -33,6 +35,12 @@ export const Register = () => {
 
             <div className={`page`}>
                 <form onSubmit={handleSubmit} className={`form`}>
+                    <FieldImageProfile
+                        image={profile}
+                        setImage={setProfile}
+                        accept="image/*"
+                        label="Profile"
+                    />
                     <Field
                         name='name'
                         type='text'

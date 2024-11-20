@@ -25,7 +25,7 @@ export const DashboardLayout = () => {
             {
                 user._id ? (
                     <>
-                        <Navbar navItems={navItems} home="/dashboard" />
+                        <Navbar navItems={navItems} home="/dashboard/books" />
                         <Outlet />
                     </>
                 )
