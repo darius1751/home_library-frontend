@@ -6,9 +6,11 @@ import styles from './showBooks.module.css'
 import EmailForm from "../../components/EmailForm/EmailForm";
 import { UserContext } from "../../context/contexts";
 import { CardBook } from "../../components/CardBook/CardBook";
+import { useParams } from "react-router-dom";
 const ShowBooks = () => {
     const { user } = useContext(UserContext);
-    const id = user._id!;
+    const params = useParams();
+    const id = user?._id ?? params.id;
     const [books, setBooks] = useState([]);
     const [filteredBooks, setFilteredBooks] = useState<BookDto[]>([])
     const [loc, setLoc] = useState('');
@@ -176,9 +178,12 @@ const ShowBooks = () => {
                     <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
                     <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
                 </select>
+                {user &&
+                <div>
                 <button onClick={togglePop}>Send List to Friend</button>
-                {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
-
+                seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null
+                </div>
+                }
             </div>
 
 
