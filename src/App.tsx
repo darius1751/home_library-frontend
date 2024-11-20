@@ -13,6 +13,8 @@ import BookDetail from "./pages/BookDetail/BookDetail";
 import UpdateBook from "./pages/UpdateBook/UpdateBook";
 import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
 import './App.css';
+import ResetPasswordForm from "./components/ResetPasswordForm/ResetPasswordForm";
+import EmailSent from "./pages/EmailSent/EmailSent";
 const router = createBrowserRouter(createRoutesFromElements(
     <Route element={<RootLayout />}>
         <Route element={<PublicLayout />}>
@@ -20,6 +22,9 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword/>}/>
+            <Route path="/reset-password/:id" element={<ResetPasswordForm/>}/>
+            <Route path="/email-sent" element={<EmailSent />} />
+            
         </Route>
         <Route element={<DashboardLayout />} path="/dashboard">
             <Route path='' element={<Navigate to={'books'} />} />
