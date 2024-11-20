@@ -8,6 +8,7 @@ import { FieldSelect } from '../FieldSelect/FieldSelect';
 import { locationOptions } from '../../constants/locationOptions';
 import { stateOptions } from '../../constants/stateOptions';
 import { FieldTextArea } from '../FieldTextArea/FieldTextArea';
+import { Loading } from '../Loading/Loading';
 
 
 interface BookFormProps {
@@ -20,6 +21,7 @@ interface BookFormProps {
     setImage: React.Dispatch<File | undefined>
     genres: string[];
     setGenres: React.Dispatch<string[]>;
+    loading: boolean
 }
 
 const BookForm: React.FC<BookFormProps> = ({
@@ -32,6 +34,7 @@ const BookForm: React.FC<BookFormProps> = ({
     setGenres,
     image,
     setImage,
+    loading
 }) => {
     return (
         <div className={`container`}>
@@ -95,6 +98,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     value={book.summary}
                     handleChange={onChange}
                 />
+                {loading && <Loading />}
                 <button className={styles.button} onClick={(e) => { e.preventDefault(); searchSummary(book.title, book.author) }}>Search</button>
                 <button className={`btn btn-primary ${styles.btn}`} type="submit" onClick={onSubmit}>{isEdit ? 'Update' : 'Create'}</button>
             </form>

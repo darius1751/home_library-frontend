@@ -27,6 +27,7 @@ const UpdateBook = () => {
     const navigate = useNavigate();
     const isEdit = true
     const { user } = useContext(UserContext);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getBook = async () => {
@@ -46,7 +47,9 @@ const UpdateBook = () => {
     }
 
     const searchSummary = async () => {
+        setLoading(true)
         const summary = await responseGenerate(book.title, book.author)
+        setLoading(false)
         setBook({ ...book, summary: summary || '' });
     }
 
@@ -99,6 +102,7 @@ const UpdateBook = () => {
                 setGenres={setGenres}
                 image={image}
                 setImage={setImage}
+                loading={loading}
             />
             {error && <p>{error}</p>}
         </div>

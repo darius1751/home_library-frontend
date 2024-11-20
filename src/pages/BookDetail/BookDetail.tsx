@@ -1,7 +1,6 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom";
 import { getOneBook } from "../../services/book";
-import { UserContext } from "../../context/contexts";
 import BookDto from "../../interfaces/book-dto";
 import styles from './bookDetail.module.css'
 
@@ -19,7 +18,6 @@ const BookDetail = () => {
     })
     const [error, setError] = useState('');
     
-    const { user } = useContext(UserContext);
     useEffect(() => {
         const getBook = async () => {
             try {
@@ -55,7 +53,7 @@ const BookDetail = () => {
                 </div>
                 <div className={styles.row}>
                     <Link className={styles.link} to={`/dashboard/books`}>Back</Link>
-                    <Link className={styles.link} to={`/dashboard/update/${id}`}>Update</Link>
+                    <Link className={styles.link} to={`/dashboard/book/update/${id}`}>Update</Link>
                     {error && <p>{error}</p>}
                 </div>
             </div>
