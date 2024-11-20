@@ -178,12 +178,12 @@ const ShowBooks = () => {
                     <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
                     <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
                 </select>
-                {user &&
-                <div>
+                
+                
                 <button onClick={togglePop}>Send List to Friend</button>
-                seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null
-                </div>
-                }
+                {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
+                
+                
             </div>
 
 
