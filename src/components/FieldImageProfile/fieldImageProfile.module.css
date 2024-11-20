@@ -1,24 +1,17 @@
-.fieldImage,
 .fieldProfileImage {
-    width: 12.25em;
+    width: 8em;
     margin: 2em 0;
     position: relative;
     max-width: 100%;
-    height: 16.25em;
-    border-radius: 7px;
+    height: 8em;
+    border-radius: 100%;
     background-color: #D3D3D3;
-    background-size: contain;
+    background-size: 200px;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-.fieldProfileImage {
-    width: 8em;
-    height: 8em;
-    border-radius: 100%;
-}
-
-.fieldImage:hover, .fieldProfileImage:hover>.options {
+.fieldProfileImage:hover>.options {
     opacity: 100%;
 }
 
@@ -55,8 +48,8 @@
 }
 
 .icon {
-    width: 4em;
-    height: 4em;
+    width: 2.5em;
+    height: 2.5em;
     cursor: pointer;
 }
 
@@ -65,6 +58,6 @@
     padding: 0;
     margin: 0;
     top: -1.5em;
-    left: 0.5em;
+    left: 2.5em;
     color: #10ACA3;
 }

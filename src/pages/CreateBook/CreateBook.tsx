@@ -52,7 +52,7 @@ const CreateBook = () => {
             });
             const book = await createBook(formData);
             console.log("book", { book });
-            navigate(`/dashboard/books/${user._id}`);
+            navigate(`/dashboard/books`);
 
         }
         catch (error) {

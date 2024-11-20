@@ -8,3 +8,8 @@
   --danger: #e64646;
   --label-text-color: #10ACA3;
 }
+
+hr {
+  width: 90%;
+  border: 1px solid gray;
+}

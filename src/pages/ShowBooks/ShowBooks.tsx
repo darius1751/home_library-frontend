@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Link } from "react-router-dom"
 import { useState, useEffect, useContext } from "react";
-import { deleteBook, getAllBooksByUserId } from "../../services/book";
+import { getAllBooksByUserId } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './showBooks.module.css'
 import EmailForm from "../../components/EmailForm/EmailForm";
 import { UserContext } from "../../context/contexts";
+import { CardBook } from "../../components/CardBook/CardBook";
 const ShowBooks = () => {
     const { user } = useContext(UserContext);
     const id = user._id!;
@@ -21,9 +21,8 @@ const ShowBooks = () => {
     const updateBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
-            // console.log("RESPONSE", response)
-            setBooks(response.data)
-            setFilteredBooks(response.data)
+            setBooks(response.data);
+            setFilteredBooks(response.data);
         } catch (error) {
             console.log(error)
         }
@@ -67,16 +66,6 @@ const ShowBooks = () => {
         }
         setFilteredBooks(filtered);
     }
-
-    const eraseBook = async (id: string) => {
-        try {
-            await deleteBook(id || '');
-            await updateBooks();
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
 
     const sortTitle = async () => {
         const sorted = [...filteredBooks].sort((a: BookDto, b: BookDto) => a.title.localeCompare(b.title));
@@ -194,24 +183,25 @@ const ShowBooks = () => {
 
 
             {filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
-                <div className={styles.row}>
+                <div className={styles.cards}>
                     {
-                        filteredBooks.map((book: BookDto) => (
-                            <div key={book._id} className={styles.card}>
-                                <img src={book.image} alt={book.title} />
-                                <div className={styles.classDetail}>
-                                    <p><span className={styles.orange}>Title: </span>{book.title}</p>
-                                    <p><span className={styles.orange}>Author: </span>{book.author}</p>
-                                    <p><span className={styles.orange}>Genres: </span>{book.genres.join(', ')}</p>
-                                    <p><span className={styles.orange}>Location: </span>{book.location}</p>
-                                    <p><span className={styles.orange}>State: </span>{book.state}</p>
-                                </div>
-                                <div className={styles.actions}>
-                                    <button onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
-                                    <Link to={`/dashboard/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
-                                </div>
-                            </div>
-                        ))
+                        // filteredBooks.map((book: BookDto) => (
+                        //     <div key={book._id} className={styles.card}>
+                        //         <img src={book.image} alt={book.title} />
+                        //         <div className={styles.classDetail}>
+                        //             <p><span className={styles.orange}>Title: </span>{book.title}</p>
+                        //             <p><span className={styles.orange}>Author: </span>{book.author}</p>
+                        //             <p><span className={styles.orange}>Genres: </span>{book.genres.join(', ')}</p>
+                        //             <p><span className={styles.orange}>Location: </span>{book.location}</p>
+                        //             <p><span className={styles.orange}>State: </span>{book.state}</p>
+                        //         </div>
+                        //         <div className={styles.actions}>
+                        //             <button onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
+                        //             <Link to={`/dashboard/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
+                        //         </div>
+                        //     </div>
+                        // ))
+                        filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
                     }
                 </div>
             }

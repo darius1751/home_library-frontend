@@ -25,8 +25,8 @@ const router = createBrowserRouter(createRoutesFromElements(
             <Route path='' element={<Navigate to={'books'} />} />
             <Route path="books" element={<ShowBooks />} />
             <Route path="add-book" element={<CreateBook />} />
-            <Route path="books/detail/:id" element={<BookDetail />} />
-            <Route path="update/:id" element={<UpdateBook />} />
+            <Route path="book/detail/:id" element={<BookDetail />} />
+            <Route path="book/update/:id" element={<UpdateBook />} />
             <Route path="logout" element={<Logout />} />
         </Route>
     </Route>
