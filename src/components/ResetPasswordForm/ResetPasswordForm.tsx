@@ -1,41 +1,46 @@
 import {  useParams } from "react-router-dom";
 import { Field } from "../../components/Field/Field";
-import { findById, updateById } from "../../services/register";
+import {updateOne, getOneByUser} from '../../services/login'
 import { useEffect, useState } from "react";
-import { CreateUserDto } from "../../interfaces";
 import type { ChangeEvent, FormEvent } from 'react';
 
 
 const ResetPasswordForm = () => {
     const { id} = useParams()
-    const [user, setUser] = useState<CreateUserDto | undefined>(undefined);
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [credential, setCredential] = useState({
+        password: '',
+        user: '',
+        _id: '',
+    })
 
     useEffect(() => {
-        const getUser = async () => {
+        const getCredential = async () => {
             try {
-                const response = await findById(id || '');
-                setUser(response.data);
-        
+                const response = await getOneByUser(id || '');
+                console.log(response)
+                setCredential(response);
             } catch (error) {
                 console.log(error);
             }
         }
-        getUser();
+        getCredential();
     }, [])
+        
+            
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setUser({ ...user, [e.target.name]: e.target.value } as CreateUserDto);
+        setCredential({ ...credential, [e.target.name]: e.target.value });
     }
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            if (user?.password !== confirmPassword) {
+            if (credential?.password !== confirmPassword) {
                 alert('Passwords do not match');
                 return;
             }
-            updateById(id || '', user);
+            updateOne(credential._id || '', credential);
 
         } catch (error) {
             console.log(error);
@@ -51,7 +56,7 @@ const ResetPasswordForm = () => {
                     type='password'
                     label='Password'
                     handleChange={handleChange}
-                    value={user?.password }
+                    value={credential?.password }
                     required
                 />
                 <Field

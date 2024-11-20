@@ -23,7 +23,7 @@ export const CardBook = ({ book }: Props) => {
                 <img src={image} alt={title} className={styles.image} />
             </div>
             <div className={styles.details}>
-                <NavLink to={`/dashboard/book/${_id}`} className={styles.title}>{title}</NavLink>
+                <NavLink to={`/dashboard/book/detail/${_id}`} className={styles.title}>{title}</NavLink>
                 <span className={styles.author}>{author}</span>
                 <div className={styles.genres}>
                     {
