@@ -1,0 +1,130 @@
+.sideBarContent {
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    width: 12em;
+    background-color: light-dark(white, var(--background-dark));
+    box-shadow: 0em 0em 1em 0.1em gray;
+    align-items: baseline;
+    z-index: 2;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.avatar {
+    width: 5em;
+    height: 5em;
+    border-radius: 100%;
+    border: 1px solid gray;
+    margin: 1em 0;
+    align-self: center;
+}
+
+.name {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+.username {
+    color: var(--label-text-color);
+}
+
+.sidebarItems {
+    width: 100%;
+}
+
+.sideBarItem {
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0.2em;
+    width: 95%;
+    border-bottom: 1px solid gray;
+}
+
+.sideBarItem {
+    margin-bottom: 0.2em;
+}
+
+.active {
+    background-color: light-dark(#c0baba, #252731);
+}
+
+.sideBarItem:hover {
+    background-color: light-dark(#c0baba, #252731);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    width: 3em;
+    height: 3em;
+    margin-right: 0.5em;
+}
+
+.logout {
+    justify-self: flex-end;
+}
+
+.text {
+    font-weight: bold;
+    color: var(--label-text-color);
+}
+
+.description {
+    color: var(--label-text-color);
+    opacity: 80%;
+}
+
+.toogleSidebar {
+    top: 1em;
+    left: 0.625em;
+    position: fixed;
+    width: 2em;
+    height: 2em;
+    z-index: 3;
+}
+
+.menuInput {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.sideBar:has(.menuInput) > .sideBarContent{
+    display: none;
+}
+.sideBar:has(.menuInput:checked) > .sideBarContent{
+    display: inherit;
+}
+
+
+.toogleSidebar:has(.menuInput) {
+    background-image: url('../../assets/icons/menu.svg');
+    background-size: cover;
+}
+
+.toogleSidebar:has(.menuInput:checked) {
+    background-image: url('../../assets/icons/arrowLeft2.svg');
+    background-size: cover;
+}

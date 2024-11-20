@@ -116,56 +116,76 @@ const ShowBooks = () => {
 
     return (
         <div className={`page`}>
-            <h1 className={styles.title}>My Books</h1>
-            <div className={styles.filter + " " + styles.row}>
-                <div>
-                    <label htmlFor="location" className={styles.label}>Location</label>
-                    <select id="location" name="location" onChange={(e) => setLoc(e.target.value)} value={loc} required className={styles.input}>
-                        <option value="" className={styles.option}>Search by location</option>
-                        <option value="library" className={styles.option}>Library</option>
-                        <option value="lent" className={styles.option}>Lent</option>
-                        <option value="wishlist" className={styles.option}>Wishlist</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="state" className={styles.label}>State</label>
-                    <select id="state" name="state" onChange={(e) => setState(e.target.value)} value={state} required className={styles.input}>
-                        <option value="" className={styles.option}>Search by state</option>
-                        <option value="read" className={styles.option}>Read</option>
-                        <option value="currently reading" className={styles.option}>Currently Reading</option>
-                        <option value="not finished" className={styles.option}>Not Finished</option>
-                        <option value="unread" className={styles.option}>Unread</option>
-                    </select>
-                </div>
-                <div>
-                    <label htmlFor="title" className={styles.label}>Title</label>
-                    <input type="text" className={styles.input} placeholder="Search by title" onChange={(e) => setTitle(e.target.value)} value={title} list="titles"></input>
-                    <datalist id="titles">
-                        {filteredBooks.map((book: BookDto) => (
-                            <option key={book._id} value={book.title}></option>
-                        ))}
-                    </datalist>
-                </div>
-                <div>
-                    <label htmlFor="author" className={styles.label}>Author</label>
-                    <input type="text" className={styles.input} placeholder="Search by author" onChange={(e) => setAuthor(e.target.value)} value={author} list="authors"></input>
-                    <datalist id="authors">
-                        {filteredBooks.map((book: BookDto) => (
-                            <option key={book._id} value={book.author}></option>
-                        ))}
-                    </datalist>
-                </div>
-                <div>
-                    <label htmlFor="genre" className={styles.label}>Genre</label>
-                    <input type="text" className={styles.input} placeholder="Search by genre" onChange={(e) => setGenre(e.target.value)} value={genre} list="genres"></input>
-                    <datalist id="genres">
-                        {filteredBooks.map((book: BookDto) => (
-                            <option key={book._id} value={book.genres}></option>
-                        ))}
-                    </datalist>
+            <div className={`container`}>
+                <div className={`${styles.showBooks}`}>
 
-                </div>
 
+                    <h1 className={styles.title}>My Books</h1>
+                    <div className={styles.filter + " " + styles.row}>
+                        <div>
+                            <label htmlFor="location" className={styles.label}>Location</label>
+                            <select id="location" name="location" onChange={(e) => setLoc(e.target.value)} value={loc} required className={styles.input}>
+                                <option value="" className={styles.option}>Search by location</option>
+                                <option value="library" className={styles.option}>Library</option>
+                                <option value="lent" className={styles.option}>Lent</option>
+                                <option value="wishlist" className={styles.option}>Wishlist</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="state" className={styles.label}>State</label>
+                            <select id="state" name="state" onChange={(e) => setState(e.target.value)} value={state} required className={styles.input}>
+                                <option value="" className={styles.option}>Search by state</option>
+                                <option value="read" className={styles.option}>Read</option>
+                                <option value="currently reading" className={styles.option}>Currently Reading</option>
+                                <option value="not finished" className={styles.option}>Not Finished</option>
+                                <option value="unread" className={styles.option}>Unread</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="title" className={styles.label}>Title</label>
+                            <input type="text" className={styles.input} placeholder="Search by title" onChange={(e) => setTitle(e.target.value)} value={title} list="titles"></input>
+                            <datalist id="titles">
+                                {filteredBooks.map((book: BookDto) => (
+                                    <option key={book._id} value={book.title}></option>
+                                ))}
+                            </datalist>
+                        </div>
+                        <div>
+                            <label htmlFor="author" className={styles.label}>Author</label>
+                            <input type="text" className={styles.input} placeholder="Search by author" onChange={(e) => setAuthor(e.target.value)} value={author} list="authors"></input>
+                            <datalist id="authors">
+                                {filteredBooks.map((book: BookDto) => (
+                                    <option key={book._id} value={book.author}></option>
+                                ))}
+                            </datalist>
+                        </div>
+                        <div>
+                            <label htmlFor="genre" className={styles.label}>Genre</label>
+                            <input type="text" className={styles.input} placeholder="Search by genre" onChange={(e) => setGenre(e.target.value)} value={genre} list="genres"></input>
+                            <datalist id="genres">
+                                {filteredBooks.map((book: BookDto) => (
+                                    <option key={book._id} value={book.genres}></option>
+                                ))}
+                            </datalist>
+
+                        </div>
+
+
+                    </div>
+                    <div className={styles.sort + " " + styles.row}>
+                        <label htmlFor="sort" className={styles.label}>Sort</label>
+                        <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
+                            <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
+                            <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
+                            <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
+                            <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
+                            <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
+                            <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
+                        </select>
+                        <button onClick={togglePop}>Send List to Friend</button>
+                        {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
+
+                    </div>
 
             </div>
             <div className={styles.sort + " " + styles.row}>
@@ -190,26 +210,15 @@ const ShowBooks = () => {
             {filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                 <div className={styles.cards}>
                     {
-                        // filteredBooks.map((book: BookDto) => (
-                        //     <div key={book._id} className={styles.card}>
-                        //         <img src={book.image} alt={book.title} />
-                        //         <div className={styles.classDetail}>
-                        //             <p><span className={styles.orange}>Title: </span>{book.title}</p>
-                        //             <p><span className={styles.orange}>Author: </span>{book.author}</p>
-                        //             <p><span className={styles.orange}>Genres: </span>{book.genres.join(', ')}</p>
-                        //             <p><span className={styles.orange}>Location: </span>{book.location}</p>
-                        //             <p><span className={styles.orange}>State: </span>{book.state}</p>
-                        //         </div>
-                        //         <div className={styles.actions}>
-                        //             <button onClick={() => eraseBook(book._id || '123')} className={styles.orange + ' ' + styles.noBtn}>Delete</button>
-                        //             <Link to={`/dashboard/books/detail/${book._id}`} className={styles.orange + ' ' + styles.link}>See more</Link>
-                        //         </div>
-                        //     </div>
-                        // ))
-                        filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
+                        filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
+                            <div className={styles.cards}>
+                                {
+                                    filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
+                                }
+                            </div>
                     }
                 </div>
-            }
+            </div>
         </div>
     )
 }

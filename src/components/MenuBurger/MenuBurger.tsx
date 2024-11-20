@@ -1,8 +1,11 @@
 import styles from '../Navbar/navbar.module.css';
-export const MenuBurger = () => {
+type Props = {
+    className?: string;
+}
+export const MenuBurger = ({ className = '' }: Props) => {
     return (
         <div>
-            <input type="checkbox" className={styles.menuInput}/>
+            <input type="checkbox" className={`${styles.menuInput} ${className}`} />
             <div className={styles.menu}></div>
         </div>
     )
