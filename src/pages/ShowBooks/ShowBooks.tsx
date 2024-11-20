@@ -187,37 +187,38 @@ const ShowBooks = () => {
 
                     </div>
 
-            </div>
-            <div className={styles.sort + " " + styles.row}>
-                <label htmlFor="sort" className={styles.label}>Sort</label>
-                <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
-                    <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
-                    <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
-                    <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
-                    <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
-                    <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
-                    <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
-                </select>
-                
-                
-                <button onClick={togglePop}>Send List to Friend</button>
-                {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
-                
-                
-            </div>
-
-
-            {filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
-                <div className={styles.cards}>
-                    {
-                        filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
-                            <div className={styles.cards}>
-                                {
-                                    filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
-                                }
-                            </div>
-                    }
                 </div>
+                <div className={styles.sort + " " + styles.row}>
+                    <label htmlFor="sort" className={styles.label}>Sort</label>
+                    <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
+                        <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
+                        <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
+                        <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
+                        <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
+                        <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
+                        <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
+                    </select>
+
+
+                    <button onClick={togglePop}>Send List to Friend</button>
+                    {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
+
+
+                </div>
+
+                {
+                    filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
+                        <div className={styles.cards}>
+                            {
+                                filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
+                                    <div className={styles.cards}>
+                                        {
+                                            filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
+                                        }
+                                    </div>
+                            }
+                        </div>
+                }
             </div>
         </div>
     )
