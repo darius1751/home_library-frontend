@@ -1,4 +1,4 @@
-import { MouseEvent, useId, useState } from 'react';
+import { useId, useState } from 'react';
 import { Modal } from '../Modal/Modal';
 import Avatars from './components/Avatars';
 import styles from './fieldImageAvatar.module.css';
@@ -11,9 +11,7 @@ export const FieldImageAvatar = ({ initialImage, label }: Props) => {
     const id = useId();
     const [image, setImage] = useState();
     const [modal, setModal] = useState(false);
-    const handleCancel = (e: MouseEvent<HTMLImageElement>) => {
-
-    }
+    
     const handleUpload = () => {
         setModal(true)
     }
