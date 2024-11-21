@@ -1,25 +1,32 @@
 import {  useParams } from "react-router-dom";
 import { Field } from "../../components/Field/Field";
-import {updateOne, getOneByUser} from '../../services/login'
+import {updateOne, getOneById} from '../../services/login'
+import { findById } from "../../services/register";
 import { useEffect, useState } from "react";
 import type { ChangeEvent, FormEvent } from 'react';
+import type { Credential, User } from "../../interfaces";
 
 
 const ResetPasswordForm = () => {
     const { id} = useParams()
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [credential, setCredential] = useState({
-        password: '',
-        user: '',
-        _id: '',
-    })
+    const [user, setUser] = useState<Partial<User>>({});
+    const [credential, setCredential] = useState<Partial<Credential>>({});
 
     useEffect(() => {
         const getCredential = async () => {
             try {
-                const response = await getOneByUser(id || '');
-                console.log(response)
-                setCredential(response);
+                const idValue = id || '';
+                if(idValue !== '') {
+                    const currentUser = await findById(idValue)
+                    console.log("currentUser", currentUser.data)
+                    await setUser(currentUser.data);
+                    const response = await getOneById(currentUser.data.credential_id || '');
+                    console.log(response)
+                    setCredential(response);
+                
+                }
+                
             } catch (error) {
                 console.log(error);
             }
@@ -40,7 +47,7 @@ const ResetPasswordForm = () => {
                 alert('Passwords do not match');
                 return;
             }
-            updateOne(credential._id || '', credential);
+            updateOne(user.credential_id || '', credential as Credential);
 
         } catch (error) {
             console.log(error);

@@ -16,7 +16,7 @@ export const updateOne = async (id: string, credential: Credential) => {
     }
 }
 
-export const getOneByUser = async (id: string) => {
+export const getOneById = async (id: string) => {
     try {
         const response = await api.get(`/auth/${id}`);
         return response.data;

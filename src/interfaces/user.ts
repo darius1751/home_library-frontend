@@ -6,4 +6,5 @@ export interface User {
     birthday: string;
     createdAt: string;
     updatedAt: string;
+    credential_id?: string;
 }
