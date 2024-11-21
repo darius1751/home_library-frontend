@@ -47,10 +47,46 @@
     height: 100%;
 }
 
-.icon {
-    width: 2.5em;
-    height: 2.5em;
+.avatarsList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.avatar {
+    top: 18px;
+    left: 24px;
+    position: absolute;
+    width: 5em;
+    height: 5em;
     cursor: pointer;
+}
+
+.avatarsTitle {
+    position: sticky;
+    top: 1em;
+    text-align: center;
+    color: var(--label-text-color);
+}
+
+.avatarIconContorn {
+    width: 5em;
+    height: 5em;
+    text-align: center;
+    padding-top: 0.25em;
+    box-sizing: border-box;
+    margin: 1em;
+}
+
+.avatarIconContorn:hover {
+    border-radius: 7px;
+    background-color: light-dark(#c0baba, #252731);
+    cursor: pointer;
+
+}
+
+.avatarIcon {
+    width: 4.5em;
+    height: 4.5em;
 }
 
 .label {
