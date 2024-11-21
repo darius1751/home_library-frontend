@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react"
+import { FormEvent } from "react"
 import { Field } from "../../components/Field/Field"
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { CreateUserForm } from '../../interfaces';
 import { register } from "../../services/register";
 import { Footer } from "../../components/Footer/Footer";
 import { navItems } from "../../Layouts/PublicLayout";
-import { FieldImageAvatar } from "../../components/FieldImageProfile/FieldImageAvatar";
+import { FieldImageAvatar } from "../../components/FieldImageAvatar/FieldImageAvatar";
 import styles from './register.module.css';
 const initialRegister: CreateUserForm = {
     name: '',
@@ -19,7 +19,6 @@ const initialRegister: CreateUserForm = {
 export const Register = () => {
     const { form, handleChange, } = useForm(initialRegister);
     const { name, email, user, birthday, password, confirmPassword } = form;
-    const [profile, setProfile] = useState<File | undefined>(undefined);
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -36,10 +35,7 @@ export const Register = () => {
             <div className={`page`}>
                 <form onSubmit={handleSubmit} className={`form`}>
                     <FieldImageAvatar
-                        image={profile}
-                        setImage={setProfile}
-                        accept="image/*"
-                        label="Profile"
+                        label="Avatar"
                     />
                     <Field
                         name='name'
