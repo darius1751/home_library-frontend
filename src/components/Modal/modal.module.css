@@ -1,0 +1,50 @@
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background-color: #80808080;
+}
+
+.modal {
+    position: relative;
+    border-radius: 1em;
+    padding: 1em;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 1em;
+    background-color: light-dark(white, var(--background-dark));
+    z-index: 9;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.sm {
+    width: 25em;
+    height: 15em;
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.md {
+    width: 45em;
+    height: 30em;
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.lg {
+    width: 70em;
+    height: 50em;
+    max-width: 100%;
+    max-height: 80%;
+}
+
+.close {
+    cursor: pointer;
+    position: absolute;
+    width: 1.5em;
+    right: 1em;
+}
