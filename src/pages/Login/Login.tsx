@@ -31,6 +31,7 @@ export const Login = () => {
         } else {
             form.user = input;
         }
+        console.log(input)
         const { status, data } = await login(form);
         console.log({ data });
         if (status === 200) {
