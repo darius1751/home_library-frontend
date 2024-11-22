@@ -14,7 +14,6 @@ export const SideBar = ({ sidebarItems }: Props) => {
     console.log({ user });
     const username = localStorage.getItem('username');
 
-
     return (
         <div className={styles.sideBar}>
             <ToogleSidebar />
@@ -25,7 +24,9 @@ export const SideBar = ({ sidebarItems }: Props) => {
                     </span>
                     <span className={styles.name}>{name}</span>
                     <small className={styles.username}>{username}</small>
+
                     <small className={styles.username}>{email}</small>
+
                 </div>
                 <div className={styles.sidebarItems}>
                     {
