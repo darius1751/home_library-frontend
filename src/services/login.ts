@@ -7,9 +7,9 @@ export const login = async (credential: Credential) => {
     return { data, status }
 }
 
-export const updateOne = async (id: string, credential: Credential) => {
+export const updateOne = async (id: string, credential: Credential, token: string) => {
     try {
-        const response = await api.put(`/auth/reset-password/${id}`, credential);
+        const response = await api.put(`/auth/reset-password/${id}?${token}`, credential);
         console.log("serviceCredential", response)
         return response.data;
     } catch (error) {

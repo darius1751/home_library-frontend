@@ -1,4 +1,4 @@
-import {  useParams } from "react-router-dom";
+import {  useParams, useSearchParams } from "react-router-dom";
 import { Field } from "../../components/Field/Field";
 import {updateOne, getOneById} from '../../services/login'
 import { findById } from "../../services/register";
@@ -13,10 +13,12 @@ const ResetPasswordForm = () => {
     const [user, setUser] = useState<Partial<User>>({});
     const [credential, setCredential] = useState<Partial<Credential>>({});
     const [newPassword, setNewPassword] = useState('')
+    const [token] = useSearchParams();
 
 
     useEffect(() => {
         const getCredential = async () => {
+            console.log("token", token.toString())
             try {
                 const idValue = id || '';
                 if(idValue !== '') {
@@ -48,7 +50,7 @@ const ResetPasswordForm = () => {
                 alert('Passwords do not match');
                 return;
             }
-            await updateOne(user.credential_id || '', credential as Credential);
+            await updateOne(user.credential_id || '', credential as Credential, token.toString());
            
 
         } catch (error) {
