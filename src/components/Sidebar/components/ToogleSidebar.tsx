@@ -1,9 +1,12 @@
 import styles from '../sideBar.module.css';
-
-export const ToogleSidebar = () => {
+type Props = {
+    sideBarState: boolean;
+    setSideBarState: React.Dispatch<boolean>
+}
+export const ToogleSidebar = ({ sideBarState, setSideBarState }: Props) => {
     return (
         <div className={styles.toogleSidebar}>
-            <input type="checkbox" className={`${styles.menuInput}`} />
+            <input type="checkbox" className={`${styles.menuInput}`} checked={sideBarState} onChange={() => { setSideBarState(!sideBarState) }} />
             <div className={styles.menu}></div>
         </div>
     )

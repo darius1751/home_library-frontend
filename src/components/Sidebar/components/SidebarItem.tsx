@@ -3,8 +3,9 @@ import { SideBarItem as SideBarItemModel } from '../../../interfaces/sidebarItem
 import styles from '../sideBar.module.css';
 type Props = {
     sidebarItem: SideBarItemModel;
+    type?: 'resumen' | 'normal'
 }
-export const SideBarItem = ({ sidebarItem }: Props) => {
+export const SideBarItem = ({ sidebarItem, type = 'normal' }: Props) => {
     const { to, text, description, icon } = sidebarItem;
     return (
         <NavLink to={to} className={({ isActive }) => {
@@ -16,10 +17,14 @@ export const SideBarItem = ({ sidebarItem }: Props) => {
             return classNames;
         }} >
             <img src={icon} alt={text} className={styles.icon} />
-            <div className={styles.details}>
-                <span className={styles.text}>{text}</span>
-                <small className={styles.description}>{description}</small>
-            </div>
+            {
+                type === 'normal' &&
+                <div className={styles.details}>
+                    <span className={styles.text}>{text}</span>
+                    <small className={styles.description}>{description}</small>
+                </div>
+            }
+
         </NavLink>
     )
 }
