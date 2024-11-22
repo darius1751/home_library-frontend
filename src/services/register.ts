@@ -9,3 +9,8 @@ export const findById = async (id: string) => {
     const { data, status } = await api.get<User>(`/user/${id}`);
     return { data, status }
 }
+
+export const findUserByEmail = async (email: string) => {
+    const { data, status } = await api.get<User>(`/user/email/${email}`);
+    return { data, status }
+}
