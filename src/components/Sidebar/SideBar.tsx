@@ -12,6 +12,7 @@ type Props = {
 export const SideBar = ({ sidebarItems }: Props) => {
     const [sidebarState, setSideBarState] = useState(false);
     const { user } = useContext(UserContext);
+
     return (
         <div className={styles.sideBar}>
             <ToogleSidebar sideBarState={sidebarState} setSideBarState={setSideBarState} />

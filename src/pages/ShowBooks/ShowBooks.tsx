@@ -169,10 +169,10 @@ const ShowBooks = () => {
                             </datalist>
 
                         </div>
-
-
                     </div>
-                    <div className={styles.sort + " " + styles.row}>
+                   
+                </div>
+                <div className={styles.sort + " " + styles.row}>
                         <label htmlFor="sort" className={styles.label}>Sort</label>
                         <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
                             <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
@@ -184,10 +184,7 @@ const ShowBooks = () => {
                         </select>
                         <button onClick={togglePop}>Send List to Friend</button>
                         {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
-
                     </div>
-
-                </div>
                 {
                     filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                         <div className={styles.cards}>
