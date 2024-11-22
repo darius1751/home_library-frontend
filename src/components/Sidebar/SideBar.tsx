@@ -10,8 +10,11 @@ type Props = {
 }
 export const SideBar = ({ sidebarItems }: Props) => {
     const { user } = useContext(UserContext);
-    const { avatar, name, username } = user;
+    const { avatar, name, email} = user;
     console.log({ user });
+    const username = localStorage.getItem('username');
+
+
     return (
         <div className={styles.sideBar}>
             <ToogleSidebar />
@@ -22,6 +25,7 @@ export const SideBar = ({ sidebarItems }: Props) => {
                     </span>
                     <span className={styles.name}>{name}</span>
                     <small className={styles.username}>{username}</small>
+                    <small className={styles.username}>{email}</small>
                 </div>
                 <div className={styles.sidebarItems}>
                     {

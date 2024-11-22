@@ -7,5 +7,5 @@ export interface User {
     createdAt: string;
     updatedAt: string;
     credential_id?: string;
-    username?: string
+    username?: string;
 }
