@@ -1,31 +1,29 @@
 import { useId, useState } from 'react';
-import { Modal } from '../Modal/Modal';
-import Avatars from './components/Avatars';
 import styles from './fieldImageAvatar.module.css';
+import { ModalAvatars } from './components/ModalAvatars';
 
 type Props = {
     label?: string;
     initialImage?: string;
+    avatar: string;
+    setAvatar: React.Dispatch<string>
 }
-export const FieldImageAvatar = ({ initialImage, label }: Props) => {
+export const FieldImageAvatar = ({ initialImage, label, avatar, setAvatar }: Props) => {
     const id = useId();
-    const [image, setImage] = useState();
     const [modal, setModal] = useState(false);
-    
+
     const handleUpload = () => {
-        setModal(true)
+        setModal(true);
     }
     return (
         <>
             <div className={`${styles.fieldProfileImage}`}>
                 <label className={styles.label} htmlFor={id}>{label}</label>
-                <img src={image || initialImage} alt="upload" className={styles.avatar} onClick={handleUpload} />
+                <img src={avatar || initialImage} alt="upload" className={styles.avatar} onClick={handleUpload} />
             </div>
             {
                 modal && (
-                    <Modal size='lg' handleClose={() => setModal(false)}>
-                        <Avatars setImage={setImage} setModal={setModal} />
-                    </Modal>
+                    <ModalAvatars setImage={setAvatar} setModal={setModal} />
                 )
             }
         </>
