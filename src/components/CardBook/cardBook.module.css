@@ -12,12 +12,14 @@
 .imageContainer {
     border-bottom: 1px solid gray;
     text-align: center;
-    height: 18em;
+    height: 27em;
+    padding-bottom: 0.2em;
 }
 
 .image {
     width: 18em;
     border-radius: 7px 7px 0 0;
+    max-height: 100%;
 }
 
 .details {
@@ -26,20 +28,37 @@
     align-items: center;
 }
 
+.text {
+    margin: 0.5rem 0;
+    height: 3em;
+    max-width: 100%;
+}
+
+
 .title {
-    display: block;
+    display: inline-block;
     font-size: 1.5em;
     color: var(--secondary-color);
-    margin: 0.5rem 0;
     font-weight: bold;
     text-align: center;
+    height: 3em;
+    overflow: auto;
+    scrollbar-width: none;
+    white-space-collapse: collapse;
+    text-overflow: ellipsis;
 }
 
 .author {
+    display: inline-block;
     font-size: 1.2em;
     color: var(--primary-color);
     margin: 0.5rem 0;
     font-weight: bold;
+    width: 95%;
+    text-align: center;
+    height: 2em;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .genres {
@@ -90,6 +109,7 @@
     color: var(--primary-color);
     font-weight: bold;
 }
-.card .btnOptions{
+
+.card .btnOptions {
     justify-content: space-between;
 }

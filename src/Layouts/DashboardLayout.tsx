@@ -16,7 +16,7 @@ const sidebarItems: SideBarItem[] = [
     {
         text: 'Add Book',
         to: '/dashboard/add-book',
-        description: '',
+        description: 'Create a new book',
         icon: addBook
     },
     {
@@ -28,7 +28,7 @@ const sidebarItems: SideBarItem[] = [
 ]
 export const DashboardLayout = () => {
     const { user } = useContext(UserContext);
-
+    
     return (
         <>
             {
