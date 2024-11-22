@@ -12,6 +12,21 @@
     z-index: 2;
 }
 
+.sideBarResumen {
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100%;
+    align-items: baseline;
+    z-index: 2;
+}
+
+.sideBarResumen .sideBarItem {
+    width: min-content;
+}
+
 .userInfo {
     display: flex;
     flex-direction: column;
@@ -57,6 +72,10 @@
     flex-direction: column;
 }
 
+.sideBarResumen .sidebarItems {
+    margin-top: 4rem;
+}
+
 .sideBarItem {
     display: flex;
     text-decoration: none;
@@ -90,6 +109,15 @@
     margin-right: 0.5em;
 }
 
+.sideBarResumen .icon {
+    width: 2em;
+    height: 2em;
+}
+
+.sideBarResumen .sideBarItem {
+    margin-top: 0.3em;
+}
+
 .logout {
     position: absolute;
     bottom: 2em;
@@ -109,7 +137,7 @@
 
 .toogleSidebar {
     top: 1em;
-    left: 0.625em;
+    left: 4px;
     position: fixed;
     width: 2em;
     height: 2em;
@@ -134,9 +162,8 @@
     display: inherit;
 }
 
-
 .toogleSidebar:has(.menuInput) {
-    background-image: url('../../assets/icons/menu.svg');
+    background-image: url('../../assets/icons/menuSidebar.svg');
     background-size: cover;
 }
 
