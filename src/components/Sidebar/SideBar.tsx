@@ -10,7 +10,8 @@ type Props = {
 }
 export const SideBar = ({ sidebarItems }: Props) => {
     const { user } = useContext(UserContext);
-    const { avatar, name, email } = user;
+    const { avatar, name, username } = user;
+    console.log({ user });
     return (
         <div className={styles.sideBar}>
             <ToogleSidebar />
@@ -20,7 +21,7 @@ export const SideBar = ({ sidebarItems }: Props) => {
                         <img src={avatar || defaultAvatar} alt={avatar} className={styles.avatar} />
                     </span>
                     <span className={styles.name}>{name}</span>
-                    <small className={styles.username}>{email}</small>
+                    <small className={styles.username}>{username}</small>
                 </div>
                 <div className={styles.sidebarItems}>
                     {

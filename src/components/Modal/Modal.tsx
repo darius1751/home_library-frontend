@@ -12,7 +12,9 @@ export const Modal = ({ children, size, handleClose, className = '' }: Props) =>
     return (
         <div className={`${styles.background}`}>
             <div className={`${styles.modal} ${styles[size]} ${className}`}>
-                <img src={close} alt="close-modal" onClick={handleClose} className={styles.close} />
+                <span className={styles.closeContainer}>
+                    <img src={close} alt="close-modal" onClick={handleClose} className={styles.close} />
+                </span>
                 {children}
             </div>
         </div>

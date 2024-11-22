@@ -48,3 +48,9 @@
     width: 1.5em;
     right: 1em;
 }
+
+.closeContainer {
+    position: sticky;
+    top: 0em;
+    display: block;
+}
