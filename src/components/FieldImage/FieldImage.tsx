@@ -31,7 +31,6 @@ export const FieldImage = ({ image, setImage, accept, label, initialImage = '' }
         }
     }
     const handleView = () => {
-        // Separar componentes que usaran imagen, para reutilizar
         setModal(true);
     }
 
