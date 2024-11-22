@@ -26,7 +26,7 @@ const Avatars = ({ setImage, setModal }: Props) => {
                 {
                     avatars.map(
                         (avatar, index) => (
-                            <div className={styles.avatarIconContorn} onClick={() => handleCheck(avatar)}>
+                            <div className={styles.avatarIconContorn} key={`avatar-${index}`} onClick={() => handleCheck(avatar)}>
                                 <img src={avatar} alt={`avatar-${index}`} className={styles.avatarIcon} />
                             </div>
                         )

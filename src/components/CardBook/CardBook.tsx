@@ -1,14 +1,15 @@
 import { NavLink } from 'react-router-dom';
 import BookDto from '../../interfaces/book-dto';
-import styles from './cardBook.module.css';
 import { locationIcons } from '../../constants/locationOptions';
 import { stateIcons } from '../../constants/stateOptions';
 import { deleteBook } from '../../services/book';
+import styles from './cardBook.module.css';
 
 type Props = {
     book: BookDto;
+    type?: 'preview' | 'owner' | 'other'
 }
-export const CardBook = ({ book }: Props) => {
+export const CardBook = ({ book, type = 'owner' }: Props) => {
     const { _id, author, title, genres, image, location, state } = book;
     const removeBook = async () => {
         try {
@@ -23,7 +24,8 @@ export const CardBook = ({ book }: Props) => {
                 <img src={image} alt={title} className={styles.image} />
             </div>
             <div className={styles.details}>
-                <NavLink to={`/dashboard/book/detail/${_id}`} className={styles.title}>{title}</NavLink>
+                {type === 'owner' && <NavLink to={`/dashboard/book/detail/${_id}`} className={styles.title}>{title}</NavLink>}
+                {type === 'preview' && <NavLink to={`#`} className={styles.title}>{title}</NavLink>}
                 <span className={styles.author}>{author}</span>
                 <div className={styles.genres}>
                     {
@@ -45,10 +47,20 @@ export const CardBook = ({ book }: Props) => {
                 </div>
             </div>
             <hr />
-            <div className={`btnOptions ${styles.btnOptions}`}>
-                <NavLink to={`/dashboard/book/detail/${_id}`} className={`btn-link btn-square btn-primary`}>See more</NavLink>
-                <button className={`btn-square btn-danger`} onClick={removeBook}>Delete</button>
+            <div className={`${styles.btnOptions} btnOptions`}>
+                {
+                    type !== 'preview' && <NavLink to={`/dashboard/book/detail/${_id}`} className={`btn-link btn-square btn-primary`}>See more</NavLink>
+                }
+                {
+                    type === 'preview' && <NavLink to={`#`} className={`btn-link btn-square btn-primary`}>See more</NavLink>
+                }
+                {
+                    type === 'owner' && <button className={`btn-square btn-danger`} onClick={removeBook}>Delete</button>
+                }
+                {
+                    type === 'preview' && < button className={`btn-square btn-danger`} onClick={(e) => e.preventDefault()}>Delete</button>
+                }
             </div>
-        </div>
+        </div >
     )
 }
