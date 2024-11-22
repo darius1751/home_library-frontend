@@ -10,6 +10,7 @@ export const login = async (credential: Credential) => {
 export const updateOne = async (id: string, credential: Credential) => {
     try {
         const response = await api.put(`/auth/reset-password/${id}`, credential);
+        console.log("serviceCredential", response)
         return response.data;
     } catch (error) {
         console.log(error);

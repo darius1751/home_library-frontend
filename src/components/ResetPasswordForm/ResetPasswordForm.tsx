@@ -3,7 +3,7 @@ import { Field } from "../../components/Field/Field";
 import {updateOne, getOneById} from '../../services/login'
 import { findById } from "../../services/register";
 import { useEffect, useState } from "react";
-import type { ChangeEvent, FormEvent } from 'react';
+import type {  FormEvent } from 'react';
 import type { Credential, User } from "../../interfaces";
 
 
@@ -12,6 +12,8 @@ const ResetPasswordForm = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [user, setUser] = useState<Partial<User>>({});
     const [credential, setCredential] = useState<Partial<Credential>>({});
+    const [newPassword, setNewPassword] = useState('')
+
 
     useEffect(() => {
         const getCredential = async () => {
@@ -19,11 +21,10 @@ const ResetPasswordForm = () => {
                 const idValue = id || '';
                 if(idValue !== '') {
                     const currentUser = await findById(idValue)
-                    console.log("currentUser", currentUser.data)
                     await setUser(currentUser.data);
-                    const response = await getOneById(currentUser.data.credential_id || '');
-                    console.log(response)
-                    setCredential(response);
+                    const response = await getOneById(currentUser.data.credential_id || '')
+                    await setCredential(response);
+                    console.log(credential)
                 
                 }
                 
@@ -32,22 +33,23 @@ const ResetPasswordForm = () => {
             }
         }
         getCredential();
-    }, [])
-        
-            
+    },[]);
+       
+    
+    useEffect(() => {
+        console.log("searching credential", credential);
+      }, [credential]);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setCredential({ ...credential, [e.target.name]: e.target.value });
-    }
-
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        credential.password = newPassword
         try {
             if (credential?.password !== confirmPassword) {
                 alert('Passwords do not match');
                 return;
             }
-            updateOne(user.credential_id || '', credential as Credential);
+            await updateOne(user.credential_id || '', credential as Credential);
+           
 
         } catch (error) {
             console.log(error);
@@ -62,8 +64,8 @@ const ResetPasswordForm = () => {
                     name='password'
                     type='password'
                     label='Password'
-                    handleChange={handleChange}
-                    value={credential?.password }
+                    value={newPassword}
+                    handleChange={(e) => setNewPassword(e.target.value)}
                     required
                 />
                 <Field
