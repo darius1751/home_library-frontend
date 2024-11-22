@@ -20,13 +20,21 @@
     margin-bottom: 2em;
 }
 
-.avatar {
+.avatarContorn {
     width: 5em;
     height: 5em;
     border-radius: 100%;
     border: 1px solid gray;
     margin: 1em 0;
-    align-self: center;
+    box-sizing: border-box;
+    padding: 0.3em;
+}
+
+.avatar {
+    width: 4em;
+    height: 4em;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .name {
@@ -43,7 +51,10 @@
 }
 
 .sidebarItems {
+    display: flex;
     width: 100%;
+    height: 100%;
+    flex-direction: column;
 }
 
 .sideBarItem {
@@ -80,7 +91,10 @@
 }
 
 .logout {
-    justify-self: flex-end;
+    position: absolute;
+    bottom: 2em;
+    border: 0;
+    margin-left: 4px;
 }
 
 .text {
@@ -109,12 +123,14 @@
     left: 0;
     right: 0;
     bottom: 0;
+    cursor: pointer;
 }
 
-.sideBar:has(.menuInput) > .sideBarContent{
+.sideBar:has(.menuInput)>.sideBarContent {
     display: none;
 }
-.sideBar:has(.menuInput:checked) > .sideBarContent{
+
+.sideBar:has(.menuInput:checked)>.sideBarContent {
     display: inherit;
 }
 

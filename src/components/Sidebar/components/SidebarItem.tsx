@@ -8,10 +8,12 @@ export const SideBarItem = ({ sidebarItem }: Props) => {
     const { to, text, description, icon } = sidebarItem;
     return (
         <NavLink to={to} className={({ isActive }) => {
+            let classNames = `${styles.sideBarItem}`;
             if (isActive)
-                return `${styles.sideBarItem} ${styles.active}`;
-            
-            return `${styles.sideBarItem}`;
+                classNames += ` ${styles.active}`;
+            if (to === '/dashboard/logout')
+                classNames += ` ${styles.logout}`;
+            return classNames;
         }} >
             <img src={icon} alt={text} className={styles.icon} />
             <div className={styles.details}>
