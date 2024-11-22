@@ -24,8 +24,10 @@ export const Register = () => {
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const {  password, user, ...userData } = form;
+
+        const { confirmPassword, password, user, ...userData } = form;
         const { status } = await register({ ...userData,  avatar: avatar || defaultAvatar, credential: { user, email, password } })
+
         if (status === 200) {
             alert(`El usuario se a creado correctamente`);
             navigate('/login');
