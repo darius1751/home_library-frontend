@@ -1,4 +1,4 @@
-import { FormEvent } from "react"
+import { FormEvent, useState } from "react"
 import { Field } from "../../components/Field/Field"
 import { useForm } from '../../hooks/useForm';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -16,14 +16,16 @@ const initialRegister: CreateUserForm = {
     password: '',
     confirmPassword: '',
 }
+export const defaultAvatar = 'https://res.cloudinary.com/dz6hey3wo/image/upload/v1732160676/avatars/default.svg'
 export const Register = () => {
     const { form, handleChange, } = useForm(initialRegister);
+    const [avatar, setAvatar] = useState<string>('');
     const { name, email, user, birthday, password, confirmPassword } = form;
     const navigate = useNavigate();
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const { confirmPassword, password, user, ...userData } = form;
-        const { status } = await register({ ...userData, credential: { user, password } })
+        const { status } = await register({ ...userData, avatar: avatar || defaultAvatar, credential: { user, password } })
         if (status === 200) {
             alert(`El usuario se a creado correctamente`);
             navigate('/login');
@@ -36,6 +38,9 @@ export const Register = () => {
                 <form onSubmit={handleSubmit} className={`form`}>
                     <FieldImageAvatar
                         label="Avatar"
+                        initialImage={defaultAvatar}
+                        avatar={avatar}
+                        setAvatar={setAvatar}
                     />
                     <Field
                         name='name'
@@ -45,6 +50,7 @@ export const Register = () => {
                         handleChange={handleChange}
                         value={name}
                         className={styles.field}
+                        required={true}
                     />
                     <Field
                         name='user'
@@ -53,6 +59,27 @@ export const Register = () => {
                         handleChange={handleChange}
                         value={user}
                         placeholder='write your username'
+                        required={true}
+                        className={styles.field}
+                    />
+
+                    <Field
+                        name='email'
+                        type='email'
+                        label='Email'
+                        placeholder='write your email'
+                        handleChange={handleChange}
+                        value={email}
+                        required={true}
+                        className={styles.field}
+                    />
+                    <Field
+                        name='birthday'
+                        type='date'
+                        label='Birthday'
+                        handleChange={handleChange}
+                        value={birthday}
+                        required={true}
                         className={styles.field}
                     />
                     <Field
@@ -62,23 +89,7 @@ export const Register = () => {
                         handleChange={handleChange}
                         value={password}
                         placeholder='*********'
-                        className={styles.field}
-                    />
-                    <Field
-                        name='email'
-                        type='text'
-                        label='Email'
-                        placeholder='write your email'
-                        handleChange={handleChange}
-                        value={email}
-                        className={styles.field}
-                    />
-                    <Field
-                        name='birthday'
-                        type='date'
-                        label='Birthday'
-                        handleChange={handleChange}
-                        value={birthday}
+                        required={true}
                         className={styles.field}
                     />
                     <Field
@@ -88,6 +99,7 @@ export const Register = () => {
                         handleChange={handleChange}
                         value={confirmPassword}
                         placeholder='*********'
+                        required={true}
                         className={styles.field}
                     />
                     <div className={`${styles.row} ${styles.btnOptions}`}>

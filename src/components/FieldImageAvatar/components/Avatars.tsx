@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllAvatars } from '../../../services/avatar';
 import styles from '../fieldImageAvatar.module.css';
 type Props = {
@@ -36,4 +36,4 @@ const Avatars = ({ setImage, setModal }: Props) => {
         </div>
     )
 }
-export default memo(Avatars);
+export default Avatars;
