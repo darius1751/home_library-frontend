@@ -10,10 +10,8 @@ type Props = {
 }
 export const SideBar = ({ sidebarItems }: Props) => {
     const { user } = useContext(UserContext);
-
-    const { avatar, name, email} = user;
+    const { avatar, name, email, username} = user;
     console.log({ user });
-    const username = localStorage.getItem('username');
 
 
     return (
