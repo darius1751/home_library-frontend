@@ -37,7 +37,6 @@ export const Login = () => {
         if (status === 200) {
             setUser(data.user);
             localStorage.setItem('token', data.token);
-            localStorage.setItem('username', data.user.username || '');
             navigate('/dashboard');
         }
     }
