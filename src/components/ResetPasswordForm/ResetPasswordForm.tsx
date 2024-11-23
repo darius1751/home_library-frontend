@@ -1,4 +1,4 @@
-import {  useParams, useSearchParams } from "react-router-dom";
+import {  useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { Field } from "../../components/Field/Field";
 import {updateOne, getOneById} from '../../services/login'
 import { findById } from "../../services/register";
@@ -14,6 +14,7 @@ const ResetPasswordForm = () => {
     const [credential, setCredential] = useState<Partial<Credential>>({});
     const [newPassword, setNewPassword] = useState('')
     const [token] = useSearchParams();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -51,7 +52,7 @@ const ResetPasswordForm = () => {
                 return;
             }
             await updateOne(user.credential_id || '', credential as Credential, token.toString());
-           
+           navigate('/login');
 
         } catch (error) {
             console.log(error);
@@ -59,13 +60,12 @@ const ResetPasswordForm = () => {
     }
 
     return (
-        <div>
-            <h1>Reset Your Password</h1>
-            <form onSubmit={handleSubmit}>
+        <div className="page">
+            <form className={`form`} onSubmit={handleSubmit}>
                 <Field
                     name='password'
                     type='password'
-                    label='Password'
+                    label='New Password'
                     value={newPassword}
                     handleChange={(e) => setNewPassword(e.target.value)}
                     required
@@ -73,7 +73,7 @@ const ResetPasswordForm = () => {
                 <Field
                     name='confirmPassword'
                     type='password'
-                    label='Confirm Password'
+                    label='Confirm New Password'
                     handleChange={(e) => setConfirmPassword(e.target.value)}
                     value={confirmPassword}
                     required
