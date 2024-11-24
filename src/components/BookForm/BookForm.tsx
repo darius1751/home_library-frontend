@@ -21,7 +21,8 @@ interface BookFormProps {
     setImage: React.Dispatch<File | undefined>
     genres: string[];
     setGenres: React.Dispatch<string[]>;
-    loading: boolean
+    loading: boolean,
+    error: string
 }
 
 const BookForm: React.FC<BookFormProps> = ({
@@ -34,7 +35,8 @@ const BookForm: React.FC<BookFormProps> = ({
     setGenres,
     image,
     setImage,
-    loading
+    loading,
+    error
 }) => {
     return (
         <div className={`container`}>

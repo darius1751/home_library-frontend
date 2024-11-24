@@ -23,7 +23,7 @@ const CreateBook = () => {
     const [image, setImage] = useState<File | undefined>();
     const [genres, setGenres] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState('')
+    const[error, setError] = useState('')   // const [error, setError] = useState('')
     const isEdit = false
 
     const searchSummary = async () => {
@@ -32,7 +32,36 @@ const CreateBook = () => {
         setForm({ ...form, summary: summary || '' });
         setLoading(false)
     }
-
+const validate = (formData: FormData) => {
+    if(!formData.get('title')) {
+        setError('Title is required')
+        return
+    }
+    if(!formData.get('author')) {
+        setError('Author is required')
+        return
+    }
+    if(!formData.get('location')) {
+        setError('Location is required')
+        return
+    }
+    if(!formData.get('state')) {
+        setError('State is required')
+        return
+    }
+    if(!formData.get('summary')) {
+        setError('Summary is required')
+        return
+    }
+    if(!formData.get('cover')) {
+        setError('Cover is required')
+        return
+    }
+    if(!formData.get('genres')) {
+        setError('Genres is required')
+        return
+    }
+}
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -53,6 +82,8 @@ const CreateBook = () => {
             genres.forEach((genre, index) => {
                 formData.append(`genres[${index}]`, genre);
             });
+            
+            validate(formData)
             const book = await createBook(formData);
             console.log("book", { book });
             navigate(`/dashboard/books`);
@@ -76,6 +107,7 @@ const CreateBook = () => {
                 image={image}
                 setImage={setImage}
                 loading={loading}
+                error = {error}
             />
         </div>
     )
