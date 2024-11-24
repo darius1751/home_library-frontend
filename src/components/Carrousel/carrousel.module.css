@@ -1,26 +1,64 @@
-.carrousel {
-    display: flex;
-    /* background-color: #ff000030; */
-    min-height: 8em;
-    align-items: center;
-    justify-content: space-around;
-    counter-reset: item;
-    animation-name: carrousel;
-    animation-duration: 6s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+@-webkit-keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 9.024));
+    }
 }
 
-.item::after {
-    content: counter(item);
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-250px * 9.024));
+    }
 }
 
-.item {
-    /* display: none; */
-    counter-increment: item;
-    content: counter(item);
-}
-
-@keyframes carrousel {
+.slider {
+    /* box-shadow: 0px 0px 9px 2px gray; */
+    margin: auto;
+    overflow: hidden;
+    position: relative;
     
+}
+
+/* .slider::before,
+.slider::after {
+    background: transparent;
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+} */
+
+/* .slider::after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+}
+
+.slider::before {
+    left: 0;
+    top: 0;
+} */
+
+.slider .slideTrack {
+    -webkit-animation: scroll 40s linear infinite;
+    animation: scroll 40s linear infinite;
+    display: flex;
+    width: 100%;
+}
+
+.slideTrack:hover {
+    animation-play-state: paused;
+}
+
+.slider .slide {
+    margin-right: 2em;
+    flex-shrink: 0;
 }
