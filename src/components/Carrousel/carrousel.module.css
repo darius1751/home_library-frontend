@@ -1,0 +1,26 @@
+.carrousel {
+    display: flex;
+    /* background-color: #ff000030; */
+    min-height: 8em;
+    align-items: center;
+    justify-content: space-around;
+    counter-reset: item;
+    animation-name: carrousel;
+    animation-duration: 6s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.item::after {
+    content: counter(item);
+}
+
+.item {
+    /* display: none; */
+    counter-increment: item;
+    content: counter(item);
+}
+
+@keyframes carrousel {
+    
+}
