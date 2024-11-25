@@ -1,0 +1,38 @@
+.slides {
+    display: flex;
+    overflow-x: hidden;
+}
+
+.slide {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .slide::before,
+.slide::after {
+    content: '';
+    cursor: pointer;
+    width: 4em;
+    height: 4em;
+    background-color: red;
+    user-select: all;
+}
+
+.slide::before {
+    background: url('../../assets/icons/back.svg') no-repeat white;
+    background-position: 100%;
+}
+
+.slide::after {
+    background: url('../../assets/icons/next.svg') no-repeat white;
+} */
+
+.slider {
+    display: flex;
+    height: 9em;
+    align-items: center;
+    justify-content: space-around;
+}

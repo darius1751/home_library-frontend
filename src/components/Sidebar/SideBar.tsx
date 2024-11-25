@@ -12,8 +12,6 @@ type Props = {
 export const SideBar = ({ sidebarItems }: Props) => {
     const [sidebarState, setSideBarState] = useState(false);
     const { user } = useContext(UserContext);
-    const { avatar, name, email, username} = user;
-    console.log({ user });
 
     return (
         <div className={styles.sideBar}>
