@@ -17,7 +17,7 @@ const errorManagement = (error: any) => {
 export const createBook = async (formData: FormData) => {
     try {
     const response = await api.post<BookDto>('/books', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
-    return response.data;
+    return response;
     } catch (error) {
     throw errorManagement(error)
     }  

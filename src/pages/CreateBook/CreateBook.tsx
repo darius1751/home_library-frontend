@@ -5,6 +5,7 @@ import { createBook } from '../../services/book';
 import BookForm from '../../components/BookForm/BookForm';
 import { useNavigate } from 'react-router-dom';
 import responseGenerate from '../../config/openAI';
+import { Modal } from '../../components/Modal/Modal';
 
 const CreateBook = () => {
     const { user } = useContext(UserContext);
@@ -76,10 +77,13 @@ const validate = (formData: FormData) => {
             });
             
             await validate(formData)
-            const book = await createBook(formData);
-            if(book !== null) {
+            const response = await createBook(formData);
+            if(response.status === 200) {
                 await setError("The book was created successfully");
-                navigate(`/dashboard/books`);
+                setTimeout(() => {
+                    navigate(`/dashboard/books`);
+                },2000)
+                
             }
 
         }
@@ -94,6 +98,11 @@ const validate = (formData: FormData) => {
     }
     return (
         <div className={`dashboard`}>
+              {
+                error && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
             <BookForm
                 onSubmit={handleSubmit}
                 onChange={handleChange}
@@ -105,8 +114,7 @@ const validate = (formData: FormData) => {
                 image={image}
                 setImage={setImage}
                 loading={loading}
-                error = {error}
-                setError = {setError}
+
             />
         </div>
     )
