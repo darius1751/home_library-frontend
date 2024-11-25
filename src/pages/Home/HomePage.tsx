@@ -14,12 +14,12 @@ export const HomePage = () => {
                         <div>Slide 3</div>
                         <div>Slide 4</div>
                     </Slider>
-                    <Carrousel>
+                    {/* <Carrousel>
                         <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 1' />
                         <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 2' />
                         <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 3' />
                         <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 4' />
-                    </Carrousel>
+                    </Carrousel> */}
                 </div>
             </div>
         </>
