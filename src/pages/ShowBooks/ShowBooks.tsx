@@ -31,7 +31,7 @@ const ShowBooks = () => {
             if (error instanceof Error) {
                 setError(error.message);
             } else {
-                setError('Unknown error');
+                setError(error as string);
             }
             console.log(error)
         }

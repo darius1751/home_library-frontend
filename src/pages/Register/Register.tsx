@@ -8,6 +8,7 @@ import { Footer } from "../../components/Footer/Footer";
 import { navItems } from "../../Layouts/PublicLayout";
 import { FieldImageAvatar } from "../../components/FieldImageAvatar/FieldImageAvatar";
 import styles from './register.module.css';
+import { Modal } from "../../components/Modal/Modal";
 const initialRegister: CreateUserForm = {
     name: '',
     email: '',
@@ -22,21 +23,64 @@ export const Register = () => {
     const [avatar, setAvatar] = useState<string>('');
     const { name, email, user, birthday, password, confirmPassword } = form;
     const navigate = useNavigate();
+    const [error, setError] = useState('');
+
+    const validate = (userData: CreateUserForm, avatar: string) => {
+        let currentError = ''
+        if (userData.password !== userData.confirmPassword) {
+            currentError += 'Passwords do not match. '
+        }
+        if (!avatar) {
+            currentError += 'Avatar is required. '    
+        } 
+        if (!userData.name) {
+            currentError += 'Name is required. '
+        }
+        if (!userData.email) {
+            currentError += 'Email is required. '
+        }
+        if (!userData.user) {
+            currentError += 'Username is required. '
+        }
+        if (!userData.birthday) {
+            currentError += 'Birthday is required. '
+        }
+        setError(currentError)
+        if(currentError) {
+            throw currentError
+        }
+
+    }
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
+      try{
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { confirmPassword, password, user, ...userData } = form;
-        const { status } = await register({ ...userData,  avatar: avatar || defaultAvatar, credential: { user, email, password } })
-
+        validate(form, avatar)
+        const { status } = await register({ ...userData,  avatar: avatar || defaultAvatar, credential: { user, password } })
         if (status === 200) {
-            alert(`El usuario se a creado correctamente`);
+            setError("The user was created successfully");
             navigate('/login');
+
+     } }  catch (e: unknown) {
+        if (e instanceof Error) {
+            setError(e.message + ". Please complete all the fields.");
+        } else {
+            setError(e as string);
         }
+        console.log({ e });
+    };
     }
+
     return (
         <>
 
             <div className={`page`}>
+            {
+                error  && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
                 <form onSubmit={handleSubmit} className={`form`}>
                     <FieldImageAvatar
                         label="Avatar"

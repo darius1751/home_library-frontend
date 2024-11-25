@@ -4,14 +4,14 @@ import BookDto from "../interfaces/book-dto";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const errorManagement = (error: any) => {
     if(error.request?.status === 403) {
-        return "Token invalido. No tienes permiso."
+        return "Invalid token. You don't have permission."
     }
 
     if(error.request?.status === 404 || error.request?.status === 401) {
         console.log(import.meta.env.VITE_API_BASE_URL)
-        return "No encontrado."
+        return "Not found."
     }
-    return error.response?.data?.message || "Algo salió mal"
+    return error.response?.data?.message || "Something went wrong"
 }
 
 export const createBook = async (formData: FormData) => {

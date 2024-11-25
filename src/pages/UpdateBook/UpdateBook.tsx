@@ -71,6 +71,9 @@ const UpdateBook = () => {
             currentError += 'Summary is required. '
         }
         setError(currentError)
+        if(currentError) {
+            throw currentError
+        }
     }
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
@@ -108,7 +111,7 @@ const UpdateBook = () => {
             if (e instanceof Error) {
                 setError(e.message + ". Please complete all the fields.");
             } else {
-                setError('An unknown error occurred');
+                setError(e as string);
             }
             console.log({ e });
         };

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { sendBookEmail } from "../../services/email";
 import React from 'react';
+import { Modal } from "../Modal/Modal";
 
 interface EmailFormProps {
     toggle: () => void;
@@ -13,20 +15,62 @@ interface EmailFormProps {
     const [name, setName] = useState('');
     const [friend, setFriend] = useState('');
     const [lastname, setLastname] = useState('');
+    const [error, setError] = useState('');
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handleSubmit = (e: any) => {
-      e.preventDefault();
-      try {
-        sendBookEmail(sender, receiver, name, friend, lastname, id)
-        toggle()
-      } catch (error) {
-        console.log(error)
+    const validate = () => {
+      let currentError = ''
+      if(!sender) {
+        currentError += 'The sender is required. '
       }
+      if(!receiver) {
+        currentError += 'The receiver is required. '
+      }
+      if(!name) {
+        currentError += 'The name is required. '
+      }
+      if(!friend) {
+        currentError += 'The friend is required. '
+      }
+      if(!lastname) {
+        currentError += 'The lastname is required. '
+      }
+      setError(currentError)
+    }
+
+  
+    
+    const handleSubmit = async (e: any) => {
+      e.preventDefault();
+      validate()
+      try {
+        const response = await sendBookEmail(sender, receiver, name, friend, lastname, id)
+        console.log(response)
+        if (response.status === 200) {
+          setError('Email sent successfully')
+          toggle() 
+        }
+        
+      } catch (e: unknown) {
+        if (e instanceof Error) {
+            setError(e.message + ". Please complete all the fields.");
+        }
+        
+        else {
+            setError(e as string);
+        }
+
+        console.log({ e });
+    };
     }
   
     return (
       <form onSubmit={handleSubmit}>
+         {
+                error  && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
         <input
           type="email"
           placeholder="From: email"

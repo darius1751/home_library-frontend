@@ -63,6 +63,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     placeholder='Title'
                     handleChange={onChange}
                     value={book.title}
+                    required={true}
                 />
                 <Field
                     name='author'
@@ -71,6 +72,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     placeholder='Author'
                     handleChange={onChange}
                     value={book.author}
+                    required={true}
                 />
 
                 <FieldImage
@@ -79,6 +81,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     label='Cover'
                     accept='image/*'
                     initialImage={book.image}
+                    
                 />
                 <FieldMultiOption
                     label='Genre'
@@ -88,6 +91,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     setSelections={setGenres}
                     maxSelection={8}
                     minSelection={1}
+                   
                 />
                 <FieldSelect
                     handleChange={onChange}
@@ -95,6 +99,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     name='location'
                     value={book.location}
                     options={locationOptions}
+                    required={true}
                 />
                 <FieldSelect
                     handleChange={onChange}
@@ -102,6 +107,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     name='state'
                     value={book.state}
                     options={stateOptions}
+                    required={true}
                 />
                 <FieldTextArea
                     label='Summary'
@@ -109,6 +115,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     maxLength={1000}
                     value={book.summary}
                     handleChange={onChange}
+                    required={true}
                 />
                 {loading && <Loading />}
                 <button className={styles.button} onClick={(e) => { e.preventDefault(); searchSummary(book.title, book.author) }}>Search</button>

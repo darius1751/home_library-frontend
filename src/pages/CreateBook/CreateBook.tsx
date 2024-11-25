@@ -50,6 +50,9 @@ const validate = (formData: FormData) => {
         currentError += 'Summary is required. '
     }
     setError(currentError)
+    if(currentError) {
+        throw currentError
+    }
 }
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
@@ -74,15 +77,17 @@ const validate = (formData: FormData) => {
             
             await validate(formData)
             const book = await createBook(formData);
-            console.log("book", { book });
-            navigate(`/dashboard/books`);
+            if(book !== null) {
+                await setError("The book was created successfully");
+                navigate(`/dashboard/books`);
+            }
 
         }
         catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message + ". Please complete all the fields.");
             } else {
-                setError('An unknown error occurred');
+                setError(e as string);
             }
             console.log({ e });
         }; // Add a semicolon here

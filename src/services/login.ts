@@ -1,10 +1,27 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Credential } from "../interfaces/credential";
 import { api } from "../config/api";
 import { User } from "../interfaces/user";
 
+const errorManagement = (error: any) => {
+    if(error.request?.status === 403) {
+        return "Invalid token. You don't have permission."
+    }
+
+    if(error.request?.status === 404 || error.request?.status === 401) {
+        console.log(import.meta.env.VITE_API_BASE_URL)
+        return "Not found."
+    }
+    return error.response?.data?.message || "Something went wrong"
+}
+
 export const login = async (credential: Credential) => {
+    try{
     const { data, status } = await api.post<{ user: User, token: string }>('/auth/login', credential);
     return { data, status }
+    } catch (error) {
+        throw errorManagement(error)
+    }
 }
 
 export const updateOne = async (id: string, credential: Credential, token: string) => {
@@ -13,7 +30,7 @@ export const updateOne = async (id: string, credential: Credential, token: strin
         console.log("serviceCredential", response)
         return response.data;
     } catch (error) {
-        console.log(error);
+        throw errorManagement(error)
     }
 }
 
@@ -22,6 +39,6 @@ export const getOneById = async (id: string) => {
         const response = await api.get(`/auth/${id}`);
         return response.data;
     } catch (error) {
-        console.log(error);
+        throw errorManagement(error)
     }
 }

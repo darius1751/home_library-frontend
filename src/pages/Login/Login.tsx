@@ -9,6 +9,7 @@ import { Footer } from '../../components/Footer/Footer';
 import { navItems } from '../../Layouts/PublicLayout';
 import styles from './login.module.css';
 import { findUserByEmail } from '../../services/register';
+import { Modal } from '../../components/Modal/Modal';
 // import { FieldMultiOption } from '../../components/FieldMultiOption/FieldMultiOption';
 const initialCredential: Credential = {
     user: '',
@@ -21,27 +22,56 @@ export const Login = () => {
     const {setUser } = useContext(UserContext);
     const [input, setInput] = useState('');
     const navigate = useNavigate();
+    const [error, setError] = useState('');
+
+    const validate = () => {
+        let currentError = '';
+        if (!form.user) {
+            currentError += 'The user is required. ';
+        }
+        if (!form.password) {
+            currentError += 'The password is required. ';
+        }
+        setError(currentError);
+        if(currentError) {
+            throw currentError
+        }
+    }
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(input.includes('@')){
-            const currentUser = await findUserByEmail(input);
-            const credential = await getOneById(currentUser.data.credential_id || '');
-            form.user = credential.user;
-        } else {
-            form.user = input;
-        }
-        console.log(input)
-        const { status, data } = await login(form);
-        console.log({ data });
-        if (status === 200) {
-            setUser(data.user);
-            localStorage.setItem('token', data.token);
-            navigate('/dashboard');
-        }
+        try{
+            if(input.includes('@')){
+                const currentUser = await findUserByEmail(input);
+                const credential = await getOneById(currentUser.data.credential_id || '');
+                form.user = credential.user;
+            } else {
+                form.user = input;
+            }
+            validate()
+            const { status, data } = await login(form);
+            if (status === 200) {
+                setUser(data.user);
+                localStorage.setItem('token', data.token);
+                navigate('/dashboard');
+            }
+        }catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            }
+            else {
+                setError(e as string);
+            }
+            console.log({ e });
+        };
     }
     return (
         <div className={`page`}>
+             {
+                error  && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
             <form onSubmit={handleSubmit} className={`form ${styles.login}`}>
                 <Field
                     name='user or email'
@@ -52,6 +82,7 @@ export const Login = () => {
                         setInput(e.target.value);
                     }}
                     value={input}
+                    required={true}
                 />
                 <Field
                     name='password'
@@ -60,6 +91,7 @@ export const Login = () => {
                     handleChange={handleChange}
                     value={password}
                     placeholder='*********'
+                    required={true}
                 />
                 <div className={`btnOptions`}>
                     <input value={'Sign In'} type='submit' className={`btn btn-primary`} />
