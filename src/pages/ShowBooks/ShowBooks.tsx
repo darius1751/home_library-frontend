@@ -7,6 +7,7 @@ import EmailForm from "../../components/EmailForm/EmailForm";
 import { UserContext } from "../../context/contexts";
 import { CardBook } from "../../components/CardBook/CardBook";
 import { useParams } from "react-router-dom";
+import { Modal } from "../../components/Modal/Modal";
 const ShowBooks = () => {
     const { user } = useContext(UserContext);
     const params = useParams();
@@ -20,12 +21,18 @@ const ShowBooks = () => {
     const [author, setAuthor] = useState('');
     const [sort, setSort] = useState('')
     const [seen, setSeen] = useState(false);
+    const [error, setError] = useState('');
     const updateBooks = async () => {
         try {
             const response = await getAllBooksByUserId(id || '');
             setBooks(response.data);
             setFilteredBooks(response.data);
         } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError('Unknown error');
+            }
             console.log(error)
         }
     }
@@ -116,6 +123,11 @@ const ShowBooks = () => {
 
     return (
         <div className={`page`}>
+             {
+                error  && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
             <div className={`container`}>
                 <div className={`${styles.showBooks}`}>
 

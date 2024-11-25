@@ -33,34 +33,23 @@ const CreateBook = () => {
         setLoading(false)
     }
 const validate = (formData: FormData) => {
+    let currentError = ''
     if(!formData.get('title')) {
-        setError('Title is required')
-        return
+        currentError += 'Title is required. '
     }
     if(!formData.get('author')) {
-        setError('Author is required')
-        return
+        currentError += 'Author is required. '
     }
     if(!formData.get('location')) {
-        setError('Location is required')
-        return
+        currentError += 'Location is required. '
     }
     if(!formData.get('state')) {
-        setError('State is required')
-        return
+        currentError += 'State is required. '
     }
     if(!formData.get('summary')) {
-        setError('Summary is required')
-        return
+        currentError += 'Summary is required. '
     }
-    if(!formData.get('cover')) {
-        setError('Cover is required')
-        return
-    }
-    if(!formData.get('genres')) {
-        setError('Genres is required')
-        return
-    }
+    setError(currentError)
 }
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
@@ -83,16 +72,20 @@ const validate = (formData: FormData) => {
                 formData.append(`genres[${index}]`, genre);
             });
             
-            validate(formData)
+            await validate(formData)
             const book = await createBook(formData);
             console.log("book", { book });
             navigate(`/dashboard/books`);
 
         }
-        catch (error) {
-            console.log({ error })
-            // setError(JSON.stringify(error))
-        }
+        catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            } else {
+                setError('An unknown error occurred');
+            }
+            console.log({ e });
+        }; // Add a semicolon here
     }
     return (
         <div className={`dashboard`}>
@@ -108,6 +101,7 @@ const validate = (formData: FormData) => {
                 setImage={setImage}
                 loading={loading}
                 error = {error}
+                setError = {setError}
             />
         </div>
     )

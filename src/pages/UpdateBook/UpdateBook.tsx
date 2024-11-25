@@ -53,6 +53,26 @@ const UpdateBook = () => {
         setBook({ ...book, summary: summary || '' });
     }
 
+    const validate = (formData: FormData) => {
+        let currentError = ''
+        if(!formData.get('title')) {
+            currentError += 'Title is required. '
+        }
+        if(!formData.get('author')) {
+            currentError += 'Author is required. '
+        }
+        if(!formData.get('location')) {
+            currentError += 'Location is required. '
+        }
+        if(!formData.get('state')) {
+            currentError += 'State is required. '
+        }
+        if(!formData.get('summary')) {
+            currentError += 'Summary is required. '
+        }
+        setError(currentError)
+    }
+
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault()
 
@@ -76,17 +96,22 @@ const UpdateBook = () => {
             genres.forEach((genre, index) => {
                 formData.append(`genres[${index}]`, genre);
             });
-            console.log("BOOK", book) //con info
-            const response = await updateBook(id || '', formData)
-            console.log({ response });
+            validate(formData)
+
+            await updateBook(id || '', formData)
+            
 
             navigate(`/dashboard/books/${user._id}`);
 
         }
-        catch (error) {
-            console.log(error)
-            setError(JSON.stringify(error))
-        }
+        catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            } else {
+                setError('An unknown error occurred');
+            }
+            console.log({ e });
+        };
     }
 
     return (
@@ -103,6 +128,8 @@ const UpdateBook = () => {
                 image={image}
                 setImage={setImage}
                 loading={loading}
+                error={error}
+                setError={setError}
             />
             {error && <p>{error}</p>}
         </div>
