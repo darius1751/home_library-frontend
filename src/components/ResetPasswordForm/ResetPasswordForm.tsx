@@ -21,7 +21,6 @@ const ResetPasswordForm = () => {
 
     useEffect(() => {
         const getCredential = async () => {
-            console.log("token", token.toString())
             try {
                 const idValue = id || '';
                 if(idValue !== '') {
@@ -29,7 +28,6 @@ const ResetPasswordForm = () => {
                     await setUser(currentUser.data);
                     const response = await getOneById(currentUser.data.credential_id || '')
                     await setCredential(response);
-                    console.log(credential)
                 
                 }
                 
@@ -42,7 +40,7 @@ const ResetPasswordForm = () => {
        
     
     useEffect(() => {
-        console.log("searching credential", credential);
+        console.log("searching credential");
       }, [credential]);
 
     const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
@@ -56,9 +54,14 @@ const ResetPasswordForm = () => {
             await updateOne(user.credential_id || '', credential as Credential, token.toString());
            navigate('/login');
 
-        } catch (error) {
-            console.log(error);
-        }
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            } else {
+                setError(e as string);
+            }
+            console.log({ e });
+        }; 
     }
 
     return (

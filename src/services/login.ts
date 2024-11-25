@@ -8,11 +8,14 @@ const errorManagement = (error: any) => {
         return "Invalid token. You don't have permission."
     }
 
-    if(error.request?.status === 404 || error.request?.status === 401) {
-        console.log(import.meta.env.VITE_API_BASE_URL)
+    if(error.request?.status === 404)  {
         return "Not found."
     }
-    return error.response?.data?.message || "Something went wrong"
+
+    if(error.request?.status === 401) {
+        return "Unauthorized"
+    }
+    return error.response?.data?.message || "Something went wrong."
 }
 
 export const login = async (credential: Credential) => {
