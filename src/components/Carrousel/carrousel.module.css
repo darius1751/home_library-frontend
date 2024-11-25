@@ -23,7 +23,7 @@
     margin: auto;
     overflow: hidden;
     position: relative;
-    
+
 }
 
 /* .slider::before,
@@ -61,4 +61,50 @@
 .slider .slide {
     margin-right: 2em;
     flex-shrink: 0;
+}
+
+.carousel {
+    height: 8em;
+    overflow: hidden;
+}
+
+.items {
+    display: flex;
+    flex-direction: column;
+    height: 8em;
+    animation: scroll-carousel 10s linear 0s infinite;
+}
+
+.item {
+    flex-shrink: 0;
+    margin: 1em;
+    /* opacity: 0%; */
+    /* animation-name: item;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; */
+}
+
+.items:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-carousel {
+    0% {
+        transform: translateY(0);
+    }
+    
+    100% {
+        transform: translateY(calc(-9 * 4.3 * 16px));
+    }
+}
+
+@keyframes item {
+    0% {
+        opacity: 10%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
 }

@@ -4,12 +4,12 @@ type Props = {
 }
 export const Carrousel = ({ children }: Props) => {
     return (
-        <div className={styles.slider}>
+        <div className={styles.carousel}>
 
-            <div className={styles.slideTrack}>
+            <div className={styles.items}>
                 {
                     children.map(
-                        (child, index) => <div className={`${styles.slide}`} key={`carrousel-item-${index}`}>{child}</div>
+                        (child, index) => <div className={`${styles.item}`} key={`carrousel-item-${index}`}>{child}</div>
                     )
                 }
             </div>
