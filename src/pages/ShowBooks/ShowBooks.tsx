@@ -195,7 +195,7 @@ const ShowBooks = () => {
                             <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
                         </select>
                         <button onClick={togglePop}>Send List to Friend</button>
-                        {seen ? <EmailForm toggle={togglePop} id={id || ''} /> : null}
+                        {seen ? <EmailForm toggle={togglePop} id={id || ''}  setError={setError} /> : null}
                     </div>
                 {
                     filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :

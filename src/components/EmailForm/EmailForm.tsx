@@ -2,20 +2,21 @@
 import { useState } from "react";
 import { sendBookEmail } from "../../services/email";
 import React from 'react';
-import { Modal } from "../Modal/Modal";
+
 
 interface EmailFormProps {
     toggle: () => void;
     id: string;
+    setError: (error: string) => void;
   }
 
-  const EmailForm: React.FC<EmailFormProps> = ({ toggle, id }) => {
+  const EmailForm: React.FC<EmailFormProps> = ({ toggle, id, setError }) => {
     const [sender, setSender] = useState('');
     const [receiver, setReceiver] = useState('');
     const [name, setName] = useState('');
     const [friend, setFriend] = useState('');
     const [lastname, setLastname] = useState('');
-    const [error, setError] = useState('');
+  
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const validate = () => {
@@ -66,11 +67,6 @@ interface EmailFormProps {
   
     return (
       <form onSubmit={handleSubmit}>
-         {
-                error  && <Modal handleClose={() => setError('')} size='sm'>
-                    <p>{error}</p>
-                </Modal>
-            }
         <input
           type="email"
           placeholder="From: email"

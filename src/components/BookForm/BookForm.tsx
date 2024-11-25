@@ -9,7 +9,6 @@ import { locationOptions } from '../../constants/locationOptions';
 import { stateOptions } from '../../constants/stateOptions';
 import { FieldTextArea } from '../FieldTextArea/FieldTextArea';
 import { Loading } from '../Loading/Loading';
-import { Modal } from '../Modal/Modal';
 
 
 interface BookFormProps {
@@ -22,9 +21,7 @@ interface BookFormProps {
     setImage: React.Dispatch<File | undefined>
     genres: string[];
     setGenres: React.Dispatch<string[]>;
-    loading: boolean,
-    error: string,
-    setError: React.Dispatch<string>    
+    loading: boolean,    
 }
 
 const BookForm: React.FC<BookFormProps> = ({
@@ -38,18 +35,11 @@ const BookForm: React.FC<BookFormProps> = ({
     image,
     setImage,
     loading,
-    error,
-    setError
 }) => {
     
     
     return (
         <div className={`container`}>
-             {
-                error  && <Modal handleClose={() => setError('')} size='sm'>
-                    <p>{error}</p>
-                </Modal>
-            }
             <form className={`form ${styles.form}`} onKeyDown={(e) => {
                 if (e.key === "Enter") {
                     e.preventDefault();
