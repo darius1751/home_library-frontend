@@ -9,6 +9,7 @@ import { locationOptions } from '../../constants/locationOptions';
 import { stateOptions } from '../../constants/stateOptions';
 import { FieldTextArea } from '../FieldTextArea/FieldTextArea';
 import { Loading } from '../Loading/Loading';
+import { Modal } from '../Modal/Modal';
 
 
 interface BookFormProps {
@@ -21,7 +22,9 @@ interface BookFormProps {
     setImage: React.Dispatch<File | undefined>
     genres: string[];
     setGenres: React.Dispatch<string[]>;
-    loading: boolean
+    loading: boolean,
+    error: string,
+    setError: React.Dispatch<string>    
 }
 
 const BookForm: React.FC<BookFormProps> = ({
@@ -34,10 +37,19 @@ const BookForm: React.FC<BookFormProps> = ({
     setGenres,
     image,
     setImage,
-    loading
+    loading,
+    error,
+    setError
 }) => {
+    
+    
     return (
         <div className={`container`}>
+             {
+                error  && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
             <form className={`form ${styles.form}`} onKeyDown={(e) => {
                 if (e.key === "Enter") {
                     e.preventDefault();
@@ -51,6 +63,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     placeholder='Title'
                     handleChange={onChange}
                     value={book.title}
+                    required={true}
                 />
                 <Field
                     name='author'
@@ -59,6 +72,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     placeholder='Author'
                     handleChange={onChange}
                     value={book.author}
+                    required={true}
                 />
 
                 <FieldImage
@@ -67,6 +81,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     label='Cover'
                     accept='image/*'
                     initialImage={book.image}
+                    
                 />
                 <FieldMultiOption
                     label='Genre'
@@ -76,6 +91,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     setSelections={setGenres}
                     maxSelection={8}
                     minSelection={1}
+                   
                 />
                 <FieldSelect
                     handleChange={onChange}
@@ -83,6 +99,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     name='location'
                     value={book.location}
                     options={locationOptions}
+                    required={true}
                 />
                 <FieldSelect
                     handleChange={onChange}
@@ -90,6 +107,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     name='state'
                     value={book.state}
                     options={stateOptions}
+                    required={true}
                 />
                 <FieldTextArea
                     label='Summary'
@@ -97,6 +115,7 @@ const BookForm: React.FC<BookFormProps> = ({
                     maxLength={1000}
                     value={book.summary}
                     handleChange={onChange}
+                    required={true}
                 />
                 {loading && <Loading />}
                 <button className={styles.button} onClick={(e) => { e.preventDefault(); searchSummary(book.title, book.author) }}>Search</button>

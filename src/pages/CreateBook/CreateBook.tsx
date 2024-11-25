@@ -23,7 +23,7 @@ const CreateBook = () => {
     const [image, setImage] = useState<File | undefined>();
     const [genres, setGenres] = useState<string[]>([]);
     const [loading, setLoading] = useState(false);
-    // const [error, setError] = useState('')
+    const[error, setError] = useState('')   // const [error, setError] = useState('')
     const isEdit = false
 
     const searchSummary = async () => {
@@ -32,7 +32,28 @@ const CreateBook = () => {
         setForm({ ...form, summary: summary || '' });
         setLoading(false)
     }
-
+const validate = (formData: FormData) => {
+    let currentError = ''
+    if(!formData.get('title')) {
+        currentError += 'Title is required. '
+    }
+    if(!formData.get('author')) {
+        currentError += 'Author is required. '
+    }
+    if(!formData.get('location')) {
+        currentError += 'Location is required. '
+    }
+    if(!formData.get('state')) {
+        currentError += 'State is required. '
+    }
+    if(!formData.get('summary')) {
+        currentError += 'Summary is required. '
+    }
+    setError(currentError)
+    if(currentError) {
+        throw currentError
+    }
+}
 
     const handleSubmit = async (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -53,15 +74,23 @@ const CreateBook = () => {
             genres.forEach((genre, index) => {
                 formData.append(`genres[${index}]`, genre);
             });
+            
+            await validate(formData)
             const book = await createBook(formData);
-            console.log("book", { book });
-            navigate(`/dashboard/books`);
+            if(book !== null) {
+                await setError("The book was created successfully");
+                navigate(`/dashboard/books`);
+            }
 
         }
-        catch (error) {
-            console.log({ error })
-            // setError(JSON.stringify(error))
-        }
+        catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            } else {
+                setError(e as string);
+            }
+            console.log({ e });
+        }; // Add a semicolon here
     }
     return (
         <div className={`dashboard`}>
@@ -76,6 +105,8 @@ const CreateBook = () => {
                 image={image}
                 setImage={setImage}
                 loading={loading}
+                error = {error}
+                setError = {setError}
             />
         </div>
     )
