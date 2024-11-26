@@ -31,3 +31,12 @@ export const sendPasswordEmail = async (email: string) => {
         throw errorManagement(error)
     }
 }
+
+export const sendWelcomeEmail = async (email:string) => {
+    try {
+        const response = await(api.post('/email/welcome', { email }))
+        return response.data
+    } catch (error) {
+        throw errorManagement(error)
+    }
+ }

@@ -9,6 +9,7 @@ import { navItems } from "../../Layouts/PublicLayout";
 import { FieldImageAvatar } from "../../components/FieldImageAvatar/FieldImageAvatar";
 import styles from './register.module.css';
 import { Modal } from "../../components/Modal/Modal";
+import { sendWelcomeEmail } from "../../services/email";
 const initialRegister: CreateUserForm = {
     name: '',
     email: '',
@@ -59,6 +60,7 @@ export const Register = () => {
         validate(form, avatar)
         const { status } = await register({ ...userData,  avatar: avatar || defaultAvatar, credential: { user, password } })
         if (status === 200) {
+            sendWelcomeEmail(form.email)
             setError("The user was created successfully");
             navigate('/login');
 
