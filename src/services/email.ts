@@ -10,6 +10,7 @@ const errorManagement = (error: any) => {
         console.log(import.meta.env.VITE_API_BASE_URL)
         return "Not found."
     }
+    console.log(error)
     return error.response?.data?.message || "Something went wrong"
 }
 

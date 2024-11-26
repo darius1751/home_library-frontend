@@ -14,15 +14,18 @@ export const ResetPassword = () => {
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(!email) {
             setError('Email is required');
             throw new Error('Email is required');
         }
         try {
-            sendPasswordEmail(email);
-            navigate('/email-sent');
+            const response = await sendPasswordEmail(email);
+            if(response.status === 200) {
+                navigate('/email-sent');
+            }
+            
         } catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message + ". Please complete all the fields.");
