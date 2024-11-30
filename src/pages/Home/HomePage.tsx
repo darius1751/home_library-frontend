@@ -1,5 +1,5 @@
 import { Carrousel } from '../../components/Carrousel/Carrousel';
-import { Slider } from '../../components/Slider/Slider';
+import { Footer } from '../../components/Footer/Footer';
 import { Cite } from './components/Cite/Cite';
 import styles from './home.module.css';
 
@@ -8,19 +8,14 @@ export const HomePage = () => {
         <>
             <div className={`page ${styles.page}`}>
                 <div className={`container`}>
-                    <Slider>
-                        <div>Slide 1</div>
-                        <div>Slide 2</div>
-                        <div>Slide 3</div>
-                        <div>Slide 4</div>
-                    </Slider>
-                    {/* <Carrousel>
-                        <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 1' />
-                        <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 2' />
-                        <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 3' />
-                        <Cite creator='darius1751' text='La programacion es mas bonita cuando piensas tu mismo el codigo 4' />
-                    </Carrousel> */}
+                    <Carrousel>
+                        <Cite creator='C.S. Lewis' text='We read to know we are not alone.' />
+                        <Cite creator='Cicero' text='A room without books is like a body without a soul.' />
+                        <Cite creator='Jhumpa Lahiri' text='That’s the thing about books. They let you travel without moving your feet.' />
+                        <Cite creator='Philip Pullman' text='We don’t need a list of rights and wrongs, tables of dos and don’ts: We need books, time, and silence. Thou shalt not is soon forgotten, but Once upon a time lasts forever.' />
+                    </Carrousel>
                 </div>
+                <Footer />
             </div>
         </>
     )
