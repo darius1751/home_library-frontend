@@ -1,0 +1,12 @@
+.page {
+
+}
+
+
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+    align-items: center;
+    justify-content: space-around;
+}

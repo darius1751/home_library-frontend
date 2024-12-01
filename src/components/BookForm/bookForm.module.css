@@ -1,0 +1,12 @@
+.title {
+    width: 100%;
+    text-align: center;
+}
+
+.form {
+    align-items: baseline;
+}
+
+.btn {
+    margin-top: 1em;
+}

@@ -1,0 +1,46 @@
+.slides {
+    display: flex;
+}
+
+.slideView {
+    overflow: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.slide {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.back,
+.next {
+    position: relative;
+    cursor: pointer;
+    width: 4em;
+    height: 4em;
+}
+
+.back {
+    background: url('../../assets/icons/back.svg') no-repeat gray;
+    background-size: 100%;
+}
+
+.next {
+    background: url('../../assets/icons/next.svg') no-repeat gray;
+    background-size: 100%;
+}
+
+.next:active+.slides {
+    transform: translateX(10em);
+}
+
+.slider {
+    display: flex;
+    height: 9em;
+    align-items: center;
+    justify-content: space-around;
+}

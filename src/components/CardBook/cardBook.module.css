@@ -1,0 +1,115 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 18em;
+    min-height: 15em;
+    box-shadow: 0em 0em 0.5em 0.1em gray;
+    border-radius: 1em;
+    margin: 1em;
+    padding-bottom: 0.5em;
+}
+
+.imageContainer {
+    border-bottom: 1px solid gray;
+    text-align: center;
+    height: 27em;
+    padding-bottom: 0.2em;
+}
+
+.image {
+    width: 18em;
+    border-radius: 7px 7px 0 0;
+    max-height: 100%;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text {
+    margin: 0.5rem 0;
+    height: 3em;
+    max-width: 100%;
+}
+
+
+.title {
+    display: inline-block;
+    font-size: 1.5em;
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-align: center;
+    height: 3em;
+    overflow: auto;
+    scrollbar-width: none;
+    white-space-collapse: collapse;
+    text-overflow: ellipsis;
+}
+
+.author {
+    display: inline-block;
+    font-size: 1.2em;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+    font-weight: bold;
+    width: 95%;
+    text-align: center;
+    height: 2em;
+    overflow: auto;
+    scrollbar-width: none;
+}
+
+.genres {
+    display: flex;
+    width: 90%;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    height: 5.5em;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.genre {
+    background-color: gray;
+    padding: 0.5em;
+    border-radius: 7px;
+    margin: 0.3em;
+    color: white;
+    height: min-content;
+}
+
+.info {
+    display: flex;
+}
+
+.icon {
+    width: 4em;
+}
+
+.additionalDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.additionalDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titleAdditionalDetail {
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.valueAdditionalDetail {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.card .btnOptions {
+    justify-content: space-between;
+}

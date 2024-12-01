@@ -2,4 +2,15 @@
   font-size: 16px;
   font-family: sans-serif;
   color-scheme: light dark;
+  --background-dark:#111826;
+  background-color: light-dark(white, var(--background-dark));
+  --primary-color: #BBEFE6;
+  --secondary-color: #F2877A;
+  --danger: #e64646;
+  --label-text-color: #10ACA3;
+}
+
+hr {
+  width: 90%;
+  border: 1px solid gray;
 }
