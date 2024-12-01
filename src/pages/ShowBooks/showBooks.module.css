@@ -101,9 +101,9 @@
 }
 
 .sort {
-    align-items: center;
-    justify-items: center;
-    justify-content: center;
+    align-items: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
     background-color: var(--secondary-color);
     width: 100%;
 }

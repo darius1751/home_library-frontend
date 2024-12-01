@@ -11,7 +11,7 @@ interface EmailFormProps {
   }
 
   const EmailForm: React.FC<EmailFormProps> = ({ toggle, id, setError }) => {
-    const [sender, setSender] = useState('');
+  const [sender, setSender] = useState('');
     const [receiver, setReceiver] = useState('');
     const [name, setName] = useState('');
     const [friend, setFriend] = useState('');
@@ -67,13 +67,13 @@ interface EmailFormProps {
   
     return (
       <form onSubmit={handleSubmit}>
+
         <input
           type="email"
           placeholder="From: email"
           value={sender}
           onChange={(e) => setSender(e.target.value)}
-        />
-       
+       />
         <input
           type="text"
           placeholder="Your Name"

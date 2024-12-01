@@ -14,7 +14,7 @@ const errorManagement = (error: any) => {
     return error.response?.data?.message || "Something went wrong"
 }
 
-export const sendBookEmail = async (sender: string, receiver: string, name:string, friend:string, lastname:string, id: string) => {
+export const sendBookEmail = async ( sender: string, receiver: string, name:string, friend:string, lastname:string, id: string) => {
     try {
     const response = await api.post('/email', { sender, receiver, name, friend, lastname, id })
     return response

@@ -185,7 +185,6 @@ const ShowBooks = () => {
                    
                 </div>
                 <div className={styles.sort + " " + styles.row}>
-                        <label htmlFor="sort" className={styles.label}>Sort</label>
                         <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
                             <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
                             <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
@@ -194,7 +193,7 @@ const ShowBooks = () => {
                             <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
                             <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
                         </select>
-                        <button onClick={togglePop}>Send List to Friend</button>
+                        {!seen && <button onClick={togglePop}>Send List to Friend</button>}
                         {seen ? <EmailForm toggle={togglePop} id={id || ''}  setError={setError} /> : null}
                     </div>
                 {
