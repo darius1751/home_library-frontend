@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import { Navbar } from "../components/Navbar/Navbar"
 import { NavItem } from "../interfaces/nav-item"
 
+
 export const navItems: NavItem[] = [
     {
         text: 'Login',
@@ -18,6 +19,7 @@ export const PublicLayout = () => {
         <>
             <Navbar navItems={navItems} />
             <Outlet />
+            
         </>
     )
 }

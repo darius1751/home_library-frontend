@@ -10,6 +10,8 @@ import { navItems } from '../../Layouts/PublicLayout';
 import styles from './login.module.css';
 import { findUserByEmail } from '../../services/register';
 import { Modal } from '../../components/Modal/Modal';
+import { Carrousel } from '../../components/Carrousel/Carrousel';
+import { Cite } from '../Home/components/Cite/Cite';
 // import { FieldMultiOption } from '../../components/FieldMultiOption/FieldMultiOption';
 const initialCredential: Credential = {
     user: '',
@@ -99,6 +101,13 @@ export const Login = () => {
                 </div>
                 <NavLink to={'/reset-password'} >Forgot Password</NavLink>
             </form>
+            <Carrousel>
+                        <Cite creator='C.S. Lewis' text='We read to know we are not alone.' />
+                        <Cite creator='Cicero' text='A room without books is like a body without a soul.' />
+                        <Cite creator='John Steinbeck' text='I guess there are never enough books.' />
+                        <Cite creator='Jhumpa Lahiri' text='That’s the thing about books. They let you travel without moving your feet.' />
+                        <Cite creator='Philip Pullman' text='We don’t need a list of rights and wrongs, tables of dos and don’ts: We need books, time, and silence. Thou shalt not is soon forgotten, but Once upon a time lasts forever.' />
+                    </Carrousel>
             <Footer navItems={navItems} className={styles.footer} />
         </div>
     )
