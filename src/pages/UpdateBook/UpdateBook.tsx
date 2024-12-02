@@ -105,7 +105,7 @@ const UpdateBook = () => {
             await updateBook(id || '', formData)
             
 
-            navigate(`/dashboard/books/${user._id}`);
+            navigate(`/dashboard/books`);
 
         }
         catch (e: unknown) {
