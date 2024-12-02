@@ -5,6 +5,7 @@ import { UserContext } from "../../context/contexts";
 import BookForm from "../../components/BookForm/BookForm";
 import { ChangeEvent } from 'react';
 import responseGenerate from "../../config/openAI";
+import { Modal } from "../../components/Modal/Modal";
 
 
 
@@ -119,7 +120,11 @@ const UpdateBook = () => {
 
     return (
         <div className={`dashboard`}>
-            <div>UpdateBook</div>
+             {
+                error && <Modal handleClose={() => setError('')} size='sm'>
+                    <p>{error}</p>
+                </Modal>
+            }
             <BookForm
                 onSubmit={handleSubmit}
                 onChange={handleChange}
@@ -131,8 +136,6 @@ const UpdateBook = () => {
                 image={image}
                 setImage={setImage}
                 loading={loading}
-                error={error}
-                setError={setError}
             />
             {error && <p>{error}</p>}
         </div>
