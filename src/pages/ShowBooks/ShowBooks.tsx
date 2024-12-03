@@ -203,7 +203,7 @@ const ShowBooks = () => {
                                 filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                                     <div className={styles.cards}>
                                         {
-                                            filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} />)
+                                            filteredBooks.map((book, index) => <CardBook key={`cardBook-${index}`} book={book} setFilteredBooks={setFilteredBooks} books={filteredBooks} />)
                                         }
                                     </div>
                             }
