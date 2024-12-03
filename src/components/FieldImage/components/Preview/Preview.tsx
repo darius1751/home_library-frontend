@@ -18,7 +18,7 @@ export const Preview = ({ image, initialImage }: Props) => {
     }
     return (
         <div>
-            <CardBook book={book} type="preview" />
+            <CardBook book={book} type="preview" setFilteredBooks={() => { }} books={[]} />
         </div>
     )
 }
