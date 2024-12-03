@@ -7,13 +7,18 @@ import styles from './cardBook.module.css';
 
 type Props = {
     book: BookDto;
-    type?: 'preview' | 'owner' | 'other'
+    type?: 'preview' | 'owner' | 'other';
+    setFilteredBooks: (books: BookDto[]) => void;
+    books: BookDto[]
 }
-export const CardBook = ({ book, type = 'owner' }: Props) => {
+export const CardBook = ({ book, type = 'owner', setFilteredBooks, books }: Props) => {
     const { _id, author, title, genres, image, location, state } = book;
     const removeBook = async () => {
         try {
             await deleteBook(_id || '');
+            const filteredBooks = books.filter((book: BookDto) => book._id !== _id);
+                setFilteredBooks(filteredBooks);
+            
         } catch (error) {
             console.log(error);
         }
