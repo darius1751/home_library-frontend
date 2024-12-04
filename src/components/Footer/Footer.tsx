@@ -6,15 +6,19 @@ type Props = {
     navItems?: { to: string; text: string }[];
 }
 export const Footer = ({ className = "" }: Props) => {
-    const year = new Date().getFullYear()
+    const year = new Date().getFullYear();
+    const email = "homelibrary.enterprise@gmail.com";
+    const phone = "+56979298644";
     return (
         <footer className={`${styles.footer} ${className}`}>
             <Logo to='/' className={styles.logo} />
             <NavLink to="/" className={styles.title}>Home Library</NavLink>
-            <NavLink to={'tel://+56979298644'} className={styles.phone}>
-                Phone: <span className={styles.detail}>+56 9 79298644</span>
+            <NavLink to={`tel://${phone}`} className={styles.phone}>
+                Phone: <span className={styles.detail}>{phone}</span>
             </NavLink>
-            <p className={styles.email}>homelibrary.enterprise@gmail.com</p>
+            <NavLink to={`mailto:${email}?Subject=Mas Informacion sobre *HomeLibrary*`} className={styles.email}>
+                {email}
+            </NavLink>
             <small className={styles.copyright}>copyright©{year}</small>
         </footer>
     )
