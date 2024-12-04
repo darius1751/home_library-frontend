@@ -1,6 +1,4 @@
 .footer {
-    position: sticky;
-    bottom: 0;
     width: 100%;
     min-height: 9rem;
     background-color: #2E332F;
@@ -18,12 +16,16 @@
     font-size: 2rem;
     color: #616461;
 }
-.phone{
+
+.phone,
+.email {
     display: block;
     text-align: center;
     color: #616461;
     text-decoration: none;
+    margin: 0.5em 0;
 }
+
 .items {
     display: flex;
     flex-wrap: wrap;
@@ -35,9 +37,7 @@
     list-style: none;
 }
 
-.email {
-    text-align: center;
-}
+
 
 .item {
     color: inherit;

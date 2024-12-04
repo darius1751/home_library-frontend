@@ -34,8 +34,8 @@ export const Register = () => {
             currentError += 'Passwords do not match. '
         }
         if (!avatar) {
-            currentError += 'Avatar is required. '    
-        } 
+            currentError += 'Avatar is required. '
+        }
         if (!userData.name) {
             currentError += 'Name is required. '
         }
@@ -49,42 +49,43 @@ export const Register = () => {
             currentError += 'Birthday is required. '
         }
         setError(currentError)
-        if(currentError) {
+        if (currentError) {
             throw currentError
         }
 
     }
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-      try{
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { confirmPassword, password, user, ...userData } = form;
-        validate(form, avatar)
-        const { status } = await register({ ...userData,  avatar: avatar || defaultAvatar, credential: { user, password } })
-        if (status === 200) {
-            sendWelcomeEmail(form.email)
-            setError("The user was created successfully");
-            navigate('/login');
+        try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { confirmPassword, password, user, ...userData } = form;
+            validate(form, avatar)
+            const { status } = await register({ ...userData, avatar: avatar || defaultAvatar, credential: { user, password } })
+            if (status === 200) {
+                sendWelcomeEmail(form.email)
+                setError("The user was created successfully");
+                navigate('/login');
 
-     } }  catch (e: unknown) {
-        if (e instanceof Error) {
-            setError(e.message + ". Please complete all the fields.");
-        } else {
-            setError(e as string);
-        }
-        console.log({ e });
-    };
+            }
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message + ". Please complete all the fields.");
+            } else {
+                setError(e as string);
+            }
+            console.log({ e });
+        };
     }
 
     return (
         <>
 
             <div className={`page`}>
-            {
-                error  && <Modal handleClose={() => setError('')} size='sm'>
-                    <p>{error}</p>
-                </Modal>
-            }
+                {
+                    error && <Modal handleClose={() => setError('')} size='sm'>
+                        <p>{error}</p>
+                    </Modal>
+                }
                 <form onSubmit={handleSubmit} className={`form`}>
                     <FieldImageAvatar
                         label="Avatar"
@@ -159,16 +160,16 @@ export const Register = () => {
 
                 </form >
                 <Carrousel>
-                        <Cite creator='C.S. Lewis' text='We read to know we are not alone.' />
-                        <Cite creator='Cicero' text='A room without books is like a body without a soul.' />
-                        <Cite creator='John Steinbeck' text='I guess there are never enough books.' />
-                        <Cite creator='Jhumpa Lahiri' text='That’s the thing about books. They let you travel without moving your feet.' />
-                        <Cite creator='Philip Pullman' text='We don’t need a list of rights and wrongs, tables of dos and don’ts: We need books, time, and silence. Thou shalt not is soon forgotten, but Once upon a time lasts forever.' />
-                    </Carrousel>
-            <Footer navItems={navItems} className={styles.footer} />
-                
+                    <Cite creator='C.S. Lewis' text='We read to know we are not alone.' />
+                    <Cite creator='Cicero' text='A room without books is like a body without a soul.' />
+                    <Cite creator='John Steinbeck' text='I guess there are never enough books.' />
+                    <Cite creator='Jhumpa Lahiri' text='That’s the thing about books. They let you travel without moving your feet.' />
+                    <Cite creator='Philip Pullman' text='We don’t need a list of rights and wrongs, tables of dos and don’ts: We need books, time, and silence. Thou shalt not is soon forgotten, but Once upon a time lasts forever.' />
+                </Carrousel>
+                <Footer navItems={navItems} className={styles.footer} />
+
             </div >
-          
+
         </>
     )
 }
