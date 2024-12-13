@@ -3,29 +3,30 @@ import styles from './resetPassword.module.css';
 import { useForm } from '../../hooks/useForm';
 import { sendPasswordEmail } from '../../services/email';
 import { FormEvent, useState } from 'react';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Modal } from '../../components/Modal/Modal';
+import { SEO } from '../../components/SEO/SEO';
 const initialForm = {
     email: ''
 }
 export const ResetPassword = () => {
-    const {form, handleChange} = useForm(initialForm);
+    const { form, handleChange } = useForm(initialForm);
     const { email } = form;
     const navigate = useNavigate();
     const [error, setError] = useState('');
 
-    const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(!email) {
+        if (!email) {
             setError('Email is required');
             throw new Error('Email is required');
         }
         try {
             const response = await sendPasswordEmail(email);
-            if(response.status === 200) {
+            if (response.status === 200) {
                 navigate('/email-sent');
             }
-            
+
         } catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message + ". Please complete all the fields.");
@@ -37,8 +38,13 @@ export const ResetPassword = () => {
     }
     return (
         <div className="page">
-             {
-                error  && <Modal handleClose={() => setError('')} size='sm'>
+            <SEO
+                title='Home Library - Reset Password'
+                keywords='Reset password, forgot password'
+                description='Forgot password, send email for reset password'
+            />
+            {
+                error && <Modal handleClose={() => setError('')} size='sm'>
                     <p>{error}</p>
                 </Modal>
             }
@@ -53,7 +59,7 @@ export const ResetPassword = () => {
                     value={email}
                     required={true}
                 />
-                <input className={`btn btn-primary ${styles.btnReset}`} value={`Reset password`}  type='submit'/>
+                <input className={`btn btn-primary ${styles.btnReset}`} value={`Reset password`} type='submit' />
             </form>
         </div>
     )

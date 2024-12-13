@@ -7,10 +7,15 @@ import wishListIcon from '../../assets/icons/wishlistIcon.svg';
 import styles from './home.module.css';
 import { Carrousel } from '../../components/Carrousel/Carrousel';
 import { Cite } from './components/Cite/Cite';
+import { SEO } from '../../components/SEO/SEO';
 
 export const HomePage = () => {
     return (
         <>
+            <SEO
+                description='Home library, your app for keep control of your books, share with your friends, create wishlists, send email to friends about your custom books, own personal library'
+                keywords='home-library, home library, favorite books, keep control of your books, share with your friends, create wishlist books, manage my own books'
+            />
             <div className={`page ${styles.page}`}>
                 <div className={`container`}>
                     <Hero />

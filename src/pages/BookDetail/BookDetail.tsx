@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getOneBook } from "../../services/book";
 import BookDto from "../../interfaces/book-dto";
 import styles from './bookDetail.module.css'
+import { SEO } from "../../components/SEO/SEO";
 
 const BookDetail = () => {
     const { id } = useParams();
@@ -17,7 +18,7 @@ const BookDetail = () => {
         state: '',
     })
     const [error, setError] = useState('');
-    
+
     useEffect(() => {
         const getBook = async () => {
             try {
@@ -34,6 +35,13 @@ const BookDetail = () => {
     return (
 
         <div className={`page`}>
+            <SEO
+                title={`Home Library - ${book.title}`}
+                author={book.user}
+                description={`${book.summary}`}
+                image={book.image}
+                keywords={book.genres.join(',').concat(book.title).concat(',').concat(book.author).concat(',')}
+            />
             <div className={styles.top}>
                 <img src={book.image} alt={book.title} className={styles.image} />
             </div>

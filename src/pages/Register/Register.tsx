@@ -12,6 +12,7 @@ import { Modal } from "../../components/Modal/Modal";
 import { sendWelcomeEmail } from "../../services/email";
 import { Carrousel } from "../../components/Carrousel/Carrousel";
 import { Cite } from "../Home/components/Cite/Cite";
+import { SEO } from "../../components/SEO/SEO";
 const initialRegister: CreateUserForm = {
     name: '',
     email: '',
@@ -79,7 +80,11 @@ export const Register = () => {
 
     return (
         <>
-
+            <SEO
+                title="Home Library - Register"
+                description='Home Library create a new account'
+                keywords='register, create account home library, new account home library'
+            />
             <div className={`page`}>
                 {
                     error && <Modal handleClose={() => setError('')} size='sm'>

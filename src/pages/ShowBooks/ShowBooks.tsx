@@ -8,11 +8,12 @@ import { UserContext } from "../../context/contexts";
 import { CardBook } from "../../components/CardBook/CardBook";
 import { useParams } from "react-router-dom";
 import { Modal } from "../../components/Modal/Modal";
+import { SEO } from "../../components/SEO/SEO";
 const ShowBooks = () => {
     const { user } = useContext(UserContext);
     const params = useParams();
     const id = user?._id ?? params.id;
-    const [books, setBooks] = useState([]);
+    const [books, setBooks] = useState<BookDto[]>([]);
     const [filteredBooks, setFilteredBooks] = useState<BookDto[]>([])
     const [loc, setLoc] = useState('');
     const [state, setState] = useState('');
@@ -123,8 +124,21 @@ const ShowBooks = () => {
 
     return (
         <div className={`page`}>
-             {
-                error  && <Modal handleClose={() => setError('')} size='sm'>
+            <SEO
+                title={`Home Library - Books - ${user.username}`}
+                author={user.username}
+                description={`All books of ${user.username}`}
+                keywords={
+                    books
+                        .map(({ title }) => title)
+                        .join(',')
+                        .concat(
+                            books.map(({ genres }) => genres).join(',')
+                        )
+                }
+            />
+            {
+                error && <Modal handleClose={() => setError('')} size='sm'>
                     <p>{error}</p>
                 </Modal>
             }
@@ -182,20 +196,20 @@ const ShowBooks = () => {
 
                         </div>
                     </div>
-                   
+
                 </div>
                 <div className={styles.sort + " " + styles.row}>
-                        <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
-                            <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
-                            <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
-                            <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
-                            <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
-                            <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
-                            <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
-                        </select>
-                        {!seen && <button onClick={togglePop}>Send List to Friend</button>}
-                        {seen ? <EmailForm toggle={togglePop} id={id || ''}  setError={setError} /> : null}
-                    </div>
+                    <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)} value={sort} required className={styles.input}>
+                        <option value="" className={styles.option + ' ' + styles.orange}>Sort by</option>
+                        <option value="title" className={styles.option + ' ' + styles.orange}>Title</option>
+                        <option value="author" className={styles.option + ' ' + styles.orange}>Author</option>
+                        <option value="genre" className={styles.option + ' ' + styles.orange}>Genre</option>
+                        <option value="location" className={styles.option + ' ' + styles.orange}>Location</option>
+                        <option value="state" className={styles.option + ' ' + styles.orange}>State</option>
+                    </select>
+                    {!seen && <button onClick={togglePop}>Send List to Friend</button>}
+                    {seen ? <EmailForm toggle={togglePop} id={id || ''} setError={setError} /> : null}
+                </div>
                 {
                     filteredBooks.length === 0 ? <h2 className={styles.noBooks}>No books found</h2> :
                         <div className={styles.cards}>
