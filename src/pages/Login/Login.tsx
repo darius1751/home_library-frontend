@@ -12,6 +12,7 @@ import { Modal } from '../../components/Modal/Modal';
 import styles from './login.module.css';
 import { Carrousel } from '../../components/Carrousel/Carrousel';
 import { Cite } from '../Home/components/Cite/Cite';
+import { SEO } from '../../components/SEO/SEO';
 // import { FieldMultiOption } from '../../components/FieldMultiOption/FieldMultiOption';
 const initialCredential: Credential = {
     user: '',
@@ -69,6 +70,11 @@ export const Login = () => {
     }
     return (
         <div className={`page`}>
+            <SEO
+                title='Home library - Login'
+                description='Home Library sign in'
+                keywords='login, sign in, my account home library'
+            />
             {
                 error && <Modal handleClose={() => setError('')} size='sm'>
                     <p>{error}</p>
