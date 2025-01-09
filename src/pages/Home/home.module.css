@@ -1,11 +1,32 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  color: var(--label-text-color);
+  margin: 0;
+  font-size: 3em;
+  text-align: center;
+}
+.motto {
+    font-size: 1.5em;
+    color: var(--secondary-color);
+}
 .sections {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 2em;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 5em;
+  /* width: 80%; */
+  
 }
 
 .footer {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
+}
+
+.box{
+  padding-bottom: 1.5em;
+  border-bottom: 2px solid gray;
 }

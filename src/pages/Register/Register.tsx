@@ -85,7 +85,7 @@ export const Register = () => {
                 description='Home Library create a new account'
                 keywords='register, create account home library, new account home library'
             />
-            <div className={`page`}>
+            <div className={`page public-page`}>
                 {
                     error && <Modal handleClose={() => setError('')} size='sm'>
                         <p>{error}</p>

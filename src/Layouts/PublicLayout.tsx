@@ -18,8 +18,10 @@ export const PublicLayout = () => {
     return (
         <>
             <Navbar navItems={navItems} />
-            <Outlet />
-            
+            <div className="public_page">
+                <Outlet />
+            </div>
+
         </>
     )
 }
