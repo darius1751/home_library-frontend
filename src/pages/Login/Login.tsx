@@ -69,7 +69,7 @@ export const Login = () => {
         };
     }
     return (
-        <div className={`page`}>
+        <div className={`page public-page`}>
             <SEO
                 title='Home library - Login'
                 description='Home Library sign in'

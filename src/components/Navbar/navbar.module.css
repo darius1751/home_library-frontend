@@ -6,7 +6,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    background-color: var(--primary-color);
+    background-color: light-dark(white, var(--background-dark));
     height: 5em;
     z-index: 2;
 }

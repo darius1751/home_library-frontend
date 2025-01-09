@@ -10,7 +10,7 @@ type Props = {
 export const SEO = ({
     description = '',
     title = 'Home Library',
-    image = '/public/logo.svg',
+    image = 'logo.svg',
     author = 'Home Library',
     keywords = ''
 }: Props) => {
@@ -21,8 +21,8 @@ export const SEO = ({
             <meta name="keywords" content={keywords} />
             <meta property="og:title" content={title} />
             <meta property="og:type" content="website" />
-            <meta property="og:url" content={import.meta.env.BASE_URL} />
-            <meta property="og:image" content={image} />
+            <meta property="og:url" content={`${location.href}`} />
+            <meta property="og:image" content={`${location.href}${image}`} />
             <meta property="og:description" content={description} />
             <meta property="og:site_name" content={title} />
             <meta name="robots" content="googlebot" />
@@ -30,7 +30,7 @@ export const SEO = ({
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:creator" content={author} />
-            <meta name="twitter:image" content={image} />
+            <meta name="twitter:image" content={`${location.href}${image}`} />
         </Helmet>
     )
 }

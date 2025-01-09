@@ -8,8 +8,11 @@
 }
 
 .text {
+    font-family: "Great Vibes", "Playwrite VN", sans-serif;
     position: relative;
     display: inline-block;
+    font-size: 1.5em;
+    font-weight: 400;
     font-style: italic;
 }
 
