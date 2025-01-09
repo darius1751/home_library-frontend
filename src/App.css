@@ -1,77 +1,78 @@
 .page {
-    margin-top: 6em;
+  margin-top: 6em;
 }
 
-/* .dashboard {} */
-
+.public-page {
+    margin-top: 7.5em;
+}
 .container {
-    width: 80%;
-    max-width: 100%;
-    margin: 0 auto;
+  width: 80%;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    width: 50em;
-    max-width: 100%;
-    min-height: 30em;
-    margin: 2em auto;
-    align-items: center;
-    background-color: light-dark(white, #13151A);
-    box-shadow: 0em 0em 1em 0.1em gray;
-    border-radius: 1em;
-    padding: 0.5em 0;
-    justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  width: 50em;
+  max-width: 100%;
+  min-height: 30em;
+  margin: 2em auto;
+  align-items: center;
+  background-color: light-dark(white, #13151a);
+  box-shadow: 0em 0em 1em 0.1em gray;
+  border-radius: 1em;
+  padding: 0.5em 0;
+  justify-content: space-evenly;
 }
 
 .btn {
-    display: inline-block;
-    cursor: pointer;
-    min-width: 7em;
-    text-align: center;
-    max-width: 100%;
-    height: 2em;
-    border: 0;
-    border-radius: 2em;
-    text-decoration: none;
-    box-sizing: border-box;
-    color: light-dark(black, white);
+  display: inline-block;
+  cursor: pointer;
+  min-width: 7em;
+  text-align: center;
+  max-width: 100%;
+  height: 2em;
+  border: 0;
+  border-radius: 2em;
+  text-decoration: none;
+  box-sizing: border-box;
+  color: light-dark(black, white);
 }
 
 .btnOptions {
-    display: flex;
-    width: 80%;
-    margin: 0 auto;
-    justify-content: center;
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .btn-square {
-    display: inline-block;
-    cursor: pointer;
-    min-width: 7em;
-    text-align: center;
-    max-width: 100%;
-    height: 2em;
-    border: 0;
-    border-radius: 7px;
-    text-decoration: none;
-    box-sizing: border-box;
-    color: white;
+  display: inline-block;
+  cursor: pointer;
+  min-width: 7em;
+  text-align: center;
+  max-width: 100%;
+  height: 2em;
+  border: 0;
+  border-radius: 7px;
+  text-decoration: none;
+  box-sizing: border-box;
+  color: white;
 }
 
 .btnOptions .btn {
-    margin: 0.5em;
+  margin: 0.5em;
 }
 
 .btn-primary {
-    background-color: #00A79D;
+  background-color: #00a79d;
 }
 
 .btn-danger {
-    background-color: var(--danger);
+  background-color: var(--danger);
 }
 
 .btn-link {
-    padding: 0.4375em 0;
+  padding: 0.4375em 0;
 }

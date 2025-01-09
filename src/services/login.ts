@@ -4,25 +4,27 @@ import { api } from "../config/api";
 import { User } from "../interfaces/user";
 
 const errorManagement = (error: any) => {
-    if(error.request?.status === 403) {
+    if (error.request?.status === 403) {
         return "Invalid token. You don't have permission."
     }
 
-    if(error.request?.status === 404)  {
+    if (error.request?.status === 404) {
         return "Not found."
     }
 
-    if(error.request?.status === 401) {
+    if (error.request?.status === 401) {
         return "Unauthorized"
     }
     return error.response?.data?.message || "Something went wrong."
 }
 
 export const login = async (credential: Credential) => {
-    try{
-    const { data, status } = await api.post<{ user: User, token: string }>('/auth/login', credential);
-    return { data, status }
+    try {
+        const { data, status } = await api.post<{ user: User, token: string }>('/auth/login', credential);
+        
+        return { data, status }
     } catch (error) {
+        console.log({error});
         throw errorManagement(error)
     }
 }

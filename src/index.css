@@ -1,6 +1,9 @@
 :root {
   font-size: 16px;
-  font-family: sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
   color-scheme: light dark;
   --background-dark:#111826;
   background-color: light-dark(white, var(--background-dark));
