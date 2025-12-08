@@ -29,6 +29,6 @@ export const stateOptions: FieldSelectOption[] = [
 export const stateIcons = <any>{
     read,
     unread,
-    "no finished": notFinished,
+    "not finished": notFinished,
     "currently reading": currentlyReading
 }

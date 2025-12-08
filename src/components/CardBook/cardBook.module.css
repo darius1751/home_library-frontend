@@ -1,31 +1,42 @@
 .card {
     display: flex;
     flex-direction: column;
-    width: 18em;
-    min-height: 15em;
+    width: 20em;
     box-shadow: 0em 0em 0.5em 0.1em gray;
     border-radius: 1em;
     margin: 1em;
     padding-bottom: 0.5em;
 }
 
+.bookInfo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 60%;
+}   
+
+.bookTitles {
+    display: flex;
+    flex-direction: column;
+    align-items: top;
+    width: 100%;
+}
 .imageContainer {
-    border-bottom: 1px solid gray;
     text-align: center;
-    height: 27em;
     padding-bottom: 0.2em;
 }
 
 .image {
-    width: 18em;
+    height: 8em;
     border-radius: 7px 7px 0 0;
-    max-height: 100%;
+    margin: 1em;
 }
 
 .details {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .text {
@@ -37,26 +48,25 @@
 
 .title {
     display: inline-block;
-    font-size: 1.5em;
+    font-size: 1em;
     color: var(--secondary-color);
     font-weight: bold;
     text-align: center;
-    height: 3em;
     overflow: auto;
     scrollbar-width: none;
     white-space-collapse: collapse;
     text-overflow: ellipsis;
+    margin-top: 2em;
 }
 
 .author {
     display: inline-block;
-    font-size: 1.2em;
+    font-size: 0.9em;
     color: var(--primary-color);
     margin: 0.5rem 0;
     font-weight: bold;
     width: 95%;
     text-align: center;
-    height: 2em;
     overflow: auto;
     scrollbar-width: none;
 }
@@ -66,7 +76,6 @@
     width: 90%;
     margin-top: 0.5rem;
     flex-wrap: wrap;
-    height: 5.5em;
     overflow-y: auto;
     scrollbar-width: none;
 }
@@ -78,6 +87,7 @@
     margin: 0.3em;
     color: white;
     height: min-content;
+    font-size: 0.8em;
 }
 
 .info {
@@ -85,12 +95,19 @@
 }
 
 .icon {
-    width: 4em;
+    width: 2em;
 }
 
 .additionalDetails {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.detailsBox {
+    display: flex;
+    width: 100%;
     justify-content: space-evenly;
 }
 
@@ -98,18 +115,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 33%  ;
 }
 
 .titleAdditionalDetail {
     color: var(--secondary-color);
     font-weight: bold;
+    font-size: 0.9em;
 }
 
 .valueAdditionalDetail {
     color: var(--primary-color);
     font-weight: bold;
+    font-size: 0.9em;
 }
 
 .card .btnOptions {
-    justify-content: space-between;
+    justify-content: center;
+    width: 100%;
+    font-size: 0.8em;
+    
 }
+
+.card :global(.book-btn) {
+    margin: 0.4em;
+}
+
